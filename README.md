@@ -1,2 +1,3 @@
-TIRA
+Juha Inkinen
+TIRA-harkkatyö
 ====
