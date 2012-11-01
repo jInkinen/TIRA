@@ -14,7 +14,7 @@ public class Lauta {
     private final int vakioMus = -1;
     private final int vakioVal = 1;
     private final int vakioTyh = 0;
-    private int kokox, kokoy;
+    private int kokox, kokoy, siirto;
     private Ruutu lauta[][];
 
 //    private boolean mustanVuoro;
@@ -27,6 +27,7 @@ public class Lauta {
      * @param kokoy laudan korkeus
      */
     public Lauta(int kokox, int kokoy) {
+        this.siirto = 0;
         this.kokox = kokox;
         this.kokoy = kokoy;
 
@@ -161,9 +162,15 @@ public class Lauta {
      */
     private int siirto(int x, int y, int uusix, int uusiy) {
         int vanhanRuudunArvo = this.lauta[uusix][uusiy].getNappula() + 1;
+        
+        siirto++;
+        System.out.println("Siirto " + siirto + " (" + getMerkki(x,y) + (x+1) +
+                "" + (y+1) + " -> " + (uusix+1) + (uusiy+1) + ")");
+        
         lauta[uusix][uusiy].setVari(lauta[x][y].getVari());
         lauta[uusix][uusiy].setNappula(lauta[x][y].getNappula());
         lauta[x][y].tyhjaksi();
+        
         
         return vanhanRuudunArvo;
     }
