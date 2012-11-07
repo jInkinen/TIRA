@@ -68,7 +68,7 @@ public class Lauta {
 
         // SOTILAAT
         for (int x = 0; x < this.kokox; x++) {
-            //uudetSotilaat(x);
+            uudetSotilaat(x);
         }
     }
 

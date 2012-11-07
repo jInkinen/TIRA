@@ -58,7 +58,8 @@ public class Ruutu {
     }
     
     public void ruutuunVaikutettu() {
-        //tyhjennä siirtolista
+        this.siirrot.clear();
+        this.siirrotLaskettu = false;
     }
     
     public boolean onkoSiirrotValmiina() {
@@ -66,6 +67,7 @@ public class Ruutu {
     }
     
     public void tallennaSiirrot(ArrayList siirrot) {
-        
+        this.siirrot = siirrot;
+        this.siirrotLaskettu = true;
     }
 }
