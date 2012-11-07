@@ -4,6 +4,7 @@
  */
 package tira;
 
+import java.util.*;
 /**
  *
  * @author juhainki
@@ -12,7 +13,8 @@ public class Ruutu {
 
     private final int x, y, tyhja;
     private int nappula, vari;
-//    private int siirrot[][];
+    private ArrayList siirrot;
+    private boolean siirrotLaskettu;
 
     Ruutu(int x, int y) {
         this.x = x;
@@ -21,6 +23,9 @@ public class Ruutu {
         
         nappula = 0;
         vari = 0;
+        
+        siirrot = new ArrayList();
+        siirrotLaskettu = false;
     }
 
     public int getVari() {
@@ -39,12 +44,12 @@ public class Ruutu {
         this.nappula = nappula;
     }
 
-    void tyhjaksi() {
+    public void tyhjaksi() {
         this.vari = this.tyhja;
         this.nappula = 0;
     }
 
-    boolean onkoTyhja() {
+    public boolean onkoTyhja() {
         if (this.vari == this.tyhja) {
             return true;
         } else {
@@ -52,4 +57,15 @@ public class Ruutu {
         }
     }
     
+    public void ruutuunVaikutettu() {
+        //tyhjennä siirtolista
+    }
+    
+    public boolean onkoSiirrotValmiina() {
+        return this.siirrotLaskettu;
+    }
+    
+    public void tallennaSiirrot(ArrayList siirrot) {
+        
+    }
 }

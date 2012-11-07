@@ -4,6 +4,8 @@
  */
 package tira;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author juhainki
@@ -162,16 +164,16 @@ public class Lauta {
      */
     private int siirto(int x, int y, int uusix, int uusiy) {
         int vanhanRuudunArvo = this.lauta[uusix][uusiy].getNappula() + 1;
-        
+
         siirto++;
-        System.out.println("Siirto " + siirto + " (" + getMerkki(x,y) + (x+1) +
-                "" + (y+1) + " -> " + (uusix+1) + (uusiy+1) + ")");
-        
+        System.out.println("Siirto " + siirto + " (" + getMerkki(x, y) + (x + 1)
+                + "" + (y + 1) + " -> " + (uusix + 1) + (uusiy + 1) + ")");
+
         lauta[uusix][uusiy].setVari(lauta[x][y].getVari());
         lauta[uusix][uusiy].setNappula(lauta[x][y].getNappula());
         lauta[x][y].tyhjaksi();
-        
-        
+
+
         return vanhanRuudunArvo;
     }
 
@@ -203,6 +205,78 @@ public class Lauta {
             return this.merkit[this.lauta[x][y].getNappula()].toLowerCase();
         } else {
             return this.merkit[this.lauta[x][y].getNappula()].toUpperCase();
+        }
+    }
+
+    public void laskeSiirrot() {
+        for (int x = 0; x < this.kokox; x++) {
+            for (int y = 0; y < this.kokoy; y++) {
+                if (!this.lauta[x][y].onkoSiirrotValmiina()) {
+                    this.lauta[x][y].tallennaSiirrot(getSiirrot(x, y));
+                }
+            }
+        }
+    }
+
+    private ArrayList getSiirrot(int x, int y) {
+        ArrayList lista = new ArrayList();
+
+        int vari = this.lauta[x][y].getVari();
+        int nappula = this.lauta[x][y].getNappula();
+
+        if (vari == 0) {
+            return null;
+        }
+        // Sotilas
+        if (nappula == 5) {
+            if (vari == -1) {
+                lista = onkoSiirtoLaillinen(x, y, x, y + 1, lista);
+                lista = onkoSiirtoLaillinen(x, y, x + 1, y + 1, lista);
+                lista = onkoSiirtoLaillinen(x, y, x - 1, y + 1, lista);
+                System.out.println(lista.size());
+            } else {
+                lista = onkoSiirtoLaillinen(x, y, x, y - 1, lista);
+                lista = onkoSiirtoLaillinen(x, y, x + 1, y - 1, lista);
+                lista = onkoSiirtoLaillinen(x, y, x - 1, y - 1, lista);
+            }
+        }
+        // Torni
+        if (nappula == 3) {
+        }
+        // Lähetti
+        if (nappula == 4) {
+        }
+        // Kuningatar
+        if (nappula == 2) {
+        }
+        // Kuningas
+        if (nappula == 1) {
+        }
+
+        return lista;
+    }
+
+    private ArrayList onkoSiirtoLaillinen(int x, int y, int uusix, int uusiy, ArrayList lista) {
+        int siirto[] = {uusix, uusiy};
+        // uusi tai vanha paikka on laudan ulkopuolella
+        if (uusix >= this.kokox || uusiy >= this.kokoy
+                || uusix < 0 || uusiy < 0) {
+            return lista;
+        }
+
+        // onko uusi paikka tyhjä?
+        if (lauta[uusix][uusiy].onkoTyhja()) {
+            // Siirrytään tyhjään ruutuun
+            lista.add(siirto);
+            return lista;
+        } else {
+            // Tutkitaan voiko jo varattuun ruutuun siirtyä (syödäänkö)
+            if (samanVarinen(x, y, uusix, uusiy)) {
+                return lista;
+            } else {
+                lista.add(siirto);
+                return lista;
+            }
         }
     }
 }

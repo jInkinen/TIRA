@@ -18,7 +18,9 @@ public class Shakki {
         peliLauta = new Lauta(6, 6);
         peliLauta.laudanTulostus();
         
-        peliLauta.onkoSiirtoMahdollinen(0, 1, 0, 2);
+        peliLauta.laskeSiirrot();
+        
+        /*peliLauta.onkoSiirtoMahdollinen(0, 1, 0, 2);
         peliLauta.laudanTulostus();
         
         peliLauta.onkoSiirtoMahdollinen(1, 4, 1, 3);
@@ -28,6 +30,6 @@ public class Shakki {
         peliLauta.laudanTulostus();
         
         peliLauta.onkoSiirtoMahdollinen(2, 4, 1, 3);
-        peliLauta.laudanTulostus();
+        peliLauta.laudanTulostus();*/
     }
 }
