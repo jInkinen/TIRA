@@ -10,4 +10,7 @@ package tira;
  */
 public class Solmu {
     private Solmu vanhempi, vlapsi, olapsi;
+    /**
+     * @TODO
+     */
 }

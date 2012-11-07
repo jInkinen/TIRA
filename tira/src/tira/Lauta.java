@@ -68,7 +68,7 @@ public class Lauta {
 
         // SOTILAAT
         for (int x = 0; x < this.kokox; x++) {
-            uudetSotilaat(x);
+            //uudetSotilaat(x);
         }
     }
 
@@ -230,33 +230,189 @@ public class Lauta {
         // Sotilas
         if (nappula == 5) {
             if (vari == -1) {
-                lista = onkoSiirtoLaillinen(x, y, x, y + 1, lista);
-                lista = onkoSiirtoLaillinen(x, y, x + 1, y + 1, lista);
-                lista = onkoSiirtoLaillinen(x, y, x - 1, y + 1, lista);
-                System.out.println(lista.size());
+                lista = lisaaLaillinenSiirto(x, y, x, y + 1, lista, true);
+                lista = lisaaLaillinenSiirto(x, y, x + 1, y + 1, lista, false);
+                lista = lisaaLaillinenSiirto(x, y, x - 1, y + 1, lista, false);
             } else {
-                lista = onkoSiirtoLaillinen(x, y, x, y - 1, lista);
-                lista = onkoSiirtoLaillinen(x, y, x + 1, y - 1, lista);
-                lista = onkoSiirtoLaillinen(x, y, x - 1, y - 1, lista);
+                lista = lisaaLaillinenSiirto(x, y, x, y - 1, lista, true);
+                lista = lisaaLaillinenSiirto(x, y, x + 1, y - 1, lista, false);
+                lista = lisaaLaillinenSiirto(x, y, x - 1, y - 1, lista, false);
             }
         }
         // Torni
         if (nappula == 3) {
+            lista = torninSiirrot(x, y, lista);
         }
         // Lähetti
         if (nappula == 4) {
+            lista = lahetinSiirrot(x, y, lista);
         }
         // Kuningatar
         if (nappula == 2) {
+            lista = torninSiirrot(x, y, lista);
+            lista = lahetinSiirrot(x, y, lista);
         }
         // Kuningas
         if (nappula == 1) {
+            lista = lisaaLaillinenSiirto(x, y, x, y + 1, lista, true);
+            lista = lisaaLaillinenSiirto(x, y, x + 1, y + 1, lista, true);
+            lista = lisaaLaillinenSiirto(x, y, x - 1, y + 1, lista, true);
+            lista = lisaaLaillinenSiirto(x, y, x, y - 1, lista, true);
+            lista = lisaaLaillinenSiirto(x, y, x + 1, y - 1, lista, true);
+            lista = lisaaLaillinenSiirto(x, y, x - 1, y - 1, lista, true);
+            lista = lisaaLaillinenSiirto(x, y, x - 1, y, lista, true);
+            lista = lisaaLaillinenSiirto(x, y, x + 1, y, lista, true);
         }
 
+        System.out.println(lista.size());
         return lista;
     }
 
-    private ArrayList onkoSiirtoLaillinen(int x, int y, int uusix, int uusiy, ArrayList lista) {
+    private ArrayList lahetinSiirrot(int x, int y, ArrayList lista) {
+        for (int siirronPituus = 1; siirronPituus < this.kokoy; siirronPituus++) { 
+            int nykyinenX = x + siirronPituus;
+            int nykyinenY = y + siirronPituus;
+            
+            if (onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
+                // Törmättiin laudan reunaan
+                break;
+            }
+            
+            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true);
+            
+            if (this.lauta[nykyinenX][nykyinenY].getVari() != 0) {
+                // Törmättiin nappulaan, ei etsitä kauemmaksi
+                break;
+            }
+        }
+        
+        for (int siirronPituus = 1; siirronPituus < this.kokoy; siirronPituus++) { 
+            int nykyinenX = x + siirronPituus;
+            int nykyinenY = y - siirronPituus;
+            
+            if (onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
+                // Törmättiin laudan reunaan
+                break;
+            }
+            
+            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true);
+            
+            if (this.lauta[nykyinenX][nykyinenY].getVari() != 0) {
+                // Törmättiin nappulaan, ei etsitä kauemmaksi
+                break;
+            }
+        }
+        
+        for (int siirronPituus = 1; siirronPituus < this.kokoy; siirronPituus++) { 
+            int nykyinenX = x - siirronPituus;
+            int nykyinenY = y - siirronPituus;
+            
+            if (onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
+                // Törmättiin laudan reunaan
+                break;
+            }
+            
+            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true);
+            
+            if (this.lauta[nykyinenX][nykyinenY].getVari() != 0) {
+                // Törmättiin nappulaan, ei etsitä kauemmaksi
+                break;
+            }
+        }
+        
+        for (int siirronPituus = 1; siirronPituus < this.kokoy; siirronPituus++) { 
+            int nykyinenX = x - siirronPituus;
+            int nykyinenY = y + siirronPituus;
+            
+            if (onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
+                // Törmättiin laudan reunaan
+                break;
+            }
+            
+            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true);
+            
+            if (this.lauta[nykyinenX][nykyinenY].getVari() != 0) {
+                // Törmättiin nappulaan, ei etsitä kauemmaksi
+                break;
+            }
+        }
+        
+        return lista;
+    }
+
+    private ArrayList torninSiirrot(int x, int y, ArrayList lista) {
+        for (int siirronPituus = 1; siirronPituus < this.kokoy; siirronPituus++) { 
+            int nykyinenX = x;
+            int nykyinenY = y + siirronPituus;
+            
+            if (onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
+                // Törmättiin laudan reunaan
+                break;
+            }
+            
+            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true);
+            
+            if (this.lauta[nykyinenX][nykyinenY].getVari() != 0) {
+                // Törmättiin nappulaan, ei etsitä kauemmaksi
+                break;
+            }
+        }
+        
+        for (int siirronPituus = 1; siirronPituus < this.kokoy; siirronPituus++) { 
+            int nykyinenX = x;
+            int nykyinenY = y - siirronPituus;
+            
+            if (onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
+                // Törmättiin laudan reunaan
+                break;
+            }
+            
+            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true);
+            
+            if (this.lauta[nykyinenX][nykyinenY].getVari() != 0) {
+                // Törmättiin nappulaan, ei etsitä kauemmaksi
+                break;
+            }
+        }
+        
+        for (int siirronPituus = 1; siirronPituus < this.kokoy; siirronPituus++) { 
+            int nykyinenX = x + siirronPituus;
+            int nykyinenY = y;
+            
+            if (onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
+                // Törmättiin laudan reunaan
+                break;
+            }
+            
+            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true);
+            
+            if (this.lauta[nykyinenX][nykyinenY].getVari() != 0) {
+                // Törmättiin nappulaan, ei etsitä kauemmaksi
+                break;
+            }
+        }
+        
+        for (int siirronPituus = 1; siirronPituus < this.kokoy; siirronPituus++) { 
+            int nykyinenX = x - siirronPituus;
+            int nykyinenY = y;
+            
+            if (onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
+                // Törmättiin laudan reunaan
+                break;
+            }
+            
+            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true);
+            
+            if (this.lauta[nykyinenX][nykyinenY].getVari() != 0) {
+                // Törmättiin nappulaan, ei etsitä kauemmaksi
+                break;
+            }
+        }
+        
+        return lista;
+    }
+
+    private ArrayList lisaaLaillinenSiirto(int x, int y, int uusix, int uusiy, ArrayList lista, boolean saaSiirtyaTyhjaan) {
         int siirto[] = {uusix, uusiy};
         // uusi tai vanha paikka on laudan ulkopuolella
         if (uusix >= this.kokox || uusiy >= this.kokoy
@@ -267,7 +423,9 @@ public class Lauta {
         // onko uusi paikka tyhjä?
         if (lauta[uusix][uusiy].onkoTyhja()) {
             // Siirrytään tyhjään ruutuun
-            lista.add(siirto);
+            if (saaSiirtyaTyhjaan) {
+                lista.add(siirto);
+            }
             return lista;
         } else {
             // Tutkitaan voiko jo varattuun ruutuun siirtyä (syödäänkö)
@@ -278,5 +436,15 @@ public class Lauta {
                 return lista;
             }
         }
+    }
+
+    private boolean onkoLaudanUlkopuolella(int nykyinenX, int nykyinenY) {
+        if (nykyinenX >= this.kokox || nykyinenX < 0) {
+            return true;
+        }
+        if (nykyinenY >= this.kokoy || nykyinenY < 0) {
+            return true;
+        }
+        return false;
     }
 }
