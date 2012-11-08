@@ -110,14 +110,14 @@ public class Lauta {
     }
 
     /**
-     *
+     * Ei käytössä tällä hetkellä.
      * @param x siirrettävän palikan alkuperäinen sijainti (sarake)
      * @param y siirrettävän palikan alkuperäinen sijainti (rivi)
      * @param uusix siirrettävän palikan uusi sijainti (sarake)
      * @param uusiy siirrettävän palikan uusi sijainti (rivi)
      * @return -1: laiton siirto, 0: siirto tyhjään ruutuun, 1: syönti
      */
-    public int onkoSiirtoMahdollinen(int x, int y, int uusix, int uusiy) {
+   /* public int onkoSiirtoMahdollinen(int x, int y, int uusix, int uusiy) {
         // uusi tai vanha paikka on laudan ulkopuolella
         if (uusix >= this.kokox || uusiy >= this.kokoy
                 || uusix < 0 || uusiy < 0) {
@@ -141,7 +141,7 @@ public class Lauta {
                 }
             }
         }
-    }
+    }*/
 
     /**
      * aika: O(1), tila: O(1)
@@ -164,6 +164,7 @@ public class Lauta {
     }
 
     /**
+     * EI KÄYTÖSSÄ.
      * aika: O(1), tila: O(1) Siirtää nappulan paikasta toiseen
      *
      * @param x siirrettävän palikan alkuperäinen sijainti (sarake)
@@ -171,7 +172,7 @@ public class Lauta {
      * @param uusix siirrettävän palikan uusi sijainti (sarake)
      * @param uusiy siirrettävän palikan uusi sijainti (rivi)
      */
-    private int siirto(int x, int y, int uusix, int uusiy) {
+    /*private int siirto(int x, int y, int uusix, int uusiy) {
         int vanhanRuudunArvo = this.lauta[uusix][uusiy].getNappula() + 1;
 
         siirto++;
@@ -184,7 +185,7 @@ public class Lauta {
 
 
         return vanhanRuudunArvo;
-    }
+    }*/
 
     /**
      * aika: O(nm), tila: O(1), n=laudan leveys, m=laudan korkeus Tulostaa
