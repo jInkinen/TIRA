@@ -11,5 +11,7 @@ package tira;
 public class Lista {
     /**
      * @TODO
+     * 
+     * tarvittavat metodit: add, clear
      */
 }
