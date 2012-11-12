@@ -18,7 +18,12 @@ public class Shakki {
         peliLauta = new Lauta(6, 6);
         peliLauta.laudanTulostus();
         
-        peliLauta.laskeSiirrot();
+        peliLauta.tulostaSiirtojenMaara();
+        
+        peliLauta.siirto(5, 1, 5, 2);
+        peliLauta.laudanTulostus();
+        
+        peliLauta.tulostaSiirtojenMaara();
         
         /*peliLauta.onkoSiirtoMahdollinen(0, 1, 0, 2);
         peliLauta.laudanTulostus();

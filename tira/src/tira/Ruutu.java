@@ -4,8 +4,6 @@
  */
 package tira;
 
-import java.util.*; //ArrayListaa varten, korvataan omalla toteutuksella
-
 /**
  *
  * @author juhainki
@@ -14,11 +12,12 @@ public class Ruutu {
 
     private final int x, y, tyhja;
     private int nappula, vari;
-    private ArrayList siirrot;
+    private Lista omatSiirrot;
     private boolean siirrotLaskettu;
 
     /**
      * Luo uuden Ruutu-olion, joka tietää omat koordinaattinsa.
+     *
      * @param x Ruudun sijainti x-akselin suhteen
      * @param y Ruudun sijainti y-akselin suhteen
      */
@@ -26,16 +25,16 @@ public class Ruutu {
         this.x = x;
         this.y = y;
         this.tyhja = 0;
-        
+
         nappula = 0;
         vari = 0;
-        
-        siirrot = new ArrayList();
+
+        omatSiirrot = new Lista();
         siirrotLaskettu = false;
     }
 
     /**
-     * 
+     *
      * @return Kertoo ruudun värin. 0, jos tyhjä
      */
     public int getVari() {
@@ -44,6 +43,7 @@ public class Ruutu {
 
     /**
      * Asettaa ruudulle värin.
+     *
      * @param vari uusi väri (1, 0, -1)
      */
     public void setVari(int vari) {
@@ -51,7 +51,7 @@ public class Ruutu {
     }
 
     /**
-     * 
+     *
      * @return Kertoo ruudussa olevan nappulan tyypin.
      */
     public int getNappula() {
@@ -60,6 +60,7 @@ public class Ruutu {
 
     /**
      * Tallentaa nappulan tyypin
+     *
      * @param nappula nappulan tyyppi
      */
     public void setNappula(int nappula) {
@@ -75,7 +76,7 @@ public class Ruutu {
     }
 
     /**
-     * 
+     *
      * @return Onko ruutu tyhjä
      */
     public boolean onkoTyhja() {
@@ -85,29 +86,47 @@ public class Ruutu {
             return false;
         }
     }
-    
+
     /**
      * Tyhjentää ruudun muistissa olevat siirrot, jos ruutuun on vaikutettu.
      */
     public void ruutuunVaikutettu() {
-        this.siirrot.clear();
+        this.omatSiirrot.clear();
         this.siirrotLaskettu = false;
     }
-    
+
     /**
-     * 
+     *
      * @return onko ruudun siirrot jo laskettu
      */
     public boolean onkoSiirrotValmiina() {
         return this.siirrotLaskettu;
     }
-    
+
     /**
      * Tallentaa ruudulle uudet siirrot
+     *
      * @param siirrot lista, jossa on ruudun mahdolliset siirrot
      */
-    public void tallennaSiirrot(ArrayList siirrot) {
-        this.siirrot = siirrot;
-        this.siirrotLaskettu = true;
+    public void tallennaSiirrot(Lista siirrot) {
+        this.omatSiirrot = siirrot;
+        //this.siirrotLaskettu = true;
+        
+        // TODO kehitä systeemi, jolla varmistetaan että siirrot lasketaan
+        // vaikka booleania käytetään
+    }
+
+    public String siirrotString() {
+        String ret = "";
+        for (int i = 0; i < omatSiirrot.length(); i++) {
+            ret = ret + omatSiirrot.get(i)[0] + "," + omatSiirrot.get(i)[1] + " ";
+        }
+
+        return ret;
+
+    }
+    
+    public int siirtojenMaara() {
+        return omatSiirrot.length();
     }
 }
