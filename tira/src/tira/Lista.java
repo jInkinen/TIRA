@@ -9,9 +9,21 @@ package tira;
  * @author juhainki
  */
 public class Lista {
-    /**
-     * @TODO
-     * 
-     * tarvittavat metodit: add, clear
-     */
+    
+    private int[][] taulukko;
+    private int koko;
+
+    public Lista() {   
+        this.koko = 50;
+        this.taulukko = new int[koko][2];
+    }
+    
+    public void add(int[] uusi) {
+        // Tarkista mahtuuko -> kasvatus järkevästi (koon tuplaus?)
+        //Lisäys
+    }
+    
+    public void clear() {
+        this.taulukko = new int[koko][2];
+    }
 }

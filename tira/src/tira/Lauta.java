@@ -457,7 +457,7 @@ public class Lauta {
      * @return lista, jossa on laskettu siirto ja aikaisemmat lasketut siirrot.
      */
     private ArrayList lisaaLaillinenSiirto(int x, int y, int uusix, int uusiy, ArrayList lista, boolean saaSiirtyaTyhjaan, boolean saakoSyoda, boolean saakoOllaVaarassa) {
-        int siirto[] = {uusix, uusiy};
+        int uusiSiirto[] = {uusix, uusiy};
         // uusi tai vanha paikka on laudan ulkopuolella
         if (uusix >= this.kokox || uusiy >= this.kokoy
                 || uusix < 0 || uusiy < 0) {
@@ -476,7 +476,7 @@ public class Lauta {
         if (lauta[uusix][uusiy].onkoTyhja()) {
             // Siirrytään tyhjään ruutuun
             if (saaSiirtyaTyhjaan) {
-                lista.add(siirto);
+                lista.add(uusiSiirto);
             }
             return lista;
         } else {
@@ -488,7 +488,7 @@ public class Lauta {
                 // Syödään
                 if (saakoSyoda) {
                     // Lisätään syöntisiirto vain jos syöminen on sallittua nappulalle tällä siirrolla
-                    lista.add(siirto);
+                    lista.add(uusiSiirto);
                 }
                 return lista;
             }
