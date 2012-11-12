@@ -27,3 +27,8 @@ public class Lista {
         this.taulukko = new int[koko][2];
     }
 }
+
+/****
+ * :::::TODO:::::
+ * Lisää testit ja javadoc
+ */
