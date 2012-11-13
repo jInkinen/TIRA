@@ -19,8 +19,10 @@ public class Shakki {
         peliLauta = new Lauta();
         Tekoaly aly = new Tekoaly(1, peliLauta);
         
-        Siirto s = aly.valitseSiirto(3);
+        Siirto s = aly.valitseSiirto(2);
         System.out.println("Tekoälyn valitsema siirto: " + s);
+
+        System.out.println(peliLauta.laudanTulostus());
         
         /*Lauta peliLauta;
         peliLauta = new Lauta(6, 6);

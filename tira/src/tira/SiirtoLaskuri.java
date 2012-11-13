@@ -26,6 +26,10 @@ public class SiirtoLaskuri {
     public Lista ruudunSiirrot(int x, int y, int vari, int nappula) {
         Lista lista = new Lista();
        
+        if (vari == 0) {
+            System.out.println("TYHJÄ: " + x + y);
+        }
+        
         if (lauta.valkoisenVuoro()) {
             if (vari != 1) {
                 return lista;
@@ -39,13 +43,13 @@ public class SiirtoLaskuri {
         if (nappula == 5) {
             lista = sotilaanSiirrot(x, y, lista, vari);
         }
-        // Torni
-        if (nappula == 3) {
-            lista = torninSiirrot(x, y, lista, vari);
-        }
         // Lähetti
         if (nappula == 4) {
             lista = lahetinSiirrot(x, y, lista, vari);
+        }
+        // Torni
+        if (nappula == 3) {
+            lista = torninSiirrot(x, y, lista, vari);
         }
         // Kuningatar
         if (nappula == 2) {
@@ -218,6 +222,9 @@ public class SiirtoLaskuri {
         // uusi paikka on laudan ulkopuolella
         if (lauta.onkoLaudanUlkopuolella(uusix, uusiy)) {
             return lista;
+        }
+        if (lauta.onkoLaudanUlkopuolella(x, y)) {
+            throw new UnsupportedOperationException("Siirrettävä nappula ei voi olla laudan ulkopuolella");
         }
 
         // TODO tarkastus, ettei siirto aseta kuningasta vaaraan.

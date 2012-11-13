@@ -41,7 +41,6 @@ public class Lauta {
         siirtoLaskin = new SiirtoLaskuri(this);
 
         alustaLauta();
-        laskeSiirrot();
     }
     
     public Lauta(int kokox, int kokoy, Ruutu[][] ruudut, int siirto) {
@@ -52,8 +51,6 @@ public class Lauta {
         siirtoLaskin = new SiirtoLaskuri(this);
         
         this.lauta = ruudut;
-        laskeSiirrot();
-
     }
 
     /**
@@ -69,7 +66,6 @@ public class Lauta {
             }
         }
         alustaNappulat();
-        
     }
 
     /**
@@ -136,19 +132,20 @@ public class Lauta {
         int uusiy = s.uusiPaikka()[1];
         
         if (onkoTyhja(x, y)) {
-            throw new UnsupportedOperationException("Eihän olematonta nappulaa voi siirtää! " + x + "," + y + " | " + this.lauta[x][y].getNappula());
+            throw new UnsupportedOperationException("Eihän olematonta nappulaa voi siirtää! " + x + "," + y);
         }
         siirto++;
-        this.lauta[x][y].ruutuunVaikutettu();
-        this.lauta[uusix][uusiy].ruutuunVaikutettu();
+        
+        /*uusiLauta.lauta[x][y].ruutuunVaikutettu();
+        uusiLauta.lauta[uusix][uusiy].ruutuunVaikutettu();*/
         // TODO: Lisää systeemi, joka käy kaikki nappulat, joiden siirtomahdollisuuksiin vaikutettiin
 
         lauta[uusix][uusiy].setVari(lauta[x][y].getVari());
         lauta[uusix][uusiy].setNappula(lauta[x][y].getNappula());
-        this.lauta[x][y].tyhjaksi();
+        lauta[x][y].tyhjaksi();
         
-        Lauta uusiLauta = new Lauta(kokox, kokoy, lauta, siirto);
-        return uusiLauta;
+        
+        return this;
     }
 
     /**
@@ -280,6 +277,10 @@ public class Lauta {
     
     public int monesSiirto() {
         return this.siirto;
+    }
+
+    void toteutaSiirto(Siirto ret) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

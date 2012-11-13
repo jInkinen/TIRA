@@ -114,4 +114,13 @@ public class PuuSolmu {
             this.solmunSiirrot.add(siirrot.get(i));
         }
     }
+
+    public String siirrotString() {
+        String ret = "";
+        for (int i = 0; i < this.solmunSiirrot.length(); i++) {
+            ret = ret + solmunSiirrot.get(i) + " | ";
+            
+        }
+        return ret;
+    }
 }
