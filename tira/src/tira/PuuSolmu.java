@@ -62,15 +62,15 @@ public class PuuSolmu {
     }
 
     public Siirto max(PuuSolmu solmu, int syvyys) {
-        if (syvyys < 1 || solmu.eiLapsia()) {
+        if (syvyys <= 1 || solmu.eiLapsia()) {
             System.out.println("PS:max():::" + solmu.getSiirrot().getMax());
             return solmu.getSiirrot().getMax();
         }
         
         Siirto s = new Siirto(-1, -1, -1, -1, Integer.MIN_VALUE);
         
-        for (PuuSolmu lapsi : solmu.lapset()) {
-            s = valitseParempi(true, s, min(lapsi, syvyys - 1));
+        for (int i = 0; i < solmu.pointer; i++) {
+            s = valitseParempi(true, s, min(solmu.alipuu[i], syvyys - 1));
         }
         return s;
     }

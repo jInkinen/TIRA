@@ -21,7 +21,7 @@ public class Tekoaly {
     }
     
     public Siirto valitseSiirto(int syvyys) {
-        laskeSiirrot(peli, juuriPuu, syvyys);
+        siirrotPuuhun(peli, juuriPuu, syvyys);
         
         Siirto ret;
         if (puoli > 0) {
@@ -32,7 +32,7 @@ public class Tekoaly {
         return ret;
     }
 
-    private void laskeSiirrot(Lauta peliTilanne, PuuSolmu vanhempi, int syvyys) {
+    private void siirrotPuuhun(Lauta peliTilanne, PuuSolmu vanhempi, int syvyys) {
         if (syvyys == 0) {
             return;
         }
@@ -41,12 +41,16 @@ public class Tekoaly {
         
         // Käydään läpi kaikki laudan laskemat siirrot
         for (int i = 0; i < siirrot.length(); i++) {
+            Lauta newLauta = new Lauta(6, 6, peliTilanne.ruudut(), peliTilanne.monesSiirto() + 1);
+            
             Siirto uusiSiirto = siirrot.get(i);
-            Lauta uusiLauta = peliTilanne.siirto(uusiSiirto);
+            
+            newLauta = newLauta.siirto(uusiSiirto);
+
             PuuSolmu uusiPuuSolmu = new PuuSolmu(50);
             vanhempi.liitaPuuPuuhun(uusiPuuSolmu);
-            // Rekursiivinen kutsu
-            laskeSiirrot(uusiLauta, uusiPuuSolmu, syvyys - 1);
+            // Rekursiivinen kutsu -> Käydään läpi syvyyssuuntaisesti
+            siirrotPuuhun(newLauta, uusiPuuSolmu, syvyys - 1);
         }
         System.out.println("Siirrot laskettu");
     }

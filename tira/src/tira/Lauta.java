@@ -41,6 +41,7 @@ public class Lauta {
         siirtoLaskin = new SiirtoLaskuri(this);
 
         alustaLauta();
+        laskeSiirrot();
     }
     
     public Lauta(int kokox, int kokoy, Ruutu[][] ruudut, int siirto) {
@@ -52,6 +53,7 @@ public class Lauta {
         
         this.lauta = ruudut;
         laskeSiirrot();
+
     }
 
     /**
@@ -67,7 +69,7 @@ public class Lauta {
             }
         }
         alustaNappulat();
-        laskeSiirrot();
+        
     }
 
     /**
@@ -264,4 +266,20 @@ public class Lauta {
         
         return siirrot;
     }
+
+    public boolean valkoisenVuoro() {
+        if (this.siirto % 2 == 0) {
+            return true;
+        }
+        return false;
+    }
+    
+    public Ruutu[][] ruudut() {
+        return this.lauta;
+    }
+    
+    public int monesSiirto() {
+        return this.siirto;
+    }
+    
 }

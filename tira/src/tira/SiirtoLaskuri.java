@@ -10,10 +10,10 @@ package tira;
  */
 public class SiirtoLaskuri {
 
-    private Lauta omistaja;
+    private Lauta lauta;
 
     public SiirtoLaskuri(Lauta omistaja) {
-        this.omistaja = omistaja;
+        this.lauta = omistaja;
     }
 
     /**
@@ -25,9 +25,15 @@ public class SiirtoLaskuri {
      */
     public Lista ruudunSiirrot(int x, int y, int vari, int nappula) {
         Lista lista = new Lista();
-
-        if (vari == 0) {
-            return lista;
+       
+        if (lauta.valkoisenVuoro()) {
+            if (vari != 1) {
+                return lista;
+            }
+        } else {
+            if (vari != -1) {
+                return lista;
+            }
         }
         // Sotilas
         if (nappula == 5) {
@@ -115,7 +121,7 @@ public class SiirtoLaskuri {
             }
 
 
-            if (omistaja.onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
+            if (lauta.onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
                 // Törmättiin laudan reunaan
                 break;
             }
@@ -156,7 +162,7 @@ public class SiirtoLaskuri {
             }
 
 
-            if (omistaja.onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
+            if (lauta.onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
                 // Törmättiin laudan reunaan
                 break;
             }
@@ -210,7 +216,7 @@ public class SiirtoLaskuri {
     private Lista lisaaLaillinenSiirto(int x, int y, int uusix, int uusiy, Lista lista, boolean saaSiirtyaTyhjaan, boolean saakoSyoda, boolean saakoOllaVaarassa, int vari) {
         Siirto uusiSiirto = new Siirto(x, y, uusix, uusiy, 0);
         // uusi paikka on laudan ulkopuolella
-        if (omistaja.onkoLaudanUlkopuolella(uusix, uusiy)) {
+        if (lauta.onkoLaudanUlkopuolella(uusix, uusiy)) {
             return lista;
         }
 
@@ -223,7 +229,7 @@ public class SiirtoLaskuri {
         }
 
         // onko uusi paikka tyhjä?
-        if (omistaja.onkoTyhja(uusix, uusiy)) {
+        if (lauta.onkoTyhja(uusix, uusiy)) {
             // Siirrytään tyhjään ruutuun
             if (saaSiirtyaTyhjaan) {
                 lista.add(uusiSiirto);
@@ -231,14 +237,14 @@ public class SiirtoLaskuri {
             return lista;
         } else {
             // Tutkitaan voiko jo varattuun ruutuun siirtyä (syödäänkö)
-            if (omistaja.samanVarinen(x, y, uusix, uusiy)) {
+            if (lauta.samanVarinen(x, y, uusix, uusiy)) {
                 // Ruudussa saman värinen
                 return lista;
             } else {
                 // Syödään
                 if (saakoSyoda) {
                     // Lisätään syöntisiirto vain jos syöminen on sallittua nappulalle tällä siirrolla
-                    uusiSiirto.setArvo(vari * omistaja.nappulanArvo(uusix, uusiy));
+                    uusiSiirto.setArvo(vari * lauta.nappulanArvo(uusix, uusiy));
                     lista.add(uusiSiirto);
                 }
                 return lista;
