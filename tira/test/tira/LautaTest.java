@@ -42,7 +42,7 @@ public class LautaTest {
     @Test
     public void testSiirtojenLaskemisenAikaVaativuus() {
         long start = System.nanoTime();
-        int kerrat = 1000;
+        int kerrat = 10000;
         System.out.println("Lasketaan siirrot " + kerrat + " kertaa");
         Lauta instance = new Lauta();
         

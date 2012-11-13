@@ -25,16 +25,5 @@ public class Shakki {
         
         peliLauta.tulostaSiirtojenMaara();
         
-        /*peliLauta.onkoSiirtoMahdollinen(0, 1, 0, 2);
-        peliLauta.laudanTulostus();
-        
-        peliLauta.onkoSiirtoMahdollinen(1, 4, 1, 3);
-        peliLauta.laudanTulostus();
-        
-        peliLauta.onkoSiirtoMahdollinen(0, 2, 1, 3);
-        peliLauta.laudanTulostus();
-        
-        peliLauta.onkoSiirtoMahdollinen(2, 4, 1, 3);
-        peliLauta.laudanTulostus();*/
     }
 }

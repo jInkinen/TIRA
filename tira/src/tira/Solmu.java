@@ -9,8 +9,11 @@ package tira;
  * @author juhainki
  */
 public class Solmu {
-    private Solmu vanhempi, vlapsi, olapsi;
+    private Solmu vanhempi;
+    // private TietorakenneX<Solmu> lapset;
     /**
      * @TODO
+     * arraylist?
+     * hash-rakenteet?
      */
 }
