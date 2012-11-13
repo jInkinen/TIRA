@@ -10,13 +10,17 @@ package tira;
  */
 public class Siirto implements Comparable {
 
-    private int x1, x2, y1, y2, arvo;
+    private int arvo;
+    private int[] paikka1, paikka2;
 
     public Siirto(int x1, int x2, int y1, int y2, int arvo) {
-        this.x1 = x1;
-        this.x2 = x2;
-        this.y1 = y1;
-        this.y2 = y2;
+        paikka1 = new int[2];
+        paikka2 = new int[2];
+
+        paikka1[0] = x1;
+        paikka2[0] = x2;
+        paikka1[1] = y1;
+        paikka2[1] = y2;
         this.arvo = arvo;
     }
 
@@ -27,5 +31,17 @@ public class Siirto implements Comparable {
 
     public int arvo() {
         return arvo;
+    }
+    
+    public int[] alkuperainenPaikka() {
+        return paikka1;
+    }
+    
+    public int[] uusiPaikka() {
+        return paikka2;
+    }
+    
+    public void setArvo(int arvo) {
+        this.arvo = arvo;
     }
 }

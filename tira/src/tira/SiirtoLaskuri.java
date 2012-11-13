@@ -8,11 +8,11 @@ package tira;
  *
  * @author juhainki
  */
-public class Siirrot {
+public class SiirtoLaskuri {
 
     private Lauta omistaja;
 
-    public Siirrot(Lauta omistaja) {
+    public SiirtoLaskuri(Lauta omistaja) {
         this.omistaja = omistaja;
     }
 
@@ -208,7 +208,7 @@ public class Siirrot {
      * @return lista, jossa on laskettu siirto ja aikaisemmat lasketut siirrot.
      */
     private Lista lisaaLaillinenSiirto(int x, int y, int uusix, int uusiy, Lista lista, boolean saaSiirtyaTyhjaan, boolean saakoSyoda, boolean saakoOllaVaarassa, int vari) {
-        int uusiSiirto[] = {uusix, uusiy, 0};
+        Siirto uusiSiirto = new Siirto(x, y, uusix, uusiy, 0);
         // uusi paikka on laudan ulkopuolella
         if (omistaja.onkoLaudanUlkopuolella(uusix, uusiy)) {
             return lista;
@@ -238,7 +238,7 @@ public class Siirrot {
                 // Syödään
                 if (saakoSyoda) {
                     // Lisätään syöntisiirto vain jos syöminen on sallittua nappulalle tällä siirrolla
-                    uusiSiirto[2] = vari * omistaja.nappulanArvo(uusix, uusiy);
+                    uusiSiirto.setArvo(vari * omistaja.nappulanArvo(uusix, uusiy));
                     lista.add(uusiSiirto);
                 }
                 return lista;

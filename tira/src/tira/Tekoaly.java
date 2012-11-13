@@ -19,14 +19,6 @@ public class Tekoaly {
         
         puu = new Puu();
         
-        laskeSiirrot();
-    }
 
-    private void laskeSiirrot() {
-        puu.add(peli.siirrot());
-    }
-    
-
-    
-    
+    } 
 }

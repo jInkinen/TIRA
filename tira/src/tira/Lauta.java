@@ -17,7 +17,7 @@ public class Lauta {
     private final int vakioTyh = 0;
     private int kokox, kokoy, siirto;
     private Ruutu lauta[][];
-    private Siirrot siirtoLaskin;
+    private SiirtoLaskuri siirtoLaskin;
 
     /**
      * Oletuskonstruktori, joka luo 6x6 laudan. Toistaiseksi suositeltu versio.
@@ -38,7 +38,7 @@ public class Lauta {
         this.kokox = kokox;
         this.kokoy = kokoy;
 
-        siirtoLaskin = new Siirrot(this);
+        siirtoLaskin = new SiirtoLaskuri(this);
 
         alustaLauta();
     }
@@ -256,5 +256,17 @@ public class Lauta {
         int nappula = this.lauta[x][y].getNappula();
         
         return this.heurestiikka[nappula];
+    }
+
+    public Siirto[] siirrot2() {
+        Siirto siirrot[] = new Siirto[kokox*kokoy];
+        
+        for (int x = 0; x < this.kokox; x++) {
+            for (int y = 0; y < this.kokoy; y++) {
+                //this.lauta[x][y]
+            }
+        }
+        
+        return siirrot;
     }
 }

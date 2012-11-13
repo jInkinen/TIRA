@@ -10,7 +10,7 @@ package tira;
  */
 public class Lista {
     
-    private int[][] taulukko;
+    private Siirto[] taulukko;
     private int koko, pointer;
 
     /**
@@ -18,7 +18,7 @@ public class Lista {
      */
     public Lista() {   
         this.koko = 50;
-        this.taulukko = new int[koko][2];
+        this.taulukko = new Siirto[this.koko];
         this.pointer = 0;
     }
     
@@ -26,22 +26,24 @@ public class Lista {
      * Lisää listan loppuun annetun alkion
      * @param uusi int[], joka kuvaa siirtoa
      */
-    public void add(int[] uusi) {
-        // Tarkista mahtuuko -> kasvatus järkevästi (koon tuplaus?)
+    public void add(Siirto uusi) {
+        if (pointer == koko - 1) {
+            kasvata();
+        }
         taulukko[pointer] = uusi;
         pointer++;
         
     }
     
     private void kasvata() {
-        //TODO
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     /**
      * Tyhjentää listan
      */
     public void clear() {
-        this.taulukko = new int[koko][2];
+        this.taulukko = new Siirto[this.koko];
     }
     
     /**
@@ -49,7 +51,7 @@ public class Lista {
      * @param index etsittävän alkion indeksi
      * @return alkio, joka on kyseisellä paikalla
      */
-    public int[] get(int index) {
+    public Siirto get(int index) {
         return taulukko[index];
     }
     
