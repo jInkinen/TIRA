@@ -16,7 +16,7 @@ public class Lauta {
     private final int vakioVal = 1;
     private final int vakioTyh = 0;
     private int kokox, kokoy, siirto;
-    private Ruutu lauta[][];
+    private Ruutu[][] lauta;
     private SiirtoLaskuri siirtoLaskin;
 
     /**
@@ -41,6 +41,16 @@ public class Lauta {
         siirtoLaskin = new SiirtoLaskuri(this);
 
         alustaLauta();
+    }
+    
+    public Lauta(int kokox, int kokoy, Ruutu[][] ruudut, int siirto) {
+        this.siirto = siirto;
+        this.kokox = kokox;
+        this.kokoy = kokoy;
+
+        siirtoLaskin = new SiirtoLaskuri(this);
+        
+        this.lauta = ruudut;
     }
 
     /**
@@ -115,8 +125,13 @@ public class Lauta {
         this.lauta[sarake][this.kokoy - 2].setNappula(5);
     }
 
-    public void siirto(int x, int y, int uusix, int uusiy) {
+    public Lauta siirto(Siirto s) {
         // Ei siirretä tyhjää nappulaa
+        int x = s.alkuperainenPaikka()[0];
+        int y = s.alkuperainenPaikka()[1];
+        int uusix = s.uusiPaikka()[0];
+        int uusiy = s.uusiPaikka()[1];
+        
         if (lauta[x][y].onkoTyhja()) {
             throw new UnsupportedOperationException("Eihän olematonta nappulaa voi siirtää!");
         }
@@ -128,7 +143,9 @@ public class Lauta {
         lauta[uusix][uusiy].setVari(lauta[x][y].getVari());
         lauta[uusix][uusiy].setNappula(lauta[x][y].getNappula());
         this.lauta[x][y].tyhjaksi();
-        laskeSiirrot();
+        
+        Lauta uusiLauta = new Lauta(kokox, kokoy, lauta, siirto);
+        return uusiLauta;
     }
 
     /**
@@ -258,12 +275,12 @@ public class Lauta {
         return this.heurestiikka[nappula];
     }
 
-    public Siirto[] siirrot2() {
-        Siirto siirrot[] = new Siirto[kokox*kokoy];
+    public Lista siirrot() {
+        Lista siirrot= new Lista();
         
         for (int x = 0; x < this.kokox; x++) {
             for (int y = 0; y < this.kokoy; y++) {
-                //this.lauta[x][y]
+                this.lauta[x][y].getSiirrot();
             }
         }
         

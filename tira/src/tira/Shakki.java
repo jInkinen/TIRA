@@ -14,7 +14,14 @@ public class Shakki {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         Lauta peliLauta;
+        peliLauta = new Lauta();
+        Tekoaly aly = new Tekoaly(1, peliLauta);
+        
+        aly.valitseSiirto(5);
+        
+        /*Lauta peliLauta;
         peliLauta = new Lauta(6, 6);
         System.out.println(peliLauta.laudanTulostus());
         
@@ -25,6 +32,6 @@ public class Shakki {
         System.out.println(peliLauta.laudanTulostus());
         
         System.out.println(peliLauta.tulostaSiirtojenMaara());
-        System.out.println(peliLauta.tulostaSiirtojenArvo());
+        System.out.println(peliLauta.tulostaSiirtojenArvo());*/
     }
 }

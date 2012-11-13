@@ -130,4 +130,8 @@ public class Ruutu {
 
         return ret;
     }
+
+    public Lista getSiirrot() {
+        return omatSiirrot;
+    }
 }

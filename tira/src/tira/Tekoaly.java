@@ -9,7 +9,7 @@ package tira;
  * @author juhainki
  */
 public class Tekoaly {
-    private Puu puu;
+    private PuuSolmu juuriPuu;
     private int puoli;
     private Lauta peli;
 
@@ -17,18 +17,31 @@ public class Tekoaly {
         this.puoli = puoli;
         this.peli = peli;
         
-        puu = new Puu();
-        
-
+        juuriPuu = new PuuSolmu(16);
     }
     
     public Siirto valitseSiirto(int syvyys) {
+        laskeSiirrot(peli, juuriPuu, syvyys);
+        
         Siirto ret;
         if (puoli > 0) {
-            ret = puu.minimax(true, syvyys);
+            ret = juuriPuu.minimax(true, syvyys);
         } else {
-            ret = puu.minimax(false, syvyys);
+            ret = juuriPuu.minimax(false, syvyys);
         }
         return ret;
+    }
+
+    private void laskeSiirrot(Lauta peliTilanne, PuuSolmu vanhempi, int syvyys) {
+        Lista siirrot = peliTilanne.siirrot();
+        vanhempi.lisaaLasketutSiirrot(siirrot);
+        
+        for (int i = 0; i < siirrot.length(); i++) {
+            Siirto uusiSiirto = siirrot.get(i);
+            Lauta uusiLauta = peliTilanne.siirto(uusiSiirto);
+            PuuSolmu uusiPuuSolmu = new PuuSolmu(50);
+            // Rekursiivinen kutsu
+            laskeSiirrot(uusiLauta, uusiPuuSolmu, syvyys - 1);
+        }
     }
 }

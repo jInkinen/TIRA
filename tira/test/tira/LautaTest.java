@@ -65,8 +65,11 @@ public class LautaTest {
     public void testSiirrotLasketaanOikein() {
         Lauta peliLauta = new Lauta();
         
-        peliLauta.siirto(5, 1, 5, 2);
-        peliLauta.siirto(4, 4, 4, 3);
+        Siirto s1 = new Siirto(5, 1, 5, 2, 0);
+        Siirto s2 = new Siirto(4, 4, 4, 3, 0);
+        
+        peliLauta.siirto(s1);
+        peliLauta.siirto(s2);
         
         String oikea = "|0|0|0|0|1|1|\n|1|1|1|1|1|0|\n|0|0|0|0|0|2|\n|0|0|0|0|2|0|\n|1|1|1|1|0|1|\n|0|0|0|1|0|0|\n";
         assertEquals(oikea, peliLauta.tulostaSiirtojenMaara());
