@@ -51,6 +51,7 @@ public class Lauta {
         siirtoLaskin = new SiirtoLaskuri(this);
         
         this.lauta = ruudut;
+        laskeSiirrot();
     }
 
     /**
@@ -132,8 +133,8 @@ public class Lauta {
         int uusix = s.uusiPaikka()[0];
         int uusiy = s.uusiPaikka()[1];
         
-        if (lauta[x][y].onkoTyhja()) {
-            throw new UnsupportedOperationException("Eihän olematonta nappulaa voi siirtää!");
+        if (onkoTyhja(x, y)) {
+            throw new UnsupportedOperationException("Eihän olematonta nappulaa voi siirtää! " + x + "," + y + " | " + this.lauta[x][y].getNappula());
         }
         siirto++;
         this.lauta[x][y].ruutuunVaikutettu();
@@ -188,32 +189,6 @@ public class Lauta {
         for (int y = 0; y < this.kokoy; y++) {
             for (int x = 0; x < this.kokox; x++) {
                 ret = ret + "|" + getMerkki(x, y);
-            }
-            ret = ret + "|\n";
-        }
-        return ret;
-    }
-
-    public String tulostaSiirtojenMaara() {
-        String ret = "";
-        for (int y = 0; y < this.kokoy; y++) {
-            for (int x = 0; x < this.kokox; x++) {
-                ret = ret + "|" + this.lauta[x][y].siirtojenMaara();
-            }
-            ret = ret + "|\n";
-        }
-        return ret;
-    }
-    
-    public String tulostaSiirtojenArvo() {
-        String ret = "";
-        for (int y = 0; y < this.kokoy; y++) {
-            for (int x = 0; x < this.kokox; x++) {
-                if (this.lauta[x][y].siirtojenArvot().equals("")) {
-                    ret = ret + "|- ";
-                } else {
-                    ret = ret + "|" + this.lauta[x][y].siirtojenArvot();
-                }
             }
             ret = ret + "|\n";
         }
@@ -276,11 +251,14 @@ public class Lauta {
     }
 
     public Lista siirrot() {
-        Lista siirrot= new Lista();
+        Lista siirrot = new Lista();
         
         for (int x = 0; x < this.kokox; x++) {
             for (int y = 0; y < this.kokoy; y++) {
-                this.lauta[x][y].getSiirrot();
+                Lista s2 = this.lauta[x][y].getSiirrot();
+                for (int i = 0; i < s2.length(); i++) {
+                    siirrot.add(s2.get(i));
+                }
             }
         }
         

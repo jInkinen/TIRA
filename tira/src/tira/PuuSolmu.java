@@ -19,7 +19,7 @@ public class PuuSolmu {
      * @param koko Mahdollisten alipuiden määrä. Ylivuoto katoaa ja lisäyksiä ei liitetä puuhun, kun lista täyttyy.
      */
     public PuuSolmu(int koko) {
-        this.solmunSiirrot = null;
+        this.solmunSiirrot = new Lista();
         this.koko = koko;
         this.pointer = 0;
         this.alipuu = new PuuSolmu[koko];
@@ -41,7 +41,7 @@ public class PuuSolmu {
     }
     
     private boolean eiLapsia() {
-        if (pointer <= 0 ) {
+        if (pointer <= 0) {
             return true;
         }
         return false;
@@ -63,6 +63,7 @@ public class PuuSolmu {
 
     public Siirto max(PuuSolmu solmu, int syvyys) {
         if (syvyys < 1 || solmu.eiLapsia()) {
+            System.out.println("PS:max():::" + solmu.getSiirrot().getMax());
             return solmu.getSiirrot().getMax();
         }
         
@@ -110,7 +111,7 @@ public class PuuSolmu {
 
     public void lisaaLasketutSiirrot(Lista siirrot) {
         for (int i = 0; i < siirrot.length(); i++) {
-            solmunSiirrot.add(siirrot.get(i));
+            this.solmunSiirrot.add(siirrot.get(i));
         }
     }
 }

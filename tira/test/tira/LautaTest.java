@@ -72,6 +72,6 @@ public class LautaTest {
         peliLauta.siirto(s2);
         
         String oikea = "|0|0|0|0|1|1|\n|1|1|1|1|1|0|\n|0|0|0|0|0|2|\n|0|0|0|0|2|0|\n|1|1|1|1|0|1|\n|0|0|0|1|0|0|\n";
-        assertEquals(oikea, peliLauta.tulostaSiirtojenMaara());
+        assertEquals(oikea, "");
     }
 }

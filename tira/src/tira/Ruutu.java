@@ -116,21 +116,6 @@ public class Ruutu {
         // vaikka booleania käytetään
     }
 
-
-    
-    public int siirtojenMaara() {
-        return omatSiirrot.length();
-    }
-
-    public String siirtojenArvot() {
-        String ret = "";
-        for (int i = 0; i < omatSiirrot.length(); i++) {
-            ret = ret + omatSiirrot.get(i).arvo() + " ";
-        }
-
-        return ret;
-    }
-
     public Lista getSiirrot() {
         return omatSiirrot;
     }

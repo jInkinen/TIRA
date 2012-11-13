@@ -23,8 +23,8 @@ public class Lista {
         
         maxArvo = Integer.MIN_VALUE;
         minArvo = Integer.MAX_VALUE;
-        minIndex = -1;
-        maxIndex = -1;
+        minIndex = 0;
+        maxIndex = 0;
     }
     
     /**
@@ -37,15 +37,16 @@ public class Lista {
         }
         taulukko[pointer] = uusi;
         
-        if (uusi.arvo() > minArvo) {
-            minArvo = uusi.arvo();
-            minIndex = pointer;
+        if (uusi.arvo() < minArvo) {
+            this.minArvo = uusi.arvo();
+            this.minIndex = pointer;
         }
         if (uusi.arvo() > maxArvo) {
-            maxArvo = uusi.arvo();
-            maxIndex = pointer;
+            this.maxArvo = uusi.arvo();
+            this.maxIndex = pointer;
         }
-        
+//        System.out.println("Lista.add(): " + uusi.arvo() + ", max: " + this.maxArvo + "@" + this.maxIndex);
+//        System.out.println("Lista.add(): " + uusi.arvo() + ", min: " + this.minArvo + "@" + this.minIndex);
         pointer++;
     }
     
