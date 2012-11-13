@@ -10,15 +10,15 @@ package tira;
  */
 public class Puu {
 
-    private Solmu nykyinenTila;
+    private Solmu juuri;
 
     public Puu() {
-        this.nykyinenTila = null;
+        this.juuri = null;
     }
 
     public void add(Solmu solmu) {
-        if (nykyinenTila == null) {
-            nykyinenTila = solmu;
+        if (juuri == null) {
+            juuri = solmu;
             return;
         }
 
@@ -30,29 +30,63 @@ public class Puu {
     }
 
     public Solmu getJuuri() {
-        return nykyinenTila;
+        return juuri;
     }
 
-    
-    public int max(Solmu solmu, int syvyys) {
-        if (syvyys < 1 || solmu.eiLapsia()) {
-            return solmu.getEka().arvo();
+    public Siirto minimax(boolean valkoisenVuoro, int syvyys) {
+        Siirto s;
+        if (valkoisenVuoro) {
+            s = max(juuri, syvyys);
+        } else {
+            s = min(juuri, syvyys);
         }
-        int luku = Integer.MIN_VALUE;
-        for (Solmu lapsi : solmu.lapset()) {
-            luku = Math.max(luku, min(lapsi, syvyys - 1));
-        }
-        return luku;
+        return s;
     }
 
-    public int min(Solmu solmu, int syvyys) {
+    public Siirto max(Solmu solmu, int syvyys) {
         if (syvyys < 1 || solmu.eiLapsia()) {
-            return solmu.getEka().arvo();
+            return solmu.getParas();
         }
-        int luku = Integer.MAX_VALUE;
+        
+        Siirto s = new Siirto(-1, -1, -1, -1, Integer.MIN_VALUE);
+        
         for (Solmu lapsi : solmu.lapset()) {
-            luku = Math.min(luku, max(lapsi, syvyys - 1));
+            s = valitseParempi(true, s, min(lapsi, syvyys - 1));
         }
-        return luku;
+        return s;
+    }
+
+    public Siirto min(Solmu solmu, int syvyys) {
+        if (syvyys < 1 || solmu.eiLapsia()) {
+            return solmu.getParas();
+        }
+        Siirto s = new Siirto(-1, -1, -1, -1, Integer.MAX_VALUE);
+        for (Solmu lapsi : solmu.lapset()) {
+            s = valitseParempi(false, s, min(lapsi, syvyys - 1));
+        }
+        return s;
+    }
+
+    /**
+     * 
+     * @param min true, jos etsitään pienempää
+     * @param s1
+     * @param s2
+     * @return 
+     */
+    private Siirto valitseParempi(boolean min, Siirto s1, Siirto s2) {
+        if (min) {
+            if (s1.arvo() >= s2.arvo()) {
+                return s2;
+            } else {
+                return s1;
+            }
+        } else {
+            if (s1.arvo() < s2.arvo()) {
+                return s2;
+            } else {
+                return s1;
+            }
+        }
     }
 }

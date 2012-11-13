@@ -21,7 +21,7 @@ public class Solmu {
         jono.add(s);
     }
     
-    public Siirto getEka() {
+    public Siirto getParas() {
         return jono.peek();
     }
 

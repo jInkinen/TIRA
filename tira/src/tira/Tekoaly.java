@@ -20,5 +20,15 @@ public class Tekoaly {
         puu = new Puu();
         
 
-    } 
+    }
+    
+    public Siirto valitseSiirto(int syvyys) {
+        Siirto ret;
+        if (puoli > 0) {
+            ret = puu.minimax(true, syvyys);
+        } else {
+            ret = puu.minimax(false, syvyys);
+        }
+        return ret;
+    }
 }
