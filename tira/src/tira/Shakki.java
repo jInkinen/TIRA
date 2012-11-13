@@ -16,12 +16,13 @@ public class Shakki {
     public static void main(String[] args) {
         Lauta peliLauta;
         peliLauta = new Lauta(6, 6);
-        peliLauta.laudanTulostus();
+        System.out.println(peliLauta.laudanTulostus());
         
-        peliLauta.tulostaSiirtojenMaara();
+        System.out.println(peliLauta.tulostaSiirtojenMaara());
         
         peliLauta.siirto(5, 1, 5, 2);
-        peliLauta.laudanTulostus();
+        peliLauta.siirto(4, 4, 4, 3);
+        System.out.println(peliLauta.laudanTulostus());
         
         peliLauta.tulostaSiirtojenMaara();
         

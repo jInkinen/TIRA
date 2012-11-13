@@ -36,7 +36,7 @@ public class Lauta {
         this.siirto = 0;
         this.kokox = kokox;
         this.kokoy = kokoy;
-        
+
         siirtoLaskin = new Siirrot(kokox, kokoy, this);
 
         alustaLauta();
@@ -114,7 +114,11 @@ public class Lauta {
         this.lauta[sarake][this.kokoy - 2].setNappula(5);
     }
 
-     public void siirto(int x, int y, int uusix, int uusiy) {
+    public void siirto(int x, int y, int uusix, int uusiy) {
+        // Ei siirretä tyhjää nappulaa
+        if (lauta[x][y].onkoTyhja()) {
+            throw new UnsupportedOperationException("Eihän olematonta nappulaa voi siirtää!");
+        }
         siirto++;
         this.lauta[x][y].ruutuunVaikutettu();
         this.lauta[uusix][uusiy].ruutuunVaikutettu();
@@ -124,20 +128,6 @@ public class Lauta {
         lauta[uusix][uusiy].setNappula(lauta[x][y].getNappula());
         this.lauta[x][y].tyhjaksi();
         laskeSiirrot();
-    }
-
-    /**
-     * aika: O(nm), tila: O(1), n=laudan leveys, m=laudan korkeus Tulostaa
-     * laudan sisällön rivi riviltä.
-     */
-    public void laudanTulostus() {
-        for (int y = 0; y < this.kokoy; y++) {
-            for (int x = 0; x < this.kokox; x++) {
-                System.out.print("|" + getMerkki(x, y));
-            }
-            System.out.println("|");
-        }
-        System.out.println("");
     }
 
     /**
@@ -171,18 +161,33 @@ public class Lauta {
         }
     }
 
-    public void tulostaSiirtojenMaara() {
-//        System.out.println("|X,Y|");
+    /**
+     * aika: O(nm), tila: O(1), n=laudan leveys, m=laudan korkeus Tulostaa
+     * laudan sisällön rivi riviltä.
+     */
+    public String laudanTulostus() {
+        String ret = "";
         for (int y = 0; y < this.kokoy; y++) {
             for (int x = 0; x < this.kokox; x++) {
-                System.out.print("|" + this.lauta[x][y].siirtojenMaara());
+                ret = ret + "|" + getMerkki(x, y);
             }
-            System.out.println("|");
+            ret = ret + "|\n";
         }
-        System.out.println("");
+        return ret;
     }
-    
-        /**
+
+    public String tulostaSiirtojenMaara() {
+        String ret = "";
+        for (int y = 0; y < this.kokoy; y++) {
+            for (int x = 0; x < this.kokox; x++) {
+                ret = ret + "|" + this.lauta[x][y].siirtojenMaara();
+            }
+            ret = ret + "|\n";
+        }
+        return ret;
+    }
+
+    /**
      * aika: O(1), tila: O(1)
      *
      * @param x siirrettävän palikan alkuperäinen sijainti (sarake)
@@ -201,7 +206,7 @@ public class Lauta {
             return false;
         }
     }
-    
+
     public boolean onkoTyhja(int x, int y) {
         return lauta[x][y].onkoTyhja();
     }

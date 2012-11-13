@@ -40,7 +40,7 @@ public class LautaTest {
      * Test of siirto method, of class Lauta.
      */
     @Test
-    public void testSiirtojenLaskemisenAikaVaativuus() {
+    public void testSimppeliSiirtojenLaskemisenAikaVaativuus() {
         long start = System.nanoTime();
         int kerrat = 10000;
         System.out.println("Lasketaan siirrot " + kerrat + " kertaa");
@@ -59,5 +59,16 @@ public class LautaTest {
         // 10 000  : 1s
         // 100 000 : 12s
         // 500 000 : 45s
+    }
+    
+    @Test
+    public void testSiirrotLasketaanOikein() {
+        Lauta peliLauta = new Lauta();
+        
+        peliLauta.siirto(5, 1, 5, 2);
+        peliLauta.siirto(4, 4, 4, 3);
+        
+        String oikea = "|0|0|0|0|1|1|\n|1|1|1|1|1|0|\n|0|0|0|0|0|2|\n|0|0|0|0|2|0|\n|1|1|1|1|0|1|\n|0|0|0|1|0|0|\n";
+        assertEquals(oikea, peliLauta.tulostaSiirtojenMaara());
     }
 }
