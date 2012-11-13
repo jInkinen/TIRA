@@ -123,10 +123,18 @@ public class Ruutu {
         }
 
         return ret;
-
     }
     
     public int siirtojenMaara() {
         return omatSiirrot.length();
+    }
+
+    public String siirtojenArvot() {
+        String ret = "";
+        for (int i = 0; i < omatSiirrot.length(); i++) {
+            ret = ret + omatSiirrot.get(i)[2] + " ";
+        }
+
+        return ret;
     }
 }

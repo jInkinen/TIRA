@@ -48,7 +48,7 @@ public class Siirrot {
         }
         // Kuningas
         if (nappula == 1) {
-            lista = kuninkaanSiirrot(x, y, lista);
+            lista = kuninkaanSiirrot(x, y, lista, vari);
         }
 
         return lista;
@@ -56,26 +56,26 @@ public class Siirrot {
 
     private Lista sotilaanSiirrot(int x, int y, Lista lista, int vari) {
         if (vari == -1) {
-            lista = lisaaLaillinenSiirto(x, y, x, y + 1, lista, true, false, true);
-            lista = lisaaLaillinenSiirto(x, y, x + 1, y + 1, lista, false, true, true);
-            lista = lisaaLaillinenSiirto(x, y, x - 1, y + 1, lista, false, true, true);
+            lista = lisaaLaillinenSiirto(x, y, x, y + 1, lista, true, false, true, vari);
+            lista = lisaaLaillinenSiirto(x, y, x + 1, y + 1, lista, false, true, true, vari);
+            lista = lisaaLaillinenSiirto(x, y, x - 1, y + 1, lista, false, true, true, vari);
         } else {
-            lista = lisaaLaillinenSiirto(x, y, x, y - 1, lista, true, false, true);
-            lista = lisaaLaillinenSiirto(x, y, x + 1, y - 1, lista, false, true, true);
-            lista = lisaaLaillinenSiirto(x, y, x - 1, y - 1, lista, false, true, true);
+            lista = lisaaLaillinenSiirto(x, y, x, y - 1, lista, true, false, true, vari);
+            lista = lisaaLaillinenSiirto(x, y, x + 1, y - 1, lista, false, true, true, vari);
+            lista = lisaaLaillinenSiirto(x, y, x - 1, y - 1, lista, false, true, true, vari);
         }
         return lista;
     }
 
-    private Lista kuninkaanSiirrot(int x, int y, Lista lista) {
-        lista = lisaaLaillinenSiirto(x, y, x, y + 1, lista, true, true, false);
-        lista = lisaaLaillinenSiirto(x, y, x + 1, y + 1, lista, true, true, false);
-        lista = lisaaLaillinenSiirto(x, y, x - 1, y + 1, lista, true, true, false);
-        lista = lisaaLaillinenSiirto(x, y, x, y - 1, lista, true, true, false);
-        lista = lisaaLaillinenSiirto(x, y, x + 1, y - 1, lista, true, true, false);
-        lista = lisaaLaillinenSiirto(x, y, x - 1, y - 1, lista, true, true, false);
-        lista = lisaaLaillinenSiirto(x, y, x - 1, y, lista, true, true, false);
-        lista = lisaaLaillinenSiirto(x, y, x + 1, y, lista, true, true, false);
+    private Lista kuninkaanSiirrot(int x, int y, Lista lista, int vari) {
+        lista = lisaaLaillinenSiirto(x, y, x, y + 1, lista, true, true, false, vari);
+        lista = lisaaLaillinenSiirto(x, y, x + 1, y + 1, lista, true, true, false, vari);
+        lista = lisaaLaillinenSiirto(x, y, x - 1, y + 1, lista, true, true, false, vari);
+        lista = lisaaLaillinenSiirto(x, y, x, y - 1, lista, true, true, false, vari);
+        lista = lisaaLaillinenSiirto(x, y, x + 1, y - 1, lista, true, true, false, vari);
+        lista = lisaaLaillinenSiirto(x, y, x - 1, y - 1, lista, true, true, false, vari);
+        lista = lisaaLaillinenSiirto(x, y, x - 1, y, lista, true, true, false, vari);
+        lista = lisaaLaillinenSiirto(x, y, x + 1, y, lista, true, true, false, vari);
         return lista;
     }
 
@@ -120,7 +120,7 @@ public class Siirrot {
                 break;
             }
 
-            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true, true, true);
+            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true, true, true, vari);
 
             if (vari != 0) {
                 // Törmättiin nappulaan, ei etsitä kauemmaksi
@@ -161,7 +161,7 @@ public class Siirrot {
                 break;
             }
 
-            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true, true, true);
+            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true, true, true, vari);
 
             if (vari != 0) {
                 // Törmättiin nappulaan, ei etsitä kauemmaksi
@@ -207,8 +207,8 @@ public class Siirrot {
      * Varmistetaan, ettei kuninkaan liikkuminen altista sitä shakille.
      * @return lista, jossa on laskettu siirto ja aikaisemmat lasketut siirrot.
      */
-    private Lista lisaaLaillinenSiirto(int x, int y, int uusix, int uusiy, Lista lista, boolean saaSiirtyaTyhjaan, boolean saakoSyoda, boolean saakoOllaVaarassa) {
-        int uusiSiirto[] = {uusix, uusiy};
+    private Lista lisaaLaillinenSiirto(int x, int y, int uusix, int uusiy, Lista lista, boolean saaSiirtyaTyhjaan, boolean saakoSyoda, boolean saakoOllaVaarassa, int vari) {
+        int uusiSiirto[] = {uusix, uusiy, 0};
         // uusi paikka on laudan ulkopuolella
         if (omistaja.onkoLaudanUlkopuolella(uusix, uusiy)) {
             return lista;
@@ -238,6 +238,7 @@ public class Siirrot {
                 // Syödään
                 if (saakoSyoda) {
                     // Lisätään syöntisiirto vain jos syöminen on sallittua nappulalle tällä siirrolla
+                    uusiSiirto[2] = vari * omistaja.nappulanArvo(uusix, uusiy);
                     lista.add(uusiSiirto);
                 }
                 return lista;

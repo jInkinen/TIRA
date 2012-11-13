@@ -25,6 +25,6 @@ public class Shakki {
         System.out.println(peliLauta.laudanTulostus());
         
         System.out.println(peliLauta.tulostaSiirtojenMaara());
-        
+        System.out.println(peliLauta.tulostaSiirtojenArvo());
     }
 }

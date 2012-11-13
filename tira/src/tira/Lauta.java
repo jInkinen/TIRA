@@ -10,7 +10,8 @@ package tira;
  */
 public class Lauta {
 
-    private final String merkit[] = {" ", "K", "Q", "T", "L", "S"};
+    private final String merkit[] = {" ", "K", "Q", "T", "L", "S", "H"};
+    private final int heurestiikka[] = {0, 2000, 9, 5, 3, 1, 3};
     private final int vakioMus = -1;
     private final int vakioVal = 1;
     private final int vakioTyh = 0;
@@ -186,6 +187,21 @@ public class Lauta {
         }
         return ret;
     }
+    
+    public String tulostaSiirtojenArvo() {
+        String ret = "";
+        for (int y = 0; y < this.kokoy; y++) {
+            for (int x = 0; x < this.kokox; x++) {
+                if (this.lauta[x][y].siirtojenArvot().equals("")) {
+                    ret = ret + "|- ";
+                } else {
+                    ret = ret + "|" + this.lauta[x][y].siirtojenArvot();
+                }
+            }
+            ret = ret + "|\n";
+        }
+        return ret;
+    }
 
     /**
      * aika: O(1), tila: O(1)
@@ -226,5 +242,19 @@ public class Lauta {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Laskee heurestiikan mukaisen arvon siirrolle
+     * @param x1 nappula ykkösen x
+     * @param y1 nappula ykkösen y
+     * @param x2 nappula kakkosen x
+     * @param y2 nappula kakkosen y
+     * @return 
+     */
+    public int nappulanArvo(int x, int y) {
+        int nappula = this.lauta[x][y].getNappula();
+        
+        return this.heurestiikka[nappula];
     }
 }

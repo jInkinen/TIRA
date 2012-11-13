@@ -9,5 +9,24 @@ package tira;
  * @author juhainki
  */
 public class Tekoaly {
+    private Puu puu;
+    private int puoli;
+    private Lauta peli;
+
+    public Tekoaly(int puoli, Lauta peli) {
+        this.puoli = puoli;
+        this.peli = peli;
+        
+        puu = new Puu();
+        
+        laskeSiirrot();
+    }
+
+    private void laskeSiirrot() {
+        puu.add(peli.siirrot());
+    }
+    
+
+    
     
 }
