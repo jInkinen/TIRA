@@ -24,7 +24,7 @@ public class Shakki {
         peliLauta.siirto(4, 4, 4, 3);
         System.out.println(peliLauta.laudanTulostus());
         
-        peliLauta.tulostaSiirtojenMaara();
+        System.out.println(peliLauta.tulostaSiirtojenMaara());
         
     }
 }

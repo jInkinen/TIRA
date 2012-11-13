@@ -10,13 +10,9 @@ package tira;
  */
 public class Siirrot {
 
-    private int kokoy, kokox;
     private Lauta omistaja;
 
-    public Siirrot(int kokox, int kokoy, Lauta omistaja) {
-        this.kokoy = kokoy;
-        this.kokox = kokox;
-        
+    public Siirrot(Lauta omistaja) {
         this.omistaja = omistaja;
     }
 
@@ -35,15 +31,7 @@ public class Siirrot {
         }
         // Sotilas
         if (nappula == 5) {
-            if (vari == -1) {
-                lista = lisaaLaillinenSiirto(x, y, x, y + 1, lista, true, false, true);
-                lista = lisaaLaillinenSiirto(x, y, x + 1, y + 1, lista, false, true, true);
-                lista = lisaaLaillinenSiirto(x, y, x - 1, y + 1, lista, false, true, true);
-            } else {
-                lista = lisaaLaillinenSiirto(x, y, x, y - 1, lista, true, false, true);
-                lista = lisaaLaillinenSiirto(x, y, x + 1, y - 1, lista, false, true, true);
-                lista = lisaaLaillinenSiirto(x, y, x - 1, y - 1, lista, false, true, true);
-            }
+            lista = sotilaanSiirrot(x, y, lista, vari);
         }
         // Torni
         if (nappula == 3) {
@@ -63,6 +51,19 @@ public class Siirrot {
             lista = kuninkaanSiirrot(x, y, lista);
         }
 
+        return lista;
+    }
+
+    private Lista sotilaanSiirrot(int x, int y, Lista lista, int vari) {
+        if (vari == -1) {
+            lista = lisaaLaillinenSiirto(x, y, x, y + 1, lista, true, false, true);
+            lista = lisaaLaillinenSiirto(x, y, x + 1, y + 1, lista, false, true, true);
+            lista = lisaaLaillinenSiirto(x, y, x - 1, y + 1, lista, false, true, true);
+        } else {
+            lista = lisaaLaillinenSiirto(x, y, x, y - 1, lista, true, false, true);
+            lista = lisaaLaillinenSiirto(x, y, x + 1, y - 1, lista, false, true, true);
+            lista = lisaaLaillinenSiirto(x, y, x - 1, y - 1, lista, false, true, true);
+        }
         return lista;
     }
 
@@ -96,7 +97,9 @@ public class Siirrot {
     }
 
     private Lista lahetti(int x, int y, Lista lista, int vari, boolean xplus, boolean yplus) {
-        for (int siirronPituus = 1; siirronPituus < this.kokoy; siirronPituus++) {
+        //for (int siirronPituus = 1; siirronPituus < this.kokoy; siirronPituus++) {
+        int siirronPituus = 1;
+        while (true) {
             int nykyinenX, nykyinenY;
 
             if (xplus) {
@@ -112,7 +115,7 @@ public class Siirrot {
             }
 
 
-            if (onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
+            if (omistaja.onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
                 // Törmättiin laudan reunaan
                 break;
             }
@@ -123,6 +126,48 @@ public class Siirrot {
                 // Törmättiin nappulaan, ei etsitä kauemmaksi
                 break;
             }
+
+            siirronPituus++;
+        }
+        return lista;
+    }
+
+    private Lista torni(int x, int y, Lista lista, int vari, boolean xakseli, boolean plus) {
+        int nykyinenX, nykyinenY;
+
+        int siirronPituus = 1;
+        while (true) {
+            if (xakseli) {
+                if (plus) {
+                    nykyinenX = x + siirronPituus;
+                    nykyinenY = y;
+                } else {
+                    nykyinenX = x - siirronPituus;
+                    nykyinenY = y;
+                }
+            } else {
+                if (plus) {
+                    nykyinenX = x;
+                    nykyinenY = y + siirronPituus;
+                } else {
+                    nykyinenX = x;
+                    nykyinenY = y - siirronPituus;
+                }
+            }
+
+
+            if (omistaja.onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
+                // Törmättiin laudan reunaan
+                break;
+            }
+
+            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true, true, true);
+
+            if (vari != 0) {
+                // Törmättiin nappulaan, ei etsitä kauemmaksi
+                break;
+            }
+            siirronPituus++;
         }
         return lista;
     }
@@ -136,73 +181,10 @@ public class Siirrot {
      * @return lista, jossa on kaikki lailliset siirrot
      */
     private Lista torninSiirrot(int x, int y, Lista lista, int vari) {
-        for (int siirronPituus = 1; siirronPituus < this.kokoy; siirronPituus++) {
-            int nykyinenX = x;
-            int nykyinenY = y + siirronPituus;
-
-            if (onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
-                // Törmättiin laudan reunaan
-                break;
-            }
-
-            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true, true, true);
-
-            if (vari != 0) {
-                // Törmättiin nappulaan, ei etsitä kauemmaksi
-                break;
-            }
-        }
-
-        for (int siirronPituus = 1; siirronPituus < this.kokoy; siirronPituus++) {
-            int nykyinenX = x;
-            int nykyinenY = y - siirronPituus;
-
-            if (onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
-                // Törmättiin laudan reunaan
-                break;
-            }
-
-            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true, true, true);
-
-            if (vari != 0) {
-                // Törmättiin nappulaan, ei etsitä kauemmaksi
-                break;
-            }
-        }
-
-        for (int siirronPituus = 1; siirronPituus < this.kokoy; siirronPituus++) {
-            int nykyinenX = x + siirronPituus;
-            int nykyinenY = y;
-
-            if (onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
-                // Törmättiin laudan reunaan
-                break;
-            }
-
-            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true, true, true);
-
-            if (vari != 0) {
-                // Törmättiin nappulaan, ei etsitä kauemmaksi
-                break;
-            }
-        }
-
-        for (int siirronPituus = 1; siirronPituus < this.kokoy; siirronPituus++) {
-            int nykyinenX = x - siirronPituus;
-            int nykyinenY = y;
-
-            if (onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
-                // Törmättiin laudan reunaan
-                break;
-            }
-
-            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true, true, true);
-
-            if (vari != 0) {
-                // Törmättiin nappulaan, ei etsitä kauemmaksi
-                break;
-            }
-        }
+        lista = torni(x, y, lista, vari, true, true);
+        lista = torni(x, y, lista, vari, true, false);
+        lista = torni(x, y, lista, vari, false, true);
+        lista = torni(x, y, lista, vari, false, false);
 
         return lista;
     }
@@ -227,9 +209,8 @@ public class Siirrot {
      */
     private Lista lisaaLaillinenSiirto(int x, int y, int uusix, int uusiy, Lista lista, boolean saaSiirtyaTyhjaan, boolean saakoSyoda, boolean saakoOllaVaarassa) {
         int uusiSiirto[] = {uusix, uusiy};
-        // uusi tai vanha paikka on laudan ulkopuolella
-        if (uusix >= this.kokox || uusiy >= this.kokoy
-                || uusix < 0 || uusiy < 0) {
+        // uusi paikka on laudan ulkopuolella
+        if (omistaja.onkoLaudanUlkopuolella(uusix, uusiy)) {
             return lista;
         }
 
@@ -262,24 +243,5 @@ public class Siirrot {
                 return lista;
             }
         }
-    }
-
-
-
-    /**
-     * Tarkistaa onko ruutu laudalla.
-     *
-     * @param nykyinenX Ruudun rivi
-     * @param nykyinenY Ruudun sarake
-     * @return onko ruutu laudan ulkopuolella
-     */
-    private boolean onkoLaudanUlkopuolella(int nykyinenX, int nykyinenY) {
-        if (nykyinenX >= this.kokox || nykyinenX < 0) {
-            return true;
-        }
-        if (nykyinenY >= this.kokoy || nykyinenY < 0) {
-            return true;
-        }
-        return false;
     }
 }

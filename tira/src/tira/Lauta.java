@@ -37,7 +37,7 @@ public class Lauta {
         this.kokox = kokox;
         this.kokoy = kokoy;
 
-        siirtoLaskin = new Siirrot(kokox, kokoy, this);
+        siirtoLaskin = new Siirrot(this);
 
         alustaLauta();
     }
@@ -209,5 +209,22 @@ public class Lauta {
 
     public boolean onkoTyhja(int x, int y) {
         return lauta[x][y].onkoTyhja();
+    }
+    
+        /**
+     * Tarkistaa onko ruutu laudalla.
+     *
+     * @param nykyinenX Ruudun rivi
+     * @param nykyinenY Ruudun sarake
+     * @return onko ruutu laudan ulkopuolella
+     */
+    public boolean onkoLaudanUlkopuolella(int nykyinenX, int nykyinenY) {
+        if (nykyinenX >= this.kokox || nykyinenX < 0) {
+            return true;
+        }
+        if (nykyinenY >= this.kokoy || nykyinenY < 0) {
+            return true;
+        }
+        return false;
     }
 }
