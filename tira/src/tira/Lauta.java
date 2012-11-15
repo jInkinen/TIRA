@@ -215,6 +215,7 @@ public class Lauta {
     }
 
     public boolean onkoTyhja(int x, int y) {
+        System.out.println("----- ONKO TYHJÄ??? " + x + "," + y + " "+ lauta[x][y] + " > " + lauta[x][y].onkoTyhja());
         return lauta[x][y].onkoTyhja();
     }
     

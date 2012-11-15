@@ -119,4 +119,9 @@ public class Ruutu {
     public Lista getSiirrot() {
         return omatSiirrot;
     }
+    
+    @Override
+    public String toString() {
+        return "(" + this.x + "," + this.y + ") V:" + this.vari + " N:" + this.nappula;
+    }
 }

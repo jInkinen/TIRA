@@ -16,22 +16,27 @@ import static org.junit.Assert.*;
  * @author juhainki
  */
 public class LautaTest {
-    
+        int kokox = 6;
+        int kokoy = 6;
+        Ruutu[][] ruudut = new Ruutu[kokox][kokoy];
+        
     public LautaTest() {
+        
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
+        
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -45,33 +50,47 @@ public class LautaTest {
         int kerrat = 1;
         //System.out.println("Lasketaan siirrot " + kerrat + " kertaa");
         Lauta instance = new Lauta();
-        
+
         for (int i = 0; i < kerrat; i++) {
             instance.laskeSiirrot();
         }
-        
+
         long end = System.nanoTime();
         double muunnos = (end - start) / 1000000000.0;
         //System.out.println("Kesto: " + muunnos + "s");
-        
-        
+
+
         // 1 000   : 0,1s
         // 10 000  : 1s
         // 100 000 : 12s
         // 500 000 : 45s
     }
+
+    @Test
+    public void lautaAlustuuOikein() {
+        Lauta l = new Lauta();
+        assertEquals("|t|l|k|q|l|t|\n"
+                + "|s|s|s|s|s|s|\n"
+                + "| | | | | | |\n"
+                + "| | | | | | |\n"
+                + "|S|S|S|S|S|S|\n"
+                + "|T|L|K|Q|L|T|\n", l.laudanTulostus());
+    }
     
     @Test
-    public void testSiirrotLasketaanOikein() {
-        Lauta peliLauta = new Lauta();
+    public void lautaAlustuuManuaalisesti() {
+        for (int x = 0; x < kokox; x++) {
+            for (int y = 0; y < kokoy; y++) {
+                ruudut[x][y] = new Ruutu(x, y);
+            }
+        }
         
-        Siirto s1 = new Siirto(5, 1, 5, 2, 0);
-        Siirto s2 = new Siirto(4, 4, 4, 3, 0);
+        Lauta l = new Lauta(kokox, kokoy, ruudut, 0);
         
-        peliLauta.siirto(s1);
-        peliLauta.siirto(s2);
+//        System.out.println(l.laudanTulostus());
         
-        String oikea = "|0|0|0|0|1|1|\n|1|1|1|1|1|0|\n|0|0|0|0|0|2|\n|0|0|0|0|2|0|\n|1|1|1|1|0|1|\n|0|0|0|1|0|0|\n";
-        assertEquals(oikea, "");
+        
     }
+    
+    
 }

@@ -52,6 +52,14 @@ public class Tekoaly {
 
             
             // Luodaan uusi Lauta-olio, jottei tuohota alkuperäistä
+            
+            System.out.println("uudelle laudalle syötettävät tiedot:");
+            Ruutu[][] ruudut = peliTilanne.ruudut();
+            for (Ruutu[] r : ruudut) {
+                for (Ruutu ruutu : r) {
+                    System.out.println(ruutu);
+                }
+            }
             Lauta newLauta = new Lauta(6, 6, peliTilanne.ruudut(), peliTilanne.monesSiirto() + 1);
             
             Siirto uusiSiirto = siirrot.get(i);
