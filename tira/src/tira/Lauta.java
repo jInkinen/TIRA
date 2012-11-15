@@ -125,11 +125,14 @@ public class Lauta {
     }
 
     public Lauta siirto(Siirto s) {
-        // Ei siirretä tyhjää nappulaa
         int x = s.alkuperainenPaikka()[0];
         int y = s.alkuperainenPaikka()[1];
         int uusix = s.uusiPaikka()[0];
         int uusiy = s.uusiPaikka()[1];
+        
+        System.out.println("ENNEN SIIRTOA:");
+        System.out.println("FROM: "+lauta[x][y]);
+        System.out.println("  TO: "+lauta[uusix][uusiy]);
         
         if (onkoTyhja(x, y)) {
             throw new UnsupportedOperationException("Eihän olematonta nappulaa voi siirtää! " + x + "," + y);
@@ -144,7 +147,9 @@ public class Lauta {
         lauta[uusix][uusiy].setNappula(lauta[x][y].getNappula());
         lauta[x][y].tyhjaksi();
         
-        
+        System.out.println("TOTEUTETTIIN SIIRTO:");
+        System.out.println("FROM: "+lauta[x][y]);
+        System.out.println("  TO: "+lauta[uusix][uusiy] + "\n");
         return this;
     }
 
@@ -215,7 +220,7 @@ public class Lauta {
     }
 
     public boolean onkoTyhja(int x, int y) {
-        System.out.println("----- ONKO TYHJÄ??? " + x + "," + y + " "+ lauta[x][y] + " > " + lauta[x][y].onkoTyhja());
+//        System.out.println("----- ONKO TYHJÄ??? " + x + "," + y + " "+ lauta[x][y] + " > " + lauta[x][y].onkoTyhja());
         return lauta[x][y].onkoTyhja();
     }
     

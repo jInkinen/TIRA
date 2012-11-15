@@ -22,6 +22,10 @@ public class Tekoaly {
     }
     
     public Siirto valitseSiirto(int syvyys) {
+        if (syvyys < 1) {
+            throw new UnsupportedOperationException("syvyys liian pieni");
+        }
+        
         siirrotPuuhun(peli, juuriPuu, syvyys);
         System.out.println("Siirrot lisätty puuhun. Suoritetaan minimax.");
         Siirto ret;
@@ -53,13 +57,13 @@ public class Tekoaly {
             
             // Luodaan uusi Lauta-olio, jottei tuohota alkuperäistä
             
-            System.out.println("uudelle laudalle syötettävät tiedot:");
-            Ruutu[][] ruudut = peliTilanne.ruudut();
-            for (Ruutu[] r : ruudut) {
-                for (Ruutu ruutu : r) {
-                    System.out.println(ruutu);
-                }
-            }
+//            System.out.println("uudelle laudalle syötettävät tiedot:");
+//            Ruutu[][] ruudut = peliTilanne.ruudut();
+//            for (Ruutu[] r : ruudut) {
+//                for (Ruutu ruutu : r) {
+//                    System.out.println(ruutu);
+//                }
+//            }
             Lauta newLauta = new Lauta(6, 6, peliTilanne.ruudut(), peliTilanne.monesSiirto() + 1);
             
             Siirto uusiSiirto = siirrot.get(i);
@@ -69,6 +73,7 @@ public class Tekoaly {
             PuuSolmu uusiPuuSolmu = new PuuSolmu(50);
             vanhempi.liitaPuuPuuhun(uusiPuuSolmu);
             
+            System.out.println("Nyt tehdään rekursiivinen kutsu: \n" + newLauta.laudanTulostus());
             siirrotPuuhun(newLauta, uusiPuuSolmu, syvyys - 1);
         }
     }

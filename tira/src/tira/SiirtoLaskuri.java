@@ -27,7 +27,11 @@ public class SiirtoLaskuri {
         Lista lista = new Lista();
        
         if (vari == 0) {
-            System.out.println("TYHJÄ: " + x + y);
+            // Palautetaan tyhjä lista
+            return lista;
+        }
+        if (nappula == 0) {
+            throw new UnsupportedOperationException("Tyhjä nappula värillisessä ruudussa o_0");
         }
         
         if (lauta.valkoisenVuoro()) {
@@ -107,32 +111,35 @@ public class SiirtoLaskuri {
     }
 
     private Lista lahetti(int x, int y, Lista lista, int vari, boolean xplus, boolean yplus) {
-        //for (int siirronPituus = 1; siirronPituus < this.kokoy; siirronPituus++) {
-        int siirronPituus = 1;
+        int siirronPituus = 0;
         while (true) {
-            int nykyinenX, nykyinenY;
+            int uusiX, uusiY;
 
             if (xplus) {
-                nykyinenX = x + siirronPituus;
+                uusiX = x + siirronPituus;
             } else {
-                nykyinenX = x - siirronPituus;
+                uusiX = x - siirronPituus;
             }
 
             if (yplus) {
-                nykyinenY = y + siirronPituus;
+                uusiY = y + siirronPituus;
             } else {
-                nykyinenY = y - siirronPituus;
+                uusiY = y - siirronPituus;
             }
 
-
-            if (lauta.onkoLaudanUlkopuolella(nykyinenX, nykyinenY)) {
+            if (lauta.onkoLaudanUlkopuolella(uusiX, uusiY)) {
                 // Törmättiin laudan reunaan
                 break;
             }
 
-            lista = lisaaLaillinenSiirto(x, y, nykyinenX, nykyinenY, lista, true, true, true, vari);
+            if (vari == this.lauta.ruudut()[uusiX][uusiY].getVari()) {
+                // Törmättiin saman väriseen
+                break;
+            }
+            
+            lista = lisaaLaillinenSiirto(x, y, uusiX, uusiY, lista, true, true, true, vari);
 
-            if (vari != 0) {
+            if (this.lauta.ruudut()[uusiX][uusiY].getVari() != 0) {
                 // Törmättiin nappulaan, ei etsitä kauemmaksi
                 break;
             }
@@ -145,7 +152,7 @@ public class SiirtoLaskuri {
     private Lista torni(int x, int y, Lista lista, int vari, boolean xakseli, boolean plus) {
         int nykyinenX, nykyinenY;
 
-        int siirronPituus = 1;
+        int siirronPituus = 0;
         while (true) {
             if (xakseli) {
                 if (plus) {
