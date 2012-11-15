@@ -116,10 +116,18 @@ public class Ruutu {
         // vaikka booleania käytetään
     }
 
+    /**
+     * 
+     * @return Lista ruudussa olevaan nappulaan liittyvistä siirroista.
+     */
     public Lista getSiirrot() {
         return omatSiirrot;
     }
     
+    /**
+     * 
+     * @return muotoiltu tulostusasu luokalle
+     */
     @Override
     public String toString() {
         return "(" + this.x + "," + this.y + ") V:" + this.vari + " N:" + this.nappula;

@@ -40,6 +40,10 @@ public class PuuSolmu {
         }
     }
 
+    /**
+     * 
+     * @return palauttaa kaikki solmun siirrot
+     */
     public Lista getSiirrot() {
         return solmunSiirrot;
     }
@@ -55,6 +59,12 @@ public class PuuSolmu {
         return alipuu;
     }
 
+    /**
+     * minimax hakee optimaalisen siirron annettujen parametrien mukaisesti
+     * @param valkoisenVuoro onko valkoisen vuoro?
+     * @param syvyys Kuinka syvä puu on käytössä?
+     * @return paras siirto
+     */
     public Siirto minimax(boolean valkoisenVuoro, int syvyys) {
         Siirto s;
         if (valkoisenVuoro) {
@@ -65,7 +75,10 @@ public class PuuSolmu {
         return s;
     }
 
-    public Siirto max(PuuSolmu solmu, int syvyys) {
+    /**
+     * minimax-funktion apufunktio.
+     */
+    private Siirto max(PuuSolmu solmu, int syvyys) {
         if (syvyys <= 1 || solmu.eiLapsia()) {
             System.out.println("PS:max():::" + solmu.getSiirrot().getMax());
             return solmu.getSiirrot().getMax();
@@ -79,7 +92,10 @@ public class PuuSolmu {
         return s;
     }
 
-    public Siirto min(PuuSolmu solmu, int syvyys) {
+    /**
+     * minimax-funktion apufunktio.
+     */
+    private Siirto min(PuuSolmu solmu, int syvyys) {
         if (syvyys < 1 || solmu.eiLapsia()) {
             return solmu.getSiirrot().getMin();
         }
@@ -113,12 +129,20 @@ public class PuuSolmu {
         }
     }
 
+    /**
+     * lisaa listan siirrot osaksi nykyistä puuta
+     * @param siirrot 
+     */
     public void lisaaLasketutSiirrot(Lista siirrot) {
         for (int i = 0; i < siirrot.length(); i++) {
             this.solmunSiirrot.add(siirrot.get(i));
         }
     }
 
+    /**
+     * Korvaa javan oletus-Stringin tämän luokan osalta
+     * @return muotoiltu esitys oliosta
+     */
     public String siirrotString() {
         String ret = "";
         for (int i = 0; i < this.solmunSiirrot.length(); i++) {

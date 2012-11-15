@@ -25,7 +25,7 @@ public class SiirtoLaskuri {
      */
     public Lista ruudunSiirrot(int x, int y, int vari, int nappula) {
         Lista lista = new Lista();
-       
+
         if (vari == 0) {
             // Palautetaan tyhjä lista
             return lista;
@@ -33,7 +33,7 @@ public class SiirtoLaskuri {
         if (nappula == 0) {
             throw new UnsupportedOperationException("Tyhjä nappula värillisessä ruudussa o_0");
         }
-        
+
         if (lauta.valkoisenVuoro()) {
             if (vari != 1) {
                 return lista;
@@ -68,6 +68,9 @@ public class SiirtoLaskuri {
         return lista;
     }
 
+    /**
+     * Lisää listaan sotilaalle mahdolliset siirrot
+     */
     private Lista sotilaanSiirrot(int x, int y, Lista lista, int vari) {
         if (vari == -1) {
             lista = lisaaLaillinenSiirto(x, y, x, y + 1, lista, true, false, true, vari);
@@ -81,6 +84,9 @@ public class SiirtoLaskuri {
         return lista;
     }
 
+    /**
+     * Lisää listaan kuninkaalle mahdolliset siirrot
+     */
     private Lista kuninkaanSiirrot(int x, int y, Lista lista, int vari) {
         lista = lisaaLaillinenSiirto(x, y, x, y + 1, lista, true, true, false, vari);
         lista = lisaaLaillinenSiirto(x, y, x + 1, y + 1, lista, true, true, false, vari);
@@ -94,12 +100,7 @@ public class SiirtoLaskuri {
     }
 
     /**
-     * Laskee lähetille mahdolliset siirrot
-     *
-     * @param x Nappulan rivi
-     * @param y Nappulan sarake
-     * @param lista lista, johon siirrot lisätään
-     * @return lista, jossa on kaikki lailliset siirrot
+     * Lisää listaan lähetille mahdolliset siirrot
      */
     private Lista lahetinSiirrot(int x, int y, Lista lista, int vari) {
         lista = lahetti(x, y, lista, vari, true, true);
@@ -110,6 +111,9 @@ public class SiirtoLaskuri {
         return lista;
     }
 
+    /*
+     * Toteuttaa lähetin siirtoihin vaikuttavat loopit
+     */
     private Lista lahetti(int x, int y, Lista lista, int vari, boolean xplus, boolean yplus) {
         int siirronPituus = 0;
         while (true) {
@@ -136,7 +140,7 @@ public class SiirtoLaskuri {
                 // Törmättiin saman väriseen
                 break;
             }
-            
+
             lista = lisaaLaillinenSiirto(x, y, uusiX, uusiY, lista, true, true, true, vari);
 
             if (this.lauta.ruudut()[uusiX][uusiY].getVari() != 0) {
@@ -149,6 +153,21 @@ public class SiirtoLaskuri {
         return lista;
     }
 
+    /**
+     * Lisää listaan sotilaalle mahdolliset siirrot
+     */
+    private Lista torninSiirrot(int x, int y, Lista lista, int vari) {
+        lista = torni(x, y, lista, vari, true, true);
+        lista = torni(x, y, lista, vari, true, false);
+        lista = torni(x, y, lista, vari, false, true);
+        lista = torni(x, y, lista, vari, false, false);
+
+        return lista;
+    }
+
+    /**
+     * Toteuttaa tornin siirtoihin vaikuttavat loopit
+     */
     private Lista torni(int x, int y, Lista lista, int vari, boolean xakseli, boolean plus) {
         int nykyinenX, nykyinenY;
 
@@ -186,23 +205,6 @@ public class SiirtoLaskuri {
             }
             siirronPituus++;
         }
-        return lista;
-    }
-
-    /**
-     * Laskee tornille mahdolliset siirrot
-     *
-     * @param x Nappulan rivi
-     * @param y Nappulan sarake
-     * @param lista lista, johon siirrot lisätään
-     * @return lista, jossa on kaikki lailliset siirrot
-     */
-    private Lista torninSiirrot(int x, int y, Lista lista, int vari) {
-        lista = torni(x, y, lista, vari, true, true);
-        lista = torni(x, y, lista, vari, true, false);
-        lista = torni(x, y, lista, vari, false, true);
-        lista = torni(x, y, lista, vari, false, false);
-
         return lista;
     }
 

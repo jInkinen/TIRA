@@ -50,6 +50,9 @@ public class Lista {
         pointer++;
     }
     
+    /**
+     * Kasvattaa taulukon kokoa tarvittaessa tuplaamalla sen
+     */
     private void kasvata() {
         Siirto[] uusiTaulu = new Siirto[this.koko*2];
         for (int i = 0; i < pointer; i++) {
@@ -82,22 +85,19 @@ public class Lista {
         return pointer;
     }
 
+    /**
+     * 
+     * @return listan suurin alkio
+     */
     public Siirto getMax() {
         return this.taulukko[this.maxIndex];
     }
 
+    /**
+     * 
+     * @return listan pienin alkio
+     */
     public Siirto getMin() {
         return this.taulukko[this.minIndex];
     }
-
-    public boolean empty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
-
-/****
- * :::::TODO:::::
- * Lisää testit
- * remove(i)
- * clear()
- */

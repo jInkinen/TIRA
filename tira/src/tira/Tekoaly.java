@@ -12,21 +12,33 @@ import java.util.PriorityQueue;
  */
 public class Tekoaly {
     private PriorityQueue<Lauta> jono;
-    private Puu puu;
+
     private int puoli;
     
     public Tekoaly(int omaPuoli) {
-        puu = new Puu();
+
         jono = new PriorityQueue<>();
         this.puoli = omaPuoli;
     }
     
     // Leveys ensin läpikäynti -> listätään puuhun -> kutsutaan
+    /**
+     * TODO
+     * 
+     * Toteuttaa tekoälyn siirron valikoinnin.
+     * Algoritmi käy ensin läpi kaikki annetun pelitilanteen mahdolliset siirrot ja lisää ne jonoon.
+     * Jonosta data lisätään puuhun, jonka jälkeen suoritetaan rekursiivinen kutsu. Lopulta rekursio
+     * purkautuu, kun syvyys saavutetaan ja kaikki alkiot käydään läpi leveyssuuntaisesti.
+     * 
+     * @param syvyys kuinka syvälle siirtoja haetaan
+     * @param oikeaTilanne mikä on ylemmän rekursiotason alkuperäinen tilanne
+     * @return 
+     */
     public Siirto valitseSiirto(int syvyys, Lauta oikeaTilanne) {
 
         lisaaSiirrot(syvyys, oikeaTilanne);
         
-        Siirto ret = puu.minimax(puoli);
+        // TODO: tallenna puuhun ja suorita haku
         return null;
     }
 
@@ -45,8 +57,7 @@ public class Tekoaly {
         // Otetaan jonon eka, lisätään se puuhun ja kutsutaan rekursiivisesti funktiota
         Lauta lauta = jono.poll();
         
-        puu.lisaaAliPuu(lauta.siirrot());
-
+        // TODO: lisää puuhun
         
         lisaaSiirrot(syvyys - 1, lauta);
     }

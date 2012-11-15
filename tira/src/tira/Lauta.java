@@ -43,6 +43,13 @@ public class Lauta implements Comparable{
         alustaLauta();
     }
     
+    /**
+     * Konstruktori, joka sallii manuaalisesti asetetun tilanteen luomisen.
+     * @param kokox laudan leveys
+     * @param kokoy laudan korkeus
+     * @param ruudut Ruutu[][], jossa on kaikkien ruutujen tiedot
+     * @param siirto monekso vuoro menossa
+     */
     public Lauta(int kokox, int kokoy, Ruutu[][] ruudut, int siirto) {
         this.siirto = siirto;
         this.kokox = kokox;
@@ -200,6 +207,12 @@ public class Lauta implements Comparable{
         }
     }
 
+    /**
+     * Kertoo onko laudan ruutu tyhjä
+     * @param x
+     * @param y
+     * @return onko tyhjä?
+     */
     public boolean onkoTyhja(int x, int y) {
 //        System.out.println("----- ONKO TYHJÄ??? " + x + "," + y + " "+ lauta[x][y] + " > " + lauta[x][y].onkoTyhja());
         return lauta[x][y].onkoTyhja();
@@ -254,6 +267,10 @@ public class Lauta implements Comparable{
         return siirrot;
     }
 
+    /**
+     * 
+     * @return Kertoo onko nyt alkoisen vuoro
+     */
     public boolean valkoisenVuoro() {
         if (this.siirto % 2 == 0) {
             return true;
@@ -261,18 +278,36 @@ public class Lauta implements Comparable{
         return false;
     }
     
+    /**
+     * 
+     * @return kertoo käyttäjälle nykyisen pelilaudan ruudut
+     */
     public Ruutu[][] ruudut() {
         return this.lauta;
     }
     
+    /**
+     * Kertoo monesko siirtovuoro pelisssä on.
+     * @return 
+     */
     public int monesSiirto() {
         return this.siirto;
     }
 
+    /**
+     * Muuttaa laudan tilannetta suorittamalla annetun siirron.
+     * @param ret toteutettavaksi annettava siirto
+     */
     void toteutaSiirto(Siirto ret) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * comparablen toteutus vaatii compareTo:n olemassaolon.
+     * Jotta oliota voi laittaa jonoon, javan jono-toteutus vaatii, että olio on comparable
+     * @param o verrattava olio
+     * @return vertailuku
+     */
     @Override
     public int compareTo(Object o) {
         return -1;
