@@ -1,8 +1,10 @@
+package tira;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tira;
+
        
 /**
  *
@@ -33,6 +35,8 @@ public class PuuSolmu {
         if (pointer < koko) {
             alipuu[pointer] = puu;
             pointer++;
+        } else {
+            throw new UnsupportedOperationException("Puu yli rajansa");
         }
     }
 

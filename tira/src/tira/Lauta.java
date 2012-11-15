@@ -130,9 +130,9 @@ public class Lauta {
         int uusix = s.uusiPaikka()[0];
         int uusiy = s.uusiPaikka()[1];
         
-        System.out.println("ENNEN SIIRTOA:");
-        System.out.println("FROM: "+lauta[x][y]);
-        System.out.println("  TO: "+lauta[uusix][uusiy]);
+//        System.out.println("ENNEN SIIRTOA:");
+//        System.out.println("FROM: "+lauta[x][y]);
+//        System.out.println("  TO: "+lauta[uusix][uusiy]);
         
         if (onkoTyhja(x, y)) {
             throw new UnsupportedOperationException("Eihän olematonta nappulaa voi siirtää! " + x + "," + y);
@@ -146,10 +146,10 @@ public class Lauta {
         lauta[uusix][uusiy].setVari(lauta[x][y].getVari());
         lauta[uusix][uusiy].setNappula(lauta[x][y].getNappula());
         lauta[x][y].tyhjaksi();
-        
-        System.out.println("TOTEUTETTIIN SIIRTO:");
-        System.out.println("FROM: "+lauta[x][y]);
-        System.out.println("  TO: "+lauta[uusix][uusiy] + "\n");
+//        
+//        System.out.println("TOTEUTETTIIN SIIRTO:");
+//        System.out.println("FROM: "+lauta[x][y]);
+//        System.out.println("  TO: "+lauta[uusix][uusiy] + "\n");
         return this;
     }
 
