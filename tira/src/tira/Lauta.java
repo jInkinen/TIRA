@@ -8,7 +8,7 @@ package tira;
  *
  * @author juhainki
  */
-public class Lauta {
+public class Lauta implements Comparable{
 
     private final String merkit[] = {" ", "K", "Q", "T", "L", "S", "H"};
     private final int heurestiikka[] = {0, 2000, 9, 5, 3, 1, 3};
@@ -124,33 +124,14 @@ public class Lauta {
         this.lauta[sarake][this.kokoy - 2].setNappula(5);
     }
 
+    /**
+     * Simuloi siirron suorittamisen
+     * @param s Siirto, joka simuloidaan
+     * @return Palautetaan pelilauta, jossa siirto on toteutettu
+     */
     public Lauta siirto(Siirto s) {
-        int x = s.alkuperainenPaikka()[0];
-        int y = s.alkuperainenPaikka()[1];
-        int uusix = s.uusiPaikka()[0];
-        int uusiy = s.uusiPaikka()[1];
-        
-//        System.out.println("ENNEN SIIRTOA:");
-//        System.out.println("FROM: "+lauta[x][y]);
-//        System.out.println("  TO: "+lauta[uusix][uusiy]);
-        
-        if (onkoTyhja(x, y)) {
-            throw new UnsupportedOperationException("Eihän olematonta nappulaa voi siirtää! " + x + "," + y);
-        }
-        siirto++;
-        
-        /*uusiLauta.lauta[x][y].ruutuunVaikutettu();
-        uusiLauta.lauta[uusix][uusiy].ruutuunVaikutettu();*/
-        // TODO: Lisää systeemi, joka käy kaikki nappulat, joiden siirtomahdollisuuksiin vaikutettiin
 
-        lauta[uusix][uusiy].setVari(lauta[x][y].getVari());
-        lauta[uusix][uusiy].setNappula(lauta[x][y].getNappula());
-        lauta[x][y].tyhjaksi();
-//        
-//        System.out.println("TOTEUTETTIIN SIIRTO:");
-//        System.out.println("FROM: "+lauta[x][y]);
-//        System.out.println("  TO: "+lauta[uusix][uusiy] + "\n");
-        return this;
+        return new Lauta();
     }
 
     /**
@@ -255,18 +236,21 @@ public class Lauta {
         return this.heurestiikka[nappula];
     }
 
+    /**
+     * 
+     * @return Kertoo pelilaudan kaikki mahdolliset siirrot
+     */
     public Lista siirrot() {
         Lista siirrot = new Lista();
         
         for (int x = 0; x < this.kokox; x++) {
             for (int y = 0; y < this.kokoy; y++) {
-                Lista s2 = this.lauta[x][y].getSiirrot();
-                for (int i = 0; i < s2.length(); i++) {
-                    siirrot.add(s2.get(i));
+                Lista apuri = this.lauta[x][y].getSiirrot();
+                for (int i = 0; i < apuri.length(); i++) {
+                    siirrot.add(apuri.get(i));
                 }
             }
         }
-        
         return siirrot;
     }
 
@@ -287,6 +271,11 @@ public class Lauta {
 
     void toteutaSiirto(Siirto ret) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return -1;
     }
     
 }

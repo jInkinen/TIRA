@@ -10,12 +10,20 @@ package tira;
  */
 public class Puu {
     private Solmu juuri;
+    private Puu[] lapset;
+    private Solmu[] lehdet[];
     
     public void setJuuri(Solmu s) {
-        this.juuri = s;
+        this.juuri = s;      
     }
-    
-    public void rakennaPuu(Solmu s, int korkeus) {
-    
+
+    void lisaaAliPuu(Lista siirrot) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    Siirto minimax(int puoli) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+  
 }
