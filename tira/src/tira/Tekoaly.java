@@ -4,20 +4,18 @@
  */
 package tira;
 
-import java.util.PriorityQueue;
 
 /**
  *
  * @author juhainki
  */
 public class Tekoaly {
-    private PriorityQueue<Lauta> jono;
-
+    
+    private Puu puu;
     private int puoli;
     
     public Tekoaly(int omaPuoli) {
-
-        jono = new PriorityQueue<>();
+        this.puu = new Puu();
         this.puoli = omaPuoli;
     }
     
@@ -35,30 +33,44 @@ public class Tekoaly {
      * @return 
      */
     public Siirto valitseSiirto(int syvyys, Lauta oikeaTilanne) {
-
-        lisaaSiirrot(syvyys, oikeaTilanne);
+        oikeaTilanne.laskeSiirrot();
         
-        // TODO: tallenna puuhun ja suorita haku
-        return null;
+        Lista l = oikeaTilanne.siirrot();
+        Solmu apuSolmu = new Solmu(null, l.get(0));
+        puu.setJuuri(apuSolmu);
+        for (int i = 0; i < l.length(); i++) {
+            Solmu uusiS = new Solmu(apuSolmu, l.get(i));
+            puu.getJuuri().lisaaLapsi(uusiS);
+        }
+        
+        for (int i2 = 0; i2 < puu.getJuuri().length(); i2++) {
+            siirronLapset(puu.getJuuri().getLapset()[i2], oikeaTilanne, syvyys);
+        }
+        
+        
+        System.out.println("puu:\n" + puu.tulostus());
+        
+        return puu.minimax(true, syvyys);
     }
 
-    private void lisaaSiirrot(int syvyys, Lauta tilanne) {
-        tilanne.laskeSiirrot();
-        
-//        System.out.println("SYV:" + syvyys + " - " + tilanne);
+    private Siirto siirronLapset(Solmu s, Lauta tilanne, int syvyys) {
+        System.out.println(syvyys);
         if (syvyys == 0) {
-            return;
+            return s.getSiirto();
         }
-        // Lisätään nykyisen tilanteen siirrot jonoon
+        // toteuta siirto
+        tilanne.siirto(s.getSiirto());
+        // laske uudet siirrot
+        tilanne.laskeSiirrot();
+        // lisää uudet lapset puuhun
+        
         for (int i = 0; i < tilanne.siirrot().length(); i++) {
-            jono.add(tilanne.siirto(tilanne.siirrot().get(i)));
+            Solmu uusiSolmu = new Solmu(s, tilanne.siirrot().get(i));
+            s.lisaaLapsi(uusiSolmu);
+            return siirronLapset(uusiSolmu, tilanne, syvyys - 1);
         }
-        
-        // Otetaan jonon eka, lisätään se puuhun ja kutsutaan rekursiivisesti funktiota
-        Lauta lauta = jono.poll();
-        
-        // TODO: lisää puuhun
-        
-        lisaaSiirrot(syvyys - 1, lauta);
+        // kutsu metodia rekursiivisesti
+        return s.getSiirto();
+        // palauta siirto
     }
 }

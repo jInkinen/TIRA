@@ -36,13 +36,18 @@ public class Solmu {
             kasvataLapsiVarastoa();
         }
         //tallennetaan suurimman/pienimmän lapsen sijainti
-        if (s.getOmaArvo() > lapset[maxIndeksi].getOmaArvo()) {
+        if (maxIndeksi < 0 || minIndeksi < 0) {
             maxIndeksi = pointer;
-            lastenMax = s.getOmaArvo();
-        }
-        if (s.getOmaArvo() < lapset[minIndeksi].getOmaArvo()) {
             minIndeksi = pointer;
-            lastenMin = s.getOmaArvo();
+        } else {
+            if (s.getOmaArvo() > lapset[maxIndeksi].getOmaArvo()) {
+                maxIndeksi = pointer;
+                lastenMax = s.getOmaArvo();
+            }
+            if (s.getOmaArvo() < lapset[minIndeksi].getOmaArvo()) {
+                minIndeksi = pointer;
+                lastenMin = s.getOmaArvo();
+            }
         }
         this.lapset[pointer] = s;
     }
@@ -92,6 +97,10 @@ public class Solmu {
     
     public Siirto getSiirto() {
         return siirto;
+    }
+    
+    public int length() {
+        return pointer;
     }
     
     

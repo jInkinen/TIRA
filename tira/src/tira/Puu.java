@@ -35,8 +35,20 @@ public class Puu {
         if (juuri == null) {
             return "Puu on tyhjä. (Juuri on null).";
         }
-        return "Tulostusta ei toteutettu vielä";
+        String ret = "" + juuri.getOmaArvo() + "\n";
         
+        ret = ret + lastenString(juuri, 1);
+        
+        return ret;
+    }
+    
+    private String lastenString(Solmu s, int syvyys) {
+        String ret = "#" + syvyys + "|v|";
+        for (int i = 0; i <= s.length(); i++) {
+            ret = ret + s.getLapset()[i].getOmaArvo() + " ";
+            ret = ret + lastenString(s.getLapset()[i], syvyys + 1);
+        }
+        return ret + "|^|\n";
     }
     
 
