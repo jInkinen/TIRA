@@ -224,7 +224,7 @@ public class SiirtoLaskuri {
      * Normaalisti true, mutta sotilaan eteenpäin siirtyminen false.
      * @param saakoOllaVaarassa Normaalisti true, mutta kuninkaalla false.
      * Varmistetaan, ettei kuninkaan liikkuminen altista sitä shakille.
-     * @return lista, jossa on laskettu siirto ja aikaisemmat lasketut siirrot.
+     * @return lista, jossa on laskettu simuloiSiirto ja aikaisemmat lasketut siirrot.
      */
     private Lista lisaaLaillinenSiirto(int x, int y, int uusix, int uusiy, Lista lista, boolean saaSiirtyaTyhjaan, boolean saakoSyoda, boolean saakoOllaVaarassa, int vari) {
         Siirto uusiSiirto = new Siirto(x, y, uusix, uusiy, 0);
@@ -236,7 +236,7 @@ public class SiirtoLaskuri {
             throw new UnsupportedOperationException("Siirrettävä nappula ei voi olla laudan ulkopuolella");
         }
 
-        // TODO tarkastus, ettei siirto aseta kuningasta vaaraan.
+        // TODO tarkastus, ettei simuloiSiirto aseta kuningasta vaaraan.
         // Pohdintaa: onko järkevämpää hoitaa erittäin suurella min-max arvolla?
 
         if (!saakoOllaVaarassa) {

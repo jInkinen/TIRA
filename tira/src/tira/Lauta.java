@@ -48,7 +48,7 @@ public class Lauta implements Comparable{
      * @param kokox laudan leveys
      * @param kokoy laudan korkeus
      * @param ruudut Ruutu[][], jossa on kaikkien ruutujen tiedot
-     * @param siirto monekso vuoro menossa
+     * @param simuloiSiirto monekso vuoro menossa
      */
     public Lauta(int kokox, int kokoy, Ruutu[][] ruudut, int siirto) {
         this.siirto = siirto;
@@ -134,11 +134,16 @@ public class Lauta implements Comparable{
     /**
      * Simuloi siirron suorittamisen
      * @param s Siirto, joka simuloidaan
-     * @return Palautetaan pelilauta, jossa siirto on toteutettu
+     * @return Palautetaan pelilauta, jossa simuloiSiirto on toteutettu
      */
-    public Lauta siirto(Siirto s) {
-
-        return new Lauta();
+    public Lauta simuloiSiirto(Siirto s) {
+        // luodaan kopio laudasta
+        Lauta ret = new Lauta(this.kokox, this.kokoy, this.ruudut(), this.siirto);
+        //Toteutetaan simuloiSiirto
+        ret.toteutaSiirto(s);
+        
+        
+        return ret;
     }
 
     /**
@@ -296,10 +301,22 @@ public class Lauta implements Comparable{
 
     /**
      * Muuttaa laudan tilannetta suorittamalla annetun siirron.
-     * @param ret toteutettavaksi annettava siirto
+     * @param s toteutettavaksi annettava siirto
      */
-    void toteutaSiirto(Siirto ret) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void toteutaSiirto(Siirto s) {
+        int origX = s.alkuperainenPaikka()[0];
+        int origY = s.alkuperainenPaikka()[1];
+        int uusiX = s.uusiPaikka()[0];
+        int uusiY = s.uusiPaikka()[1];
+        
+        Ruutu orig = this.lauta[origX][origY];
+        Ruutu uusi = this.lauta[uusiX][uusiY];
+        
+        //Annetaan uudelle ruudulle vanhan tiedot
+        uusi.setVari(orig.getVari());
+        uusi.setNappula(orig.getNappula());
+        //Tyhjennetään alkuperäisen ruudun tiedot
+        orig.tyhjaksi();
     }
 
     /**

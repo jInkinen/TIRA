@@ -58,10 +58,13 @@ public class Tekoaly {
         if (syvyys == 0) {
             return s.getSiirto();
         }
-        // toteuta siirto
-        tilanne.siirto(s.getSiirto());
+        // toteuta simuloiSiirto
+        System.out.println(s.getSiirto());
+        tilanne.simuloiSiirto(s.getSiirto());
         // laske uudet siirrot
         tilanne.laskeSiirrot();
+        System.out.println(tilanne.laudanTulostus());
+        
         // lisää uudet lapset puuhun
         
         for (int i = 0; i < tilanne.siirrot().length(); i++) {
@@ -71,6 +74,6 @@ public class Tekoaly {
         }
         // kutsu metodia rekursiivisesti
         return s.getSiirto();
-        // palauta siirto
+        // palauta simuloiSiirto
     }
 }

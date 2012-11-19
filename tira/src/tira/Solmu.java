@@ -112,7 +112,7 @@ public class Solmu {
             return this.siirto;
         }
         
-        Siirto s = new Siirto(-1, -1, -1, -1, Integer.MIN_VALUE);
+        Siirto s = new Siirto(-1, -1, -1, -1, Integer.MAX_VALUE);
         
         for (int i = 0; i < pointer; i++) {
             s = valitseParempi(true, s, min(lapset[this.minIndeksi].getSiirto(), syvyys - 1));
@@ -128,7 +128,7 @@ public class Solmu {
             return this.siirto;
         }
         
-        Siirto s = new Siirto(-1, -1, -1, -1, Integer.MAX_VALUE);
+        Siirto s = new Siirto(-1, -1, -1, -1, Integer.MIN_VALUE);
         
         for (int i = 0; i < pointer; i++) {
             s = valitseParempi(false, s, max(lapset[this.maxIndeksi].getSiirto(), syvyys - 1));

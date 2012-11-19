@@ -42,7 +42,7 @@ public class LautaTest {
     }
 
     /**
-     * Test of siirto method, of class Lauta.
+     * Test of simuloiSiirto method, of class Lauta.
      */
     @Test
     public void testSimppeliSiirtojenLaskemisenAikaVaativuus() {

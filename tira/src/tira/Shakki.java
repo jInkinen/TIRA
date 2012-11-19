@@ -19,7 +19,7 @@ public class Shakki {
         peliLauta = new Lauta();
         Tekoaly aly = new Tekoaly(1);
         
-        Siirto s = aly.valitseSiirto(5, peliLauta);
+        Siirto s = aly.valitseSiirto(10, peliLauta);
         System.out.println("Tekoälyn valitsema siirto: " + s);
 
         System.out.println(peliLauta.laudanTulostus());
@@ -30,8 +30,8 @@ public class Shakki {
         
         System.out.println(peliLauta.tulostaSiirtojenMaara());
         
-        peliLauta.siirto(5, 1, 5, 2);
-        peliLauta.siirto(4, 4, 4, 3);
+        peliLauta.simuloiSiirto(5, 1, 5, 2);
+        peliLauta.simuloiSiirto(4, 4, 4, 3);
         System.out.println(peliLauta.laudanTulostus());
         
         System.out.println(peliLauta.tulostaSiirtojenMaara());
