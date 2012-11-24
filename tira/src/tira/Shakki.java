@@ -19,6 +19,7 @@ public class Shakki {
         Tekoaly aly1 = new Tekoaly(1);
         Tekoaly aly2 = new Tekoaly(-1);
         int siirto = 0;
+        
         while (true) {
             siirto++;
             Lauta dynaaminen = new Lauta(6, 6, peliLauta.ruudut(), siirto);
@@ -41,18 +42,5 @@ public class Shakki {
             System.out.println(peliLauta.laudanTulostus());
             Thread.sleep(2000);
         }
-        
-        /*Lauta peliLauta;
-        peliLauta = new Lauta(6, 6);
-        System.out.println(peliLauta.laudanTulostus());
-        
-        System.out.println(peliLauta.tulostaSiirtojenMaara());
-        
-        peliLauta.simuloiSiirto(5, 1, 5, 2);
-        peliLauta.simuloiSiirto(4, 4, 4, 3);
-        System.out.println(peliLauta.laudanTulostus());
-        
-        System.out.println(peliLauta.tulostaSiirtojenMaara());
-        System.out.println(peliLauta.tulostaSiirtojenArvo());*/
     }
 }
