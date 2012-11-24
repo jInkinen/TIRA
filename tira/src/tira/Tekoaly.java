@@ -43,14 +43,22 @@ public class Tekoaly {
             puu.getJuuri().lisaaLapsi(uusiS);
         }
         
-        for (int i2 = 0; i2 < puu.getJuuri().length(); i2++) {
+        for (int i2 = 0; i2 < puu.getJuuri().lastenMaara(); i2++) {
             siirronLapset(puu.getJuuri().getLapset()[i2], oikeaTilanne, syvyys);
         }
         
         
 //        System.out.println("puu:\n" + puu.tulostus());
+        boolean valkoinen = true;
+        if (puoli < 0) {
+            valkoinen = false;
+        }
+        Siirto min = new Siirto(-1, -1, -1, -1, Integer.MIN_VALUE);
+        Siirto max = new Siirto(-1, -1, -1, -1, Integer.MAX_VALUE);
+        Solmu sMin = new Solmu(null, min);
+        Solmu sMax = new Solmu(null, max);
         
-        return puu.minimax(true, syvyys);
+        return puu.alphabeta(valkoinen, syvyys, puu.getJuuri(), sMin, sMax).getSiirto();
     }
 
     private Siirto siirronLapset(Solmu s, Lauta tilanne, int syvyys) {

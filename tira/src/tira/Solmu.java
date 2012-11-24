@@ -103,7 +103,7 @@ public class Solmu {
         return siirto;
     }
     
-    public int length() {
+    public int lastenMaara() {
         return pointer;
     }
     
@@ -141,7 +141,7 @@ public class Solmu {
         return s;
     }
 
-    private boolean eiLapsia() {
+    public boolean eiLapsia() {
         if (pointer < 0) {
             return true;
         }

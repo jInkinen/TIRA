@@ -23,14 +23,26 @@ public class Puu {
         juuri = s;
     }
     
+    /**
+     * Asettaa uuden juuren puulle
+     * @param s uusi juurisolmu
+     */
     public void setJuuri(Solmu s) {
         this.juuri = s;
     }
     
+    /**
+     * 
+     * @return puun juurisolmu
+     */
     public Solmu getJuuri() {
         return juuri;
     }
     
+    /**
+     * 
+     * @return Puun tulostusasu testausta varten
+     */
     public String tulostus() {
         if (juuri == null) {
             return "Puu on tyhjä. (Juuri on null).";
@@ -44,34 +56,66 @@ public class Puu {
     
     private String lastenString(Solmu s, int syvyys) {
         String ret = "#" + syvyys + "|v|";
-        for (int i = 0; i <= s.length(); i++) {
+        for (int i = 0; i <= s.lastenMaara(); i++) {
             ret = ret + s.getLapset()[i].getOmaArvo() + " ";
             ret = ret + lastenString(s.getLapset()[i], syvyys + 1);
         }
         return ret + "|^|\n";
     }
+ 
     
-
-
-   
-
     /**
-     * minimax hakee optimaalisen siirron annettujen parametrien mukaisesti
-     * @param valkoisenVuoro onko valkoisen vuoro?
-     * @param syvyys Kuinka syvä puu on käytössä?
-     * @return paras siirto
+     * Alphabeta-algoritmi, joka laskee optimaalisen siirron parametrien mukaan.
+     * @param vuoro true, jos max-pelaaja. false, jos min-pelaaja
+     * @param syvyys kuinka monta tasoa alaspäin mennään puussa. Käytetään rekursiokutsussa arvolla syvyys-1. Lisäksi alkuperäisessä kutsussa käytetään määrittämään etsinnän kokonaissyvyys.
+     * @param solmu solmu, joka toimii juurena kyseisellä iteraatiolla
+     * @param a alpha-arvon sisältävä solmu
+     * @param b beta-arvon sisältävä solmu
+     * @return solmu, joka on paras
      */
-    public Siirto minimax(boolean valkoisenVuoro, int syvyys) {
-        Siirto s = new Siirto(-1, -1, -1, -1, Integer.MIN_VALUE);
-        if (valkoisenVuoro) {
-            s = juuri.max(s, syvyys);
-        } else {
-            s = juuri.min(s, syvyys);
+    public Solmu alphabeta(boolean vuoro, int syvyys, Solmu solmu, Solmu a, Solmu b) {
+        if (syvyys == 0 || solmu.eiLapsia()) {
+            return solmu;
         }
-        return s;
+        if (vuoro) {
+            for (int i = 0; i < solmu.lastenMaara(); i++) {
+                a = max(a, alphabeta(!vuoro, syvyys - 1, solmu, a, b));
+                if (b.getOmaArvo() <= a.getOmaArvo()) {
+                    break;
+                }
+            }
+            return a;
+        } else {
+            for (int i = 0; i < solmu.lastenMaara(); i++) {
+                b = min(b, alphabeta(!vuoro, syvyys - 1, solmu, a, b));
+                if (b.getOmaArvo() <= a.getOmaArvo()) {
+                    break;
+                }
+            }
+            return b;
+        }
     }
 
-    
+    private Solmu max(Solmu a, Solmu ab) {
+        if (a.getOmaArvo() > ab.getOmaArvo()) {
+            return a;
+        } else {
+            return ab;
+        }
+    }
+        
+
+    private Solmu min(Solmu b, Solmu ab) {
+        if (b.getOmaArvo() < ab.getOmaArvo()) {
+            return b;
+        } else {
+            return ab;
+        }
+    }
+
+
+
+  
 
 
 
