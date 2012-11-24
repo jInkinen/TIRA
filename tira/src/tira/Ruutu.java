@@ -13,7 +13,6 @@ public class Ruutu {
     private final int x, y, tyhja;
     private int nappula, vari;
     private Lista omatSiirrot;
-    private boolean siirrotLaskettu;
 
     /**
      * Luo uuden Ruutu-olion, joka tietää omat koordinaattinsa.
@@ -30,7 +29,6 @@ public class Ruutu {
         vari = 0;
 
         omatSiirrot = new Lista();
-        siirrotLaskettu = false;
     }
 
     /**
@@ -92,15 +90,6 @@ public class Ruutu {
      */
     public void ruutuunVaikutettu() {
         this.omatSiirrot.clear();
-        this.siirrotLaskettu = false;
-    }
-
-    /**
-     *
-     * @return onko ruudun siirrot jo laskettu
-     */
-    public boolean onkoSiirrotValmiina() {
-        return this.siirrotLaskettu;
     }
 
     /**

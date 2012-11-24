@@ -17,12 +17,24 @@ public class Shakki {
         
         Lauta peliLauta;
         peliLauta = new Lauta();
-        Tekoaly aly = new Tekoaly(1);
-        
-        Siirto s = aly.valitseSiirto(10, peliLauta);
-        System.out.println("Tekoälyn valitsema siirto: " + s);
-
-        System.out.println(peliLauta.laudanTulostus());
+        Tekoaly aly1 = new Tekoaly(1);
+        Tekoaly aly2 = new Tekoaly(-1);
+        int siirto = 0;
+//        while (true) {
+            siirto++;
+            Lauta dynaaminen = new Lauta(6, 6, peliLauta.ruudut(), siirto);
+            Siirto s1 = aly1.valitseSiirto(10, dynaaminen);
+            System.out.println("Tekoälyn valitsema siirto: " + s1);
+            peliLauta.simuloiSiirto(s1);
+            
+            dynaaminen = new Lauta(6, 6, peliLauta.ruudut(), siirto);
+            Siirto s2 = aly2.valitseSiirto(10, dynaaminen);
+            System.out.println("Tekoälyn valitsema siirto: " + s2);
+            peliLauta.simuloiSiirto(s2);
+            
+            System.out.println("OIKEA TILANNE:");
+            System.out.println(peliLauta.laudanTulostus());
+//        }
         
         /*Lauta peliLauta;
         peliLauta = new Lauta(6, 6);

@@ -48,7 +48,7 @@ public class Tekoaly {
         }
         
         
-        System.out.println("puu:\n" + puu.tulostus());
+//        System.out.println("puu:\n" + puu.tulostus());
         
         return puu.minimax(true, syvyys);
     }

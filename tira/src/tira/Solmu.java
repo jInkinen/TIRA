@@ -19,6 +19,10 @@ public class Solmu {
         this.siirto = siirto;
         
         this.omaArvo = this.siirto.arvo();
+        if (vanhempi != null) {
+            omaArvo =+ vanhempi.getOmaArvo();
+        }
+        
         
         this.pointer = -1;
         this.koko = 20;

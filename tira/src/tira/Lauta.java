@@ -8,7 +8,7 @@ package tira;
  *
  * @author juhainki
  */
-public class Lauta implements Comparable{
+public class Lauta{
 
     private final String merkit[] = {" ", "K", "Q", "T", "L", "S", "H"};
     private final int heurestiikka[] = {0, 2000, 9, 5, 3, 1, 3};
@@ -170,9 +170,9 @@ public class Lauta implements Comparable{
     public void laskeSiirrot() {
         for (int x = 0; x < this.kokox; x++) {
             for (int y = 0; y < this.kokoy; y++) {
-                if (!this.lauta[x][y].onkoSiirrotValmiina()) {
-                    this.lauta[x][y].tallennaSiirrot(siirtoLaskin.ruudunSiirrot(x, y, this.lauta[x][y].getVari(), this.lauta[x][y].getNappula()));
-                }
+//                if (!this.lauta[x][y].onkoSiirrotValmiina()) {
+                this.lauta[x][y].tallennaSiirrot(siirtoLaskin.ruudunSiirrot(x, y, this.lauta[x][y].getVari(), this.lauta[x][y].getNappula()));
+//                }
             }
         }
     }
@@ -317,17 +317,5 @@ public class Lauta implements Comparable{
         uusi.setNappula(orig.getNappula());
         //Tyhjennetään alkuperäisen ruudun tiedot
         orig.tyhjaksi();
-    }
-
-    /**
-     * comparablen toteutus vaatii compareTo:n olemassaolon.
-     * Jotta oliota voi laittaa jonoon, javan jono-toteutus vaatii, että olio on comparable
-     * @param o verrattava olio
-     * @return vertailuku
-     */
-    @Override
-    public int compareTo(Object o) {
-        return -1;
-    }
-    
+    }    
 }
