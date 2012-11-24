@@ -18,7 +18,12 @@ public class Solmu {
         this.vanh = vanhempi;
         this.siirto = siirto;
         
-        this.omaArvo = this.siirto.arvo();
+        if (this.siirto != null) {
+            this.omaArvo = this.siirto.arvo();
+        } else {
+            this.omaArvo = Integer.MAX_VALUE;
+        }
+        
         if (vanhempi != null) {
             omaArvo =+ vanhempi.getOmaArvo();
         }
@@ -106,70 +111,11 @@ public class Solmu {
     public int lastenMaara() {
         return pointer;
     }
-    
-    
-    /**
-     * minimax-funktion apufunktio.
-     */
-    public Siirto max(Siirto vanhempi, int syvyys) {
-        if (syvyys <= 1 || eiLapsia()) {
-            return this.siirto;
-        }
-        
-        Siirto s = new Siirto(-1, -1, -1, -1, Integer.MAX_VALUE);
-        
-        for (int i = 0; i < pointer; i++) {
-            s = valitseParempi(true, s, min(lapset[this.minIndeksi].getSiirto(), syvyys - 1));
-        }
-        return s;
-    }
-
-    /**
-     * minimax-funktion apufunktio.
-     */
-    public Siirto min(Siirto vanhempi, int syvyys) {
-        if (syvyys < 1 || eiLapsia()) {
-            return this.siirto;
-        }
-        
-        Siirto s = new Siirto(-1, -1, -1, -1, Integer.MIN_VALUE);
-        
-        for (int i = 0; i < pointer; i++) {
-            s = valitseParempi(false, s, max(lapset[this.maxIndeksi].getSiirto(), syvyys - 1));
-        }
-
-        return s;
-    }
 
     public boolean eiLapsia() {
         if (pointer < 0) {
             return true;
         }
         return false;
-    }
-    
-        /**
-     * 
-     * @param min true, jos etsitään pienempää
-     * @param s1
-     * @param s2
-     * @return 
-     */
-    private Siirto valitseParempi(boolean min, Siirto s1, Siirto s2) {
-        if (min) {
-            if (s1.arvo() >= s2.arvo()) {
-                return s2;
-            } else {
-                return s1;
-            }
-        } else {
-            if (s1.arvo() < s2.arvo()) {
-                return s2;
-            } else {
-                return s1;
-            }
-        }
-    }
-
-    
+    }   
 }

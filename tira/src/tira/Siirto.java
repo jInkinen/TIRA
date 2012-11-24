@@ -14,6 +14,7 @@ public class Siirto implements Comparable {
 
     private int arvo;
     private int[] paikka1, paikka2;
+    private boolean laiton = true;
 
     public Siirto(int x1, int y1, int x2, int y2, int arvo) {
         paikka1 = new int[2];
@@ -24,6 +25,8 @@ public class Siirto implements Comparable {
         paikka1[1] = y1;
         paikka2[1] = y2;
         this.arvo = arvo;
+        
+        laiton = false;
     }
 
     /**
@@ -66,6 +69,14 @@ public class Siirto implements Comparable {
      */
     public void setArvo(int arvo) {
         this.arvo = arvo;
+    }
+
+    public boolean isLaiton() {
+        return laiton;
+    }
+
+    public void setLaiton(boolean laiton) {
+        this.laiton = laiton;
     }
     
     /**

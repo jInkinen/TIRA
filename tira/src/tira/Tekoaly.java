@@ -37,9 +37,10 @@ public class Tekoaly {
         
         Lista l = oikeaTilanne.siirrot();
         Solmu apuSolmu = new Solmu(null, l.get(0));
+        Solmu apuri2 = new Solmu(apuSolmu, l.getMax());
         puu.setJuuri(apuSolmu);
         for (int i = 0; i < l.length(); i++) {
-            Solmu uusiS = new Solmu(apuSolmu, l.get(i));
+            Solmu uusiS = new Solmu(apuri2, l.get(i));
             puu.getJuuri().lisaaLapsi(uusiS);
         }
         
@@ -58,20 +59,20 @@ public class Tekoaly {
         Solmu sMin = new Solmu(null, min);
         Solmu sMax = new Solmu(null, max);
         
-        return puu.alphabeta(valkoinen, syvyys, puu.getJuuri(), sMin, sMax).getSiirto();
+        return puu.alphabeta(valkoinen, syvyys - 1, puu.getJuuri(), sMin, sMax).getSiirto();
     }
 
     private Siirto siirronLapset(Solmu s, Lauta tilanne, int syvyys) {
-        System.out.println(syvyys);
+//        System.out.println(syvyys);
         if (syvyys == 0) {
             return s.getSiirto();
         }
         // toteuta simuloiSiirto
-        System.out.println(s.getSiirto());
+//        System.out.println(s.getSiirto());
         tilanne.simuloiSiirto(s.getSiirto());
         // laske uudet siirrot
         tilanne.laskeSiirrot();
-        System.out.println(tilanne.laudanTulostus());
+//        System.out.println(tilanne.laudanTulostus());
         
         // lisää uudet lapset puuhun
         

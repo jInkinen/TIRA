@@ -304,6 +304,9 @@ public class Lauta{
      * @param s toteutettavaksi annettava siirto
      */
     public void toteutaSiirto(Siirto s) {
+        if (s == null) {
+            throw new UnsupportedOperationException("siirto on null");
+        }
         int origX = s.alkuperainenPaikka()[0];
         int origY = s.alkuperainenPaikka()[1];
         int uusiX = s.uusiPaikka()[0];
