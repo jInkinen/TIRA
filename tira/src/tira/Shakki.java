@@ -16,32 +16,38 @@ public class Shakki {
     public static void main(String[] args) throws InterruptedException {
 
         Lauta peliLauta = new Lauta();
+        Lauta tilanne;
 
         Tekoaly aly1 = new Tekoaly(1);
         Tekoaly aly2 = new Tekoaly(-1);
         int siirto = 0;
+        
+        Siirto[] siirrot = new Siirto[1000];
 
         while (true) {
+            //VALKOINEN
+            tilanne = new Lauta();
+            tilanne.toteutaSiirrot(siirrot, siirto);
+            
+            siirrot[siirto] = aly1.valitseSiirto(5, tilanne);
             siirto++;
-            Lauta dynaaminen = new Lauta(6, 6, peliLauta.ruudut(), siirto);
-            Siirto s1 = aly1.valitseSiirto(5, dynaaminen);
-
-            System.out.println(siirto + " Tekoälyn 1 valitsema siirto: " + s1);
-
-            peliLauta.toteutaSiirto(s1);
+            
+            System.out.println(siirto + " Tekoälyn 1 valitsema siirto: " + siirrot[siirto - 1]);
+            peliLauta.toteutaSiirto(siirrot[siirto - 1]);
 
             System.out.println(peliLauta.laudanTulostus());
             Thread.sleep(1000);
 
-
-
-
+            //MUSTA
+            tilanne = new Lauta();
+            tilanne.toteutaSiirrot(siirrot, siirto);
+            
+            siirrot[siirto] = aly2.valitseSiirto(5, tilanne);
             siirto++;
-            dynaaminen = new Lauta(6, 6, peliLauta.ruudut(), siirto);
-            Siirto s2 = aly2.valitseSiirto(5, dynaaminen);
-            peliLauta.toteutaSiirto(s2);
+            
+            System.out.println(siirto + " Tekoälyn 2 valitsema siirto: " + siirrot[siirto - 1]);
+            peliLauta.toteutaSiirto(siirrot[siirto - 1]);
 
-            System.out.println(siirto + " Tekoälyn 2 valitsema siirto: " + s2);
             System.out.println(peliLauta.laudanTulostus());
             Thread.sleep(1000);
         }

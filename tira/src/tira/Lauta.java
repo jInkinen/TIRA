@@ -254,4 +254,10 @@ public class Lauta{
         //Tyhjennetään alkuperäisen ruudun tiedot
         orig.tyhjaksi();
     }    
+
+    public void toteutaSiirrot(Siirto[] siirrot, int pituus) {
+        for (int i = 0; i < pituus; i++) {
+            this.toteutaSiirto(siirrot[i]);
+        }
+    }
 }
