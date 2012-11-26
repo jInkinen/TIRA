@@ -74,7 +74,7 @@ public class Puu {
      * @return solmu, joka on paras
      */
     public Solmu alphabeta(boolean vuoro, int syvyys, Solmu solmu, Solmu a, Solmu b) {
-        if (syvyys == 0 || solmu.eiLapsia()) {
+        if (syvyys <= 0 || solmu.eiLapsia()) {
             return solmu;
         }
         if (vuoro) {

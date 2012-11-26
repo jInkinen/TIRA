@@ -16,12 +16,12 @@ import static org.junit.Assert.*;
  * @author juhainki
  */
 public class LautaTest {
-        int kokox = 6;
-        int kokoy = 6;
-        Ruutu[][] ruudut = new Ruutu[kokox][kokoy];
-        
+
+    int kokox = 6;
+    int kokoy = 6;
+    Ruutu[][] ruudut = new Ruutu[kokox][kokoy];
+
     public LautaTest() {
-        
     }
 
     @BeforeClass
@@ -34,7 +34,6 @@ public class LautaTest {
 
     @Before
     public void setUp() {
-        
     }
 
     @After
@@ -76,21 +75,20 @@ public class LautaTest {
                 + "|S|S|S|S|S|S|\n"
                 + "|T|L|K|Q|L|T|\n", l.laudanTulostus());
     }
-    
+
     @Test
     public void lautaAlustuuManuaalisesti() {
-        for (int x = 0; x < kokox; x++) {
-            for (int y = 0; y < kokoy; y++) {
-                ruudut[x][y] = new Ruutu(x, y);
-            }
-        }
-        
-        Lauta l = new Lauta(kokox, kokoy, ruudut, 0);
-        
-//        System.out.println(l.laudanTulostus());
-        
-        
+        Ruudut r = new Ruudut(6, 6, 1, -1);
+        r.alustaLauta();
+        Lauta l = new Lauta(kokox, kokoy, r, 0);
+
+        assertEquals("|t|l|k|q|l|t|\n"
+                + "|s|s|s|s|s|s|\n"
+                + "| | | | | | |\n"
+                + "| | | | | | |\n"
+                + "|S|S|S|S|S|S|\n"
+                + "|T|L|K|Q|L|T|\n", l.laudanTulostus());
+
+
     }
-    
-    
 }

@@ -10,11 +10,12 @@ package tira;
  */
 public class Lauta{
 
+    public final int vakioMus = -1;
+    public final int vakioVal = 1;
+    public final int vakioTyh = 0;
+    
     private final String merkit[] = {" ", "K", "Q", "T", "L", "S", "H"};
     private final int heurestiikka[] = {0, 2000, 9, 5, 3, 1, 3};
-    private final int vakioMus = -1;
-    private final int vakioVal = 1;
-    private final int vakioTyh = 0;
     private int kokox, kokoy, siirto;
     private Ruudut lauta;
     private SiirtoLaskuri siirtoLaskin;
@@ -40,7 +41,8 @@ public class Lauta{
 
         siirtoLaskin = new SiirtoLaskuri(this);
         
-        alustaLauta();
+        lauta = new Ruudut(kokox, kokoy, vakioVal, vakioMus);
+        lauta.alustaLauta();
     }
     
     /**
@@ -60,70 +62,7 @@ public class Lauta{
         this.lauta = ruudut;
     }
 
-    /**
-     * Luo pelilaudan käyttäen matriisia, johon luodaan Ruutu-olioita, jotka
-     * ovat tietoisia ruutujen tiedoista.
-     */
-    private void alustaLauta() {
-        lauta = new Ruudut(kokox, kokoy);
-        alustaNappulat();
-    }
-
-    /**
-     * Asettaa nappulat pelilaudan oikeisiin paikkoihin.
-     */
-    private void alustaNappulat() {
-        // A-sarake (tornit)
-        uudetErikoisNappulat(0, 3);
-
-        // B-sarake (lähetit)
-        uudetErikoisNappulat(1, 4);
-
-        // C-sarake (kuninkaat)
-        uudetErikoisNappulat(2, 1);
-
-        // D-sarake (kuningattaret)
-        uudetErikoisNappulat(3, 2);
-
-        // E-sarake (lähetit)
-        uudetErikoisNappulat(4, 4);
-
-        // F-sarake (tornit)
-        uudetErikoisNappulat(5, 3);
-
-        // SOTILAAT
-        for (int x = 0; x < this.kokox; x++) {
-            uudetSotilaat(x);
-        }
-    }
-
-    /**
-     * aika: O(1), tila: O(1) Luo molemmille pelaajille anettujen parametrien
-     * mukaan halutut erikoisnappulat.
-     *
-     * @param sarake laudan sarake
-     * @param nappula nappulan tyyppi, merkit-taulukosta
-     */
-    private void uudetErikoisNappulat(int sarake, int nappula) {
-        this.lauta.get(sarake, 0).setVari(vakioMus);
-        this.lauta.get(sarake, 0).setNappula(nappula);
-        this.lauta.get(sarake, this.kokoy - 1).setVari(vakioVal);
-        this.lauta.get(sarake, this.kokoy - 1).setNappula(nappula);
-    }
-
-    /**
-     * aika: O(1), tila: O(1) Luo molemmille pelaajille sotilaat laudan
-     * haluttuun sarakkeesen.
-     *
-     * @param sarake laudan sarake
-     * @param nappula nappulan tyyppi, merkit-taulukosta
-     */
-    private void uudetSotilaat(int sarake) {
-        this.lauta.get(sarake, 1).setVari(vakioMus);
-        this.lauta.get(sarake, 1).setNappula(5);
-        this.lauta.get(sarake, this.kokoy - 2).setVari(vakioVal);
-        this.lauta.get(sarake, this.kokoy - 2).setNappula(5);
-    }
+    
 
     /**
      * Simuloi siirron suorittamisen

@@ -24,29 +24,26 @@ public class Shakki {
         while (true) {
             siirto++;
             Lauta dynaaminen = new Lauta(6, 6, peliLauta.ruudut(), siirto);
-            Siirto s1 = aly1.valitseSiirto(10, dynaaminen);
+            Siirto s1 = aly1.valitseSiirto(5, dynaaminen);
 
             System.out.println(siirto + " Tekoälyn 1 valitsema siirto: " + s1);
 
-
-            System.out.println(peliLauta.laudanTulostus());
-//            Ei toimi
             peliLauta.toteutaSiirto(s1);
 
             System.out.println(peliLauta.laudanTulostus());
-            Thread.sleep(2000);
+            Thread.sleep(1000);
 
 
 
 
             siirto++;
             dynaaminen = new Lauta(6, 6, peliLauta.ruudut(), siirto);
-            Siirto s2 = aly2.valitseSiirto(10, dynaaminen);
-            peliLauta.simuloiSiirto(s2);
+            Siirto s2 = aly2.valitseSiirto(5, dynaaminen);
+            peliLauta.toteutaSiirto(s2);
 
             System.out.println(siirto + " Tekoälyn 2 valitsema siirto: " + s2);
             System.out.println(peliLauta.laudanTulostus());
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         }
     }
 }
