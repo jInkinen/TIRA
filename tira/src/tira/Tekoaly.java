@@ -32,7 +32,7 @@ public class Tekoaly {
      * @param oikeaTilanne mikä on ylemmän rekursiotason alkuperäinen tilanne
      * @return 
      */
-    public Siirto valitseSiirto(int syvyys, Lauta oikeaTilanne) {
+    public Siirto valitseSiirto(int syvyys, Lauta oikeaTilanne, int siirto) {
         oikeaTilanne.laskeSiirrot(valkoinen);
         
         Lista l = oikeaTilanne.siirrot();

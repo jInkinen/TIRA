@@ -105,7 +105,7 @@ public class Lauta{
             for (int y = 0; y < this.kokoy; y++) {
                 int vari = this.lauta.get(x, y).getVari();
                 int nappula = this.lauta.get(x, y).getNappula();
-                this.lauta.get(x, y).tallennaSiirrot(siirtoLaskin.ruudunSiirrot(x, y, vari, nappula));
+                this.lauta.get(x, y).tallennaSiirrot(siirtoLaskin.ruudunSiirrot(valkoinen, x, y, vari, nappula));
             }
         }
     }

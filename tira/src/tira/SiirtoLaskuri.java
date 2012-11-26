@@ -23,7 +23,7 @@ public class SiirtoLaskuri {
      * @param y Nappula sarake
      * @return Lista, jossa on kyseisen ruudun kaikki toteutettavat siirrot.
      */
-    public Lista ruudunSiirrot(int x, int y, int vari, int nappula) {
+    public Lista ruudunSiirrot(boolean valkoisenVuoro, int x, int y, int vari, int nappula) {
         Lista lista = new Lista();
 
         if (vari == 0) {
@@ -34,7 +34,7 @@ public class SiirtoLaskuri {
             throw new UnsupportedOperationException("Tyhjä nappula värillisessä ruudussa o_0");
         }
 
-        if (lauta.valkoisenVuoro()) {
+        if (valkoisenVuoro) {
             if (vari != 1) {
                 return lista;
             }
