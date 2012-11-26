@@ -136,14 +136,14 @@ public class SiirtoLaskuri {
                 break;
             }
 
-            if (vari == this.lauta.ruudut()[uusiX][uusiY].getVari()) {
+            if (vari == this.lauta.ruudut().get(uusiX, uusiY).getVari()) {
                 // Törmättiin saman väriseen
                 break;
             }
 
             lista = lisaaLaillinenSiirto(x, y, uusiX, uusiY, lista, true, true, true, vari);
 
-            if (this.lauta.ruudut()[uusiX][uusiY].getVari() != 0) {
+            if (this.lauta.ruudut().get(uusiX, uusiY).getVari() != 0) {
                 // Törmättiin nappulaan, ei etsitä kauemmaksi
                 break;
             }

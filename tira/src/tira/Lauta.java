@@ -16,7 +16,7 @@ public class Lauta{
     private final int vakioVal = 1;
     private final int vakioTyh = 0;
     private int kokox, kokoy, siirto;
-    private Ruutu[][] lauta;
+    private Ruudut lauta;
     private SiirtoLaskuri siirtoLaskin;
 
     /**
@@ -39,7 +39,7 @@ public class Lauta{
         this.kokoy = kokoy;
 
         siirtoLaskin = new SiirtoLaskuri(this);
-
+        
         alustaLauta();
     }
     
@@ -50,7 +50,7 @@ public class Lauta{
      * @param ruudut Ruutu[][], jossa on kaikkien ruutujen tiedot
      * @param simuloiSiirto monekso vuoro menossa
      */
-    public Lauta(int kokox, int kokoy, Ruutu[][] ruudut, int siirto) {
+    public Lauta(int kokox, int kokoy, Ruudut ruudut, int siirto) {
         this.siirto = siirto;
         this.kokox = kokox;
         this.kokoy = kokoy;
@@ -65,13 +65,7 @@ public class Lauta{
      * ovat tietoisia ruutujen tiedoista.
      */
     private void alustaLauta() {
-        this.lauta = new Ruutu[kokox][kokoy];
-
-        for (int x = 0; x < kokox; x++) {
-            for (int y = 0; y < kokoy; y++) {
-                this.lauta[x][y] = new Ruutu(x, y);
-            }
-        }
+        lauta = new Ruudut(kokox, kokoy);
         alustaNappulat();
     }
 
@@ -111,10 +105,10 @@ public class Lauta{
      * @param nappula nappulan tyyppi, merkit-taulukosta
      */
     private void uudetErikoisNappulat(int sarake, int nappula) {
-        this.lauta[sarake][0].setVari(vakioMus);
-        this.lauta[sarake][0].setNappula(nappula);
-        this.lauta[sarake][this.kokoy - 1].setVari(vakioVal);
-        this.lauta[sarake][this.kokoy - 1].setNappula(nappula);
+        this.lauta.get(sarake, 0).setVari(vakioMus);
+        this.lauta.get(sarake, 0).setNappula(nappula);
+        this.lauta.get(sarake, this.kokoy - 1).setVari(vakioVal);
+        this.lauta.get(sarake, this.kokoy - 1).setNappula(nappula);
     }
 
     /**
@@ -125,10 +119,10 @@ public class Lauta{
      * @param nappula nappulan tyyppi, merkit-taulukosta
      */
     private void uudetSotilaat(int sarake) {
-        this.lauta[sarake][1].setVari(vakioMus);
-        this.lauta[sarake][1].setNappula(5);
-        this.lauta[sarake][this.kokoy - 2].setVari(vakioVal);
-        this.lauta[sarake][this.kokoy - 2].setNappula(5);
+        this.lauta.get(sarake, 1).setVari(vakioMus);
+        this.lauta.get(sarake, 1).setNappula(5);
+        this.lauta.get(sarake, this.kokoy - 2).setVari(vakioVal);
+        this.lauta.get(sarake, this.kokoy - 2).setNappula(5);
     }
 
     /**
@@ -154,12 +148,12 @@ public class Lauta{
      * @return merkki, joka kuvaa laudan sijainnissa olevaa nappulaa
      */
     private String getMerkki(int x, int y) {
-        if (this.lauta[x][y].getVari() == vakioTyh) {
+        if (this.lauta.get(x, y).getVari() == vakioTyh) {
             return " ";
-        } else if (this.lauta[x][y].getVari() == vakioMus) {
-            return this.merkit[this.lauta[x][y].getNappula()].toLowerCase();
+        } else if (this.lauta.get(x, y).getVari() == vakioMus) {
+            return this.merkit[this.lauta.get(x, y).getNappula()].toLowerCase();
         } else {
-            return this.merkit[this.lauta[x][y].getNappula()].toUpperCase();
+            return this.merkit[this.lauta.get(x, y).getNappula()].toUpperCase();
         }
     }
 
@@ -170,9 +164,9 @@ public class Lauta{
     public void laskeSiirrot() {
         for (int x = 0; x < this.kokox; x++) {
             for (int y = 0; y < this.kokoy; y++) {
-//                if (!this.lauta[x][y].onkoSiirrotValmiina()) {
-                this.lauta[x][y].tallennaSiirrot(siirtoLaskin.ruudunSiirrot(x, y, this.lauta[x][y].getVari(), this.lauta[x][y].getNappula()));
-//                }
+                int vari = this.lauta.get(x, y).getVari();
+                int nappula = this.lauta.get(x, y).getNappula();
+                this.lauta.get(x, y).tallennaSiirrot(siirtoLaskin.ruudunSiirrot(x, y, vari, nappula));
             }
         }
     }
@@ -202,8 +196,8 @@ public class Lauta{
      * @return ovatko annettuissa ruuduissa olevat nappulat saman pelaajan
      */
     public boolean samanVarinen(int x, int y, int uusix, int uusiy) {
-        int vari1 = lauta[x][y].getVari();
-        int vari2 = lauta[uusix][uusiy].getVari();
+        int vari1 = lauta.get(x, y).getVari();
+        int vari2 = lauta.get(uusix, uusiy).getVari();
 
         if (vari1 == vari2) {
             return true;
@@ -220,7 +214,7 @@ public class Lauta{
      */
     public boolean onkoTyhja(int x, int y) {
 //        System.out.println("----- ONKO TYHJÄ??? " + x + "," + y + " "+ lauta[x][y] + " > " + lauta[x][y].onkoTyhja());
-        return lauta[x][y].onkoTyhja();
+        return lauta.get(x, y).onkoTyhja();
     }
     
         /**
@@ -249,7 +243,7 @@ public class Lauta{
      * @return 
      */
     public int nappulanArvo(int x, int y) {
-        int nappula = this.lauta[x][y].getNappula();
+        int nappula = this.lauta.get(x, y).getNappula();
         
         return this.heurestiikka[nappula];
     }
@@ -263,7 +257,7 @@ public class Lauta{
         
         for (int x = 0; x < this.kokox; x++) {
             for (int y = 0; y < this.kokoy; y++) {
-                Lista apuri = this.lauta[x][y].getSiirrot();
+                Lista apuri = this.lauta.get(x, y).getSiirrot();
                 for (int i = 0; i < apuri.length(); i++) {
                     siirrot.add(apuri.get(i));
                 }
@@ -287,7 +281,7 @@ public class Lauta{
      * 
      * @return kertoo käyttäjälle nykyisen pelilaudan ruudut
      */
-    public Ruutu[][] ruudut() {
+    public Ruudut ruudut() {
         return this.lauta;
     }
     
@@ -312,8 +306,8 @@ public class Lauta{
         int uusiX = s.uusiPaikka()[0];
         int uusiY = s.uusiPaikka()[1];
         
-        Ruutu orig = this.lauta[origX][origY];
-        Ruutu uusi = this.lauta[uusiX][uusiY];
+        Ruutu orig = this.lauta.get(origX, origY);
+        Ruutu uusi = this.lauta.get(uusiX, uusiY);
         
         //Annetaan uudelle ruudulle vanhan tiedot
         uusi.setVari(orig.getVari());
