@@ -66,20 +66,20 @@ public class Puu {
     
     /**
      * Alphabeta-algoritmi, joka laskee optimaalisen siirron parametrien mukaan.
-     * @param vuoro true, jos max-pelaaja. false, jos min-pelaaja
+     * @param valkoinen true, jos max-pelaaja. false, jos min-pelaaja
      * @param syvyys kuinka monta tasoa alaspäin mennään puussa. Käytetään rekursiokutsussa arvolla syvyys-1. Lisäksi alkuperäisessä kutsussa käytetään määrittämään etsinnän kokonaissyvyys.
      * @param solmu solmu, joka toimii juurena kyseisellä iteraatiolla
      * @param a alpha-arvon sisältävä solmu
      * @param b beta-arvon sisältävä solmu
      * @return solmu, joka on paras
      */
-    public Solmu alphabeta(boolean vuoro, int syvyys, Solmu solmu, Solmu a, Solmu b) {
+    public Solmu alphabeta(boolean valkoinen, int syvyys, Solmu solmu, Solmu a, Solmu b) {
         if (syvyys <= 0 || solmu.eiLapsia()) {
             return solmu;
         }
-        if (vuoro) {
+        if (valkoinen) {
             for (int i = 0; i < solmu.lastenMaara(); i++) {
-                a = max(a, alphabeta(!vuoro, syvyys - 1, solmu, a, b));
+                a = max(a, alphabeta(!valkoinen, syvyys - 1, solmu, a, b));
                 if (b.getOmaArvo() <= a.getOmaArvo()) {
                     break;
                 }
@@ -87,7 +87,7 @@ public class Puu {
             return a;
         } else {
             for (int i = 0; i < solmu.lastenMaara(); i++) {
-                b = min(b, alphabeta(!vuoro, syvyys - 1, solmu, a, b));
+                b = min(b, alphabeta(!valkoinen, syvyys - 1, solmu, a, b));
                 if (b.getOmaArvo() <= a.getOmaArvo()) {
                     break;
                 }

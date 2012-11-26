@@ -18,8 +18,8 @@ public class Shakki {
         Lauta peliLauta = new Lauta();
         Lauta tilanne;
 
-        Tekoaly aly1 = new Tekoaly(1);
-        Tekoaly aly2 = new Tekoaly(-1);
+        Tekoaly aly1 = new Tekoaly(true);
+        Tekoaly aly2 = new Tekoaly(false);
         int siirto = 0;
         
         Siirto[] siirrot = new Siirto[1000];
@@ -29,7 +29,7 @@ public class Shakki {
             tilanne = new Lauta();
             tilanne.toteutaSiirrot(siirrot, siirto);
             
-            siirrot[siirto] = aly1.valitseSiirto(5, tilanne);
+            siirrot[siirto] = aly1.valitseSiirto(10, tilanne);
             siirto++;
             
             System.out.println(siirto + " Tekoälyn 1 valitsema siirto: " + siirrot[siirto - 1]);
@@ -42,7 +42,7 @@ public class Shakki {
             tilanne = new Lauta();
             tilanne.toteutaSiirrot(siirrot, siirto);
             
-            siirrot[siirto] = aly2.valitseSiirto(5, tilanne);
+            siirrot[siirto] = aly2.valitseSiirto(10, tilanne);
             siirto++;
             
             System.out.println(siirto + " Tekoälyn 2 valitsema siirto: " + siirrot[siirto - 1]);

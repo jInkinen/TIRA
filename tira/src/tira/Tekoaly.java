@@ -12,11 +12,11 @@ package tira;
 public class Tekoaly {
     
     private Puu puu;
-    private int puoli;
+    private boolean valkoinen;
     
-    public Tekoaly(int omaPuoli) {
+    public Tekoaly(boolean omaPuoli) {
         this.puu = new Puu();
-        this.puoli = omaPuoli;
+        this.valkoinen = omaPuoli;
     }
     
     // Leveys ensin läpikäynti -> listätään puuhun -> kutsutaan
@@ -48,12 +48,6 @@ public class Tekoaly {
             siirronLapset(puu.getJuuri().getLapset()[i2], oikeaTilanne, syvyys);
         }
         
-        
-//        System.out.println("puu:\n" + puu.tulostus());
-        boolean valkoinen = true;
-        if (puoli < 0) {
-            valkoinen = false;
-        }
         Siirto min = new Siirto(-1, -1, -1, -1, Integer.MIN_VALUE);
         Siirto max = new Siirto(-1, -1, -1, -1, Integer.MAX_VALUE);
         Solmu sMin = new Solmu(null, min);
