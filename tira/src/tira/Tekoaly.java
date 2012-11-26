@@ -33,7 +33,7 @@ public class Tekoaly {
      * @return 
      */
     public Siirto valitseSiirto(int syvyys, Lauta oikeaTilanne) {
-        oikeaTilanne.laskeSiirrot();
+        oikeaTilanne.laskeSiirrot(valkoinen);
         
         Lista l = oikeaTilanne.siirrot();
         Solmu apuSolmu = new Solmu(null, l.get(0));
@@ -57,19 +57,15 @@ public class Tekoaly {
     }
 
     private Siirto siirronLapset(Solmu s, Lauta tilanne, int syvyys) {
-//        System.out.println(syvyys);
-        if (syvyys == 0) {
+        if (syvyys <= 0) {
             return s.getSiirto();
         }
-        // toteuta simuloiSiirto
-//        System.out.println(s.getSiirto());
+
         tilanne.simuloiSiirto(s.getSiirto());
-        // laske uudet siirrot
-        tilanne.laskeSiirrot();
-//        System.out.println(tilanne.laudanTulostus());
+
+        tilanne.laskeSiirrot(valkoinen);
         
-        // lisää uudet lapset puuhun
-        
+        // lisää uudet lapset puuhun       
         for (int i = 0; i < tilanne.siirrot().length(); i++) {
             Solmu uusiSolmu = new Solmu(s, tilanne.siirrot().get(i));
             s.lisaaLapsi(uusiSolmu);
@@ -77,6 +73,5 @@ public class Tekoaly {
         }
         // kutsu metodia rekursiivisesti
         return s.getSiirto();
-        // palauta simuloiSiirto
     }
 }

@@ -51,7 +51,8 @@ public class LautaTest {
         Lauta instance = new Lauta();
 
         for (int i = 0; i < kerrat; i++) {
-            instance.laskeSiirrot();
+            instance.laskeSiirrot(true);
+            instance.laskeSiirrot(false);
         }
 
         long end = System.nanoTime();

@@ -100,7 +100,7 @@ public class Lauta{
      * Laskee laudan ruuduissa oleville nappuloille siirrot ja tallentaa ne
      * ruudun tietorakenteisiin.
      */
-    public void laskeSiirrot() {
+    public void laskeSiirrot(boolean valkoinen) {
         for (int x = 0; x < this.kokox; x++) {
             for (int y = 0; y < this.kokoy; y++) {
                 int vari = this.lauta.get(x, y).getVari();
