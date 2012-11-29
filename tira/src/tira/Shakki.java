@@ -12,6 +12,8 @@ public class Shakki {
 
     /**
      * @param args the command line arguments
+     * 
+     * main-luokka testausta ja käyttöä varten.
      */
     public static void main(String[] args) throws InterruptedException {
 

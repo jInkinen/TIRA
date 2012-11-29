@@ -7,6 +7,8 @@ package tira;
 /**
  *
  * @author juhainki
+ * 
+ * Ruutu tietää oman sijaintinsa sekä nappulan joka laudalla on.
  */
 public class Ruutu {
 

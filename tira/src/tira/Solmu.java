@@ -7,6 +7,8 @@ package tira;
 /**
  *
  * @author juhainki
+ * 
+ * Solmu on puun käyttämä apuväline, jonne tiedot varsinaisesti säilötään.
  */
 public class Solmu {
     private Solmu vanh;

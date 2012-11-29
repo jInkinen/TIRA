@@ -7,6 +7,9 @@ package tira;
 /**
  *
  * @author juhainki
+ * 
+ * Listä on ArrayListia muistuttava tietorakenne, joka muistaa myös oman maksimin
+ * ja miniminsä, sekä niiden sijainnit.
  */
 public class Lista {
     

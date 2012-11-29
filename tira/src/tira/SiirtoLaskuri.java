@@ -7,6 +7,9 @@ package tira;
 /**
  *
  * @author juhainki
+ * 
+ * Siirtolaskuri on ludan käyttämä apuväline laillisten siirtojen selvittämiseen
+ * kullekin nappulalle.
  */
 public class SiirtoLaskuri {
 

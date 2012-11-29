@@ -7,6 +7,9 @@ package tira;
 /**
  *
  * @author juhainki
+ * 
+ * Ruudut on taulukkorakenne joka säilöö ruutu-olioita ja osaa alustaa ne uutta
+ * peliä varten.
  */
 public class Ruudut {
 

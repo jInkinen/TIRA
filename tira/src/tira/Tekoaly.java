@@ -8,6 +8,9 @@ package tira;
 /**
  *
  * @author juhainki
+ * 
+ * Tekoäly toteuttaa pelin tekoälylliset ominaisuudet hyödyntäen mm. puu-luokasta
+ * löytyviä välineitä.
  */
 public class Tekoaly {
     

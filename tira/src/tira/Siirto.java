@@ -9,6 +9,8 @@ package tira;
 /**
  *
  * @author juhainki
+ * 
+ * Siirto-luokka luo olioita, jotka esittävät yksittäisiä siirtoja.
  */
 public class Siirto implements Comparable {
 
