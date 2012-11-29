@@ -31,6 +31,10 @@ public class Shakki {
             siirto++;
             
             System.out.println(siirto + " Tekoälyn 1 valitsema siirto: " + siirrot[siirto - 1]);
+//            for (int i = 0; i < siirto; i++) {
+//                System.out.println(i + " " + siirrot[i]);
+//            }
+            
             peliLauta.toteutaSiirto(siirrot[siirto - 1]);
 
             System.out.println(peliLauta.laudanTulostus());

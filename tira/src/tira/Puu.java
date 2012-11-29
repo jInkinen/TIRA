@@ -54,7 +54,6 @@ public class Puu {
         return ret + "|^|\n";
     }
  
-    
     /**
      * Alphabeta-algoritmi, joka laskee optimaalisen siirron parametrien mukaan.
      * @param valkoinen true, jos max-pelaaja. false, jos min-pelaaja
@@ -103,11 +102,4 @@ public class Puu {
             return ab;
         }
     }
-
-
-
-  
-
-
-
 }

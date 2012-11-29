@@ -233,6 +233,15 @@ public class Lauta{
         orig.tyhjaksi();
     }    
 
+    /**
+     * Toteuttaa kaikki siirrot, jotka sille annetaan taulukon järjestyksessä.
+     * Mahdollistaa pelitilanteeseen kiinnipääsemisen ilman tilanteen säilömistä.
+     * Aikavaativuus O(n), mutta tilaa menee vähemmän, kuin jokaisen pelitilanteen
+     * säilömiseen.
+     * 
+     * @param siirrot Taulukko, jossa on kaikki toteutettavat siirrot järjestyksessä
+     * @param pituus kuinka monta siirtoa taulukosta toteutetaan
+     */
     public void toteutaSiirrot(Siirto[] siirrot, int pituus) {
         for (int i = 0; i < pituus; i++) {
             this.toteutaSiirto(siirrot[i]);

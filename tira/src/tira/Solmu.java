@@ -35,6 +35,10 @@ public class Solmu {
         minIndeksi = -1;
     }
     
+    /**
+     * Lisää solmulle toisen solmun lapseksi
+     * @param s lisättävä solmu
+     */
     public void lisaaLapsi(Solmu s) {
         pointer++;
         if (pointer == koko) {

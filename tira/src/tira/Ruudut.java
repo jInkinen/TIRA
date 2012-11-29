@@ -25,10 +25,12 @@ public class Ruudut {
         }
     }
 
+    /**
+     * @param x ruudukon x-koordinaatti
+     * @param y ruudukon y-koordinaatti
+     * @return ruudukon ruudun paramterien mukaisesti
+     */
     public Ruutu get(int x, int y) {
-        if (x < 0) {
-            System.out.println("testi");
-        }
         return taulukko[x][y];
     }
 
