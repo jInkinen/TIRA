@@ -45,12 +45,9 @@ public class Tekoaly {
         for (int i = 0; i < l.length(); i++) {
             Solmu uusiS = new Solmu(apuSolmu, l.get(i));
             puu.getJuuri().lisaaLapsi(uusiS);
-            System.out.print(i);
-            if (siirto > 30) {
-                System.out.println(l.get(i));
-            }
+           
         }
-        System.out.println("");
+
         
         for (int i2 = 0; i2 < puu.getJuuri().lastenMaara(); i2++) {
             siirronLapset(puu.getJuuri().getLapset()[i2], oikeaTilanne, syvyys);
@@ -65,7 +62,7 @@ public class Tekoaly {
     }
 
     private Siirto siirronLapset(Solmu s, Lauta tilanne, int syvyys) {
-        System.out.println(syvyys + " " + s.getSiirto());
+//        System.out.println(syvyys + " " + s.getSiirto());
         if (syvyys <= 0) {
             return s.getSiirto();
         }
