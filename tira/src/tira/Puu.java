@@ -1,15 +1,6 @@
 package tira;
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-       
+   
 /**
- *
- * @author juhainki
- * 
  * Puu tuntee oman juurensa. Juuri on Solmu joka tuntee lapsensa ja vanhempansa.
  */
 public class Puu {

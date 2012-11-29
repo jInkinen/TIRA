@@ -1,13 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tira;
 
 /**
- *
- * @author juhainki
- * 
  * Ruutu tietää oman sijaintinsa sekä nappulan joka laudalla on.
  */
 public class Ruutu {

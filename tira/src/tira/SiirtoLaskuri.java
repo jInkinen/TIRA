@@ -1,13 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tira;
 
 /**
- *
- * @author juhainki
- * 
  * Siirtolaskuri on ludan käyttämä apuväline laillisten siirtojen selvittämiseen
  * kullekin nappulalle.
  */

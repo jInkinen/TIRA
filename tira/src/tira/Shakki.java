@@ -1,19 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tira;
 
 /**
- *
- * @author juhainki
+ * main-luokka testausta ja käyttöä varten.
  */
 public class Shakki {
 
     /**
      * @param args the command line arguments
      * 
-     * main-luokka testausta ja käyttöä varten.
+     * 
      */
     public static void main(String[] args) throws InterruptedException {
 

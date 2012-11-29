@@ -1,13 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tira;
 
 /**
- *
- * @author juhainki
- * 
  * Solmu on puun käyttämä apuväline, jonne tiedot varsinaisesti säilötään.
  */
 public class Solmu {

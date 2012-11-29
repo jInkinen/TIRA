@@ -1,13 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tira;
 
 /**
- *
- * @author juhainki
- * 
  * Listä on ArrayListia muistuttava tietorakenne, joka muistaa myös oman maksimin
  * ja miniminsä, sekä niiden sijainnit.
  */

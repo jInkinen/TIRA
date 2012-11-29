@@ -2,9 +2,6 @@
 package tira;
 
 /**
- *
- * @author juhainki
- * 
  * Lauta toimii logiikan perusluokkana, joka säätelee mm. siirtojen laskemista,
  * tilanteen tallentamista ja heurestiikkaa.
  */

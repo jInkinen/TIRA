@@ -1,15 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tira;
 
 
 
 /**
- *
- * @author juhainki
- * 
  * Siirto-luokka luo olioita, jotka esittävät yksittäisiä siirtoja.
  */
 public class Siirto implements Comparable {
