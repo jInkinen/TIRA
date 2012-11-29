@@ -10,6 +10,10 @@ public class Solmu {
     private int pointer, koko, omaArvo, lastenMax, lastenMin, maxIndeksi, minIndeksi;
     private Siirto siirto;
 
+    /**
+     * @param vanhempi Solmun vanhempi
+     * @param siirto solmun siirto
+     */
     public Solmu(Solmu vanhempi, Siirto siirto) {
         this.vanh = vanhempi;
         this.siirto = siirto;
@@ -24,7 +28,11 @@ public class Solmu {
             omaArvo =+ vanhempi.getOmaArvo();
         }
         
-        
+        asetaOletusArvot();
+    }
+    
+    //Asettaa oliolle tietyt enneltamääritetyt oletusarvot
+    private void asetaOletusArvot() {
         this.pointer = -1;
         this.koko = 20;
         this.lapset = new Solmu[koko];
@@ -35,6 +43,8 @@ public class Solmu {
         minIndeksi = -1;
     }
     
+    
+    
     /**
      * Lisää solmulle toisen solmun lapseksi
      * @param s lisättävä solmu
@@ -44,7 +54,14 @@ public class Solmu {
         if (pointer == koko) {
             kasvataLapsiVarastoa();
         }
-        //tallennetaan suurimman/pienimmän lapsen sijainti
+        
+        aariLastenSijainti(s);
+        
+        this.lapset[pointer] = s;
+    }
+    
+    //tallennetaan suurimman/pienimmän lapsen sijainti
+    private void aariLastenSijainti(Solmu s) {
         if (maxIndeksi < 0 || minIndeksi < 0) {
             maxIndeksi = pointer;
             minIndeksi = pointer;
@@ -58,8 +75,8 @@ public class Solmu {
                 lastenMin = s.getOmaArvo();
             }
         }
-        this.lapset[pointer] = s;
     }
+    
     
     /**
      * Kasvattaa taulukon kokoa tarvittaessa tuplaamalla sen
