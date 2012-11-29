@@ -2,7 +2,8 @@
 package tira;
 
 
-/**Tekoäly toteuttaa pelin tekoälylliset ominaisuudet hyödyntäen mm. puu-luokasta
+/**
+ * Tekoäly toteuttaa pelin tekoälylliset ominaisuudet hyödyntäen mm. puu-luokasta
  * löytyviä välineitä.
  */
 public class Tekoaly {
@@ -33,10 +34,17 @@ public class Tekoaly {
         
         Lista l = oikeaTilanne.siirrot();
         Solmu apuSolmu = new Solmu(null, l.get(0));
-        Solmu apuri2 = new Solmu(apuSolmu, l.getMax());
+//        Solmu apuri2;
+//        
+//        if (valkoinen) {
+//            apuri2 = new Solmu(apuSolmu, l.getMax());
+//        } else {
+//            apuri2 = new Solmu(apuSolmu, l.getMin());
+//        }
+        
         puu.setJuuri(apuSolmu);
         for (int i = 0; i < l.length(); i++) {
-            Solmu uusiS = new Solmu(apuri2, l.get(i));
+            Solmu uusiS = new Solmu(apuSolmu, l.get(i));
             puu.getJuuri().lisaaLapsi(uusiS);
         }
         

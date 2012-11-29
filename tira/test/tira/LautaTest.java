@@ -1,13 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tira;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -21,27 +14,8 @@ public class LautaTest {
     int kokoy = 6;
     Ruutu[][] ruudut = new Ruutu[kokox][kokoy];
 
-    public LautaTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
     /**
-     * Test of simuloiSiirto method, of class Lauta.
+     * Testaa siirtojen laskemisen aikavaativuutta
      */
     @Test
     public void testSimppeliSiirtojenLaskemisenAikaVaativuus() {
@@ -66,6 +40,9 @@ public class LautaTest {
         // 500 000 : 45s
     }
 
+    /**
+     * Varmistaa, että lauta sisältää oikean tilanteen, kun se luodaan
+     */
     @Test
     public void lautaAlustuuOikein() {
         Lauta l = new Lauta();
@@ -77,11 +54,14 @@ public class LautaTest {
                 + "|T|L|K|Q|L|T|\n", l.laudanTulostus());
     }
 
+    /**
+     * Varmistaa, että laudan voi luoda myös manuaalisesti
+     */
     @Test
     public void lautaAlustuuManuaalisesti() {
         Ruudut r = new Ruudut(6, 6, 1, -1);
         r.alustaLauta();
-        Lauta l = new Lauta(kokox, kokoy, r, 0);
+        Lauta l = new Lauta(kokox, kokoy, r);
 
         assertEquals("|t|l|k|q|l|t|\n"
                 + "|s|s|s|s|s|s|\n"

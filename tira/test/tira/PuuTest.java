@@ -1,13 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tira;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -17,34 +10,18 @@ import static org.junit.Assert.*;
  */
 public class PuuTest {
     
-    public PuuTest() {
-    }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
     /**
-     * Test of add method, of class PuuSolmu.
+     * Testataan, että puun juuri asettuu oikein
      */
     @Test
-    public void testEkaLisaysMeneeJuureksi() {
+    public void testJuurenLisays() {
+        Siirto si = new Siirto(-1, -1, -1, -1, 0);
+        Solmu s = new Solmu(null, si);
+        Puu puu = new Puu();
+        puu.setJuuri(s);
         
+        assertEquals(puu.getJuuri(), s);
     }
     
-    public void testTokaLisaysEiMeneJuureksi() {
-        
-    }
 }

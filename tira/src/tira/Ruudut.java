@@ -26,6 +26,9 @@ public class Ruudut {
     }
 
     public Ruutu get(int x, int y) {
+        if (x < 0) {
+            System.out.println("testi");
+        }
         return taulukko[x][y];
     }
 

@@ -34,7 +34,7 @@ public class Shakki {
             peliLauta.toteutaSiirto(siirrot[siirto - 1]);
 
             System.out.println(peliLauta.laudanTulostus());
-            Thread.sleep(1000);
+            Thread.sleep(100);
 
             //MUSTA
             tilanne = new Lauta();
@@ -47,7 +47,7 @@ public class Shakki {
             peliLauta.toteutaSiirto(siirrot[siirto - 1]);
 
             System.out.println(peliLauta.laudanTulostus());
-            Thread.sleep(1000);
+            Thread.sleep(100);
         }
     }
 }

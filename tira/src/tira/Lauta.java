@@ -13,7 +13,7 @@ public class Lauta{
     
     private final String merkit[] = {" ", "K", "Q", "T", "L", "S", "H"};
     private final int heurestiikka[] = {0, 2000, 9, 5, 3, 1, 3};
-    private int kokox, kokoy, siirto;
+    private int kokox, kokoy;
     private Ruudut lauta;
     private SiirtoLaskuri siirtoLaskin;
 
@@ -32,7 +32,7 @@ public class Lauta{
      * @param kokoy laudan korkeus
      */
     public Lauta(int kokox, int kokoy) {
-        this.siirto = 0;
+
         this.kokox = kokox;
         this.kokoy = kokoy;
 
@@ -49,8 +49,8 @@ public class Lauta{
      * @param ruudut Ruutu[][], jossa on kaikkien ruutujen tiedot
      * @param simuloiSiirto monekso vuoro menossa
      */
-    public Lauta(int kokox, int kokoy, Ruudut ruudut, int siirto) {
-        this.siirto = siirto;
+    public Lauta(int kokox, int kokoy, Ruudut ruudut) {
+
         this.kokox = kokox;
         this.kokoy = kokoy;
 
@@ -68,7 +68,7 @@ public class Lauta{
      */
     public Lauta simuloiSiirto(Siirto s) {
         // luodaan kopio laudasta
-        Lauta ret = new Lauta(this.kokox, this.kokoy, this.ruudut(), this.siirto);
+        Lauta ret = new Lauta(this.kokox, this.kokoy, this.ruudut());
         //Toteutetaan simuloiSiirto
         ret.toteutaSiirto(s);
         
@@ -201,17 +201,6 @@ public class Lauta{
         }
         return siirrot;
     }
-
-    /**
-     * 
-     * @return Kertoo onko nyt alkoisen vuoro
-     */
-    public boolean valkoisenVuoro() {
-        if (this.siirto % 2 == 0) {
-            return true;
-        }
-        return false;
-    }
     
     /**
      * 
@@ -219,14 +208,6 @@ public class Lauta{
      */
     public Ruudut ruudut() {
         return this.lauta;
-    }
-    
-    /**
-     * Kertoo monesko siirtovuoro pelisssä on.
-     * @return 
-     */
-    public int monesSiirto() {
-        return this.siirto;
     }
 
     /**
