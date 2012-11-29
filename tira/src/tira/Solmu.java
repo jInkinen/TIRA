@@ -72,46 +72,68 @@ public class Solmu {
         this.lapset = uudetLapset;
     }
 
+    /**
+     * @return suurrimman lapsen arvo
+     */
     public int getLastenMax() {
         return lastenMax;
     }
 
-    public void setLastenMax(int lastenMax) {
-        this.lastenMax = lastenMax;
-    }
-
+    /**
+     * @return pienimmän lapsen arvo
+     */
     public int getLastenMin() {
         return lastenMin;
     }
 
-    public void setLastenMin(int lastenMin) {
-        this.lastenMin = lastenMin;
-    }
-
+    /**
+     * @return Solmun oma arvo
+     */
     public int getOmaArvo() {
         return omaArvo;
     }
 
-    public void setOmaArvo(int omaArvo) {
-        this.omaArvo = omaArvo;
-    }
+//    public void setOmaArvo(int omaArvo) {
+//        this.omaArvo = omaArvo;
+//    }
 
+    /**
+     * 
+     * @return solmun vanhempi
+     */
     public Solmu getVanhempi() {
         return vanh;
     }
 
+    /**
+     * 
+     * @return lista solmun lapsista
+     */
     public Solmu[] getLapset() {
         return lapset;
     }
     
+    /**
+     * 
+     * @return solmun siirto
+     */
     public Siirto getSiirto() {
         return siirto;
     }
     
+    /**
+     * getLapset palauttama lista saattaa sisältää tyhjiä alkioita.
+     * Siksi on syytä käyttää tätä metodia oikea pituuden selvittämiseen.
+     * @return lasten määrä
+     */
     public int lastenMaara() {
         return pointer;
     }
 
+    /**
+     * 
+     * @return jos solmulla ei ole lapsia -> true, muutoin false
+     */
     public boolean eiLapsia() {
         if (pointer < 0) {
             return true;
