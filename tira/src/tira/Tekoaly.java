@@ -41,7 +41,7 @@ public class Tekoaly {
         Siirto max = new Siirto(-3, -3, -3, -3, Integer.MAX_VALUE);
         Solmu sMin = new Solmu(null, min);
         Solmu sMax = new Solmu(null, max);
-        
+
         //Palautetaan alphabetan avulla paras siirto
         return puu.alphabeta(valkoinenko, syvyys - 1, puu.getJuuri(), sMin, sMax).getSiirto();
     }
@@ -53,18 +53,20 @@ public class Tekoaly {
      * @param syvyys syvyys, jota hyödynnetään rekursion katkaisussa
      */
     private void rakennaPuu(Solmu s, Lauta tilanne, int syvyys) {
+        tilanne.laskeSiirrot(valkoinenko);
+
         // Ei edetä annettua syvyyttä pidemmälle
         if (syvyys <= 0) {
             return;
         }
     
         for (int i = 0; i < tilanne.siirrot().length(); i++) {
+            System.out.println(tilanne.siirrot().get(i));
+            
             //Luodaan uusi solmu
             Solmu uusiSolmu = new Solmu(s, tilanne.siirrot().get(i));
             //lisätään uusi solmu lapseksi
             s.lisaaLapsi(uusiSolmu);
-            //kutsutaan rekursiivisesti
-            rakennaPuu(uusiSolmu, tilanne, syvyys - 1);
         }
     }
 }

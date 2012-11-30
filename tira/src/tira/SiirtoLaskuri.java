@@ -112,7 +112,7 @@ public class SiirtoLaskuri {
      * Toteuttaa lähetin siirtoihin vaikuttavat loopit
      */
     private Lista lahetti(int x, int y, Lista lista, int vari, boolean xplus, boolean yplus) {
-        int siirronPituus = 0;
+        int siirronPituus = 1;
         while (true) {
             int uusiX, uusiY;
 
@@ -168,7 +168,7 @@ public class SiirtoLaskuri {
     private Lista torni(int x, int y, Lista lista, int vari, boolean xakseli, boolean plus) {
         int nykyinenX, nykyinenY;
 
-        int siirronPituus = 0;
+        int siirronPituus = 1;
         while (true) {
             if (xakseli) {
                 if (plus) {
@@ -245,6 +245,7 @@ public class SiirtoLaskuri {
         if (lauta.onkoTyhja(uusix, uusiy)) {
             // Siirrytään tyhjään ruutuun
             if (saaSiirtyaTyhjaan) {
+                uusiSiirto.setArvo(vari * (int)Math.round(Math.random() * 5));
                 lista.add(uusiSiirto);
             }
             return lista;

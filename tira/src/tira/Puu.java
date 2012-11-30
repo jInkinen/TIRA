@@ -49,7 +49,7 @@ public class Puu {
     private String lastenString(Solmu s, int syvyys) {
         String ret = "#" + syvyys + "|v|";
         for (int i = 0; i <= s.lastenMaara(); i++) {
-            ret = ret + s.getLapset()[i].getOmaArvo() + " ";
+            ret = ret + s.getLapset()[i].getOmaArvo() + "<A ";
             ret = ret + lastenString(s.getLapset()[i], syvyys + 1);
         }
         return ret + "|^|\n";

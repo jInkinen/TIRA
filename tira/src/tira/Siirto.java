@@ -81,6 +81,6 @@ public class Siirto implements Comparable {
      */
     @Override
     public String toString() {
-        return "(" + paikka1[0] + "," + paikka1[1] + ") -> (" + paikka2[0] + "," + paikka2[1] + ")";
+        return "(" + paikka1[0] + "," + paikka1[1] + ") -> (" + paikka2[0] + "," + paikka2[1] + ") [" + arvo + "]";
     }
 }

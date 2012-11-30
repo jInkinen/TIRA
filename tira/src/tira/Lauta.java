@@ -12,7 +12,7 @@ public class Lauta{
     public final int vakioTyh = 0;
     
     private final String merkit[] = {" ", "K", "Q", "T", "L", "S", "H"};
-    private final int heurestiikka[] = {0, 2000, 9, 5, 3, 1, 3};
+    private final int heurestiikka[] = {0, 20000, 90, 50, 30, 10, 30};
     private int kokox, kokoy;
     private Ruudut lauta;
     private SiirtoLaskuri siirtoLaskin;
