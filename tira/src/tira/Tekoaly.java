@@ -33,7 +33,7 @@ public class Tekoaly {
         Solmu apuSolmu = new Solmu(null, oikeaTilanne.siirrot().get(0));
         puu.setJuuri(apuSolmu);
         
-        //Räkennetaan puu alphabetaa varten
+        //Rakennetaan puu alphabetaa varten
         rakennaPuu(puu.getJuuri(), oikeaTilanne, syvyys);
         
         //Luodaan vertailua varten apuarvot, jotka rikkovat pelin jos ne tulevat valituksi
@@ -48,32 +48,23 @@ public class Tekoaly {
 
     /**
      * Rakentaa puun alphabetassa käytettäväksi
-     * @param s Puun juurisolmu
-     * @param tilanne
-     * @param syvyys
-     * @return 
+     * @param s luotavan tason vanhempi
+     * @param tilanne pelitilanne
+     * @param syvyys syvyys, jota hyödynnetään rekursion katkaisussa
      */
-    private Siirto rakennaPuu(Solmu s, Lauta tilanne, int syvyys) {
+    private void rakennaPuu(Solmu s, Lauta tilanne, int syvyys) {
         // Ei edetä annettua syvyyttä pidemmälle
         if (syvyys <= 0) {
-            return s.getSiirto();
+            return;
         }
-
-        System.out.println(puu.tulostus());
-        //ensimmäisellä kutstukerralla luo     
+    
         for (int i = 0; i < tilanne.siirrot().length(); i++) {
-            System.out.println(tilanne.siirrot().get(i));
+            //Luodaan uusi solmu
             Solmu uusiSolmu = new Solmu(s, tilanne.siirrot().get(i));
+            //lisätään uusi solmu lapseksi
             s.lisaaLapsi(uusiSolmu);
-            return rakennaPuu(uusiSolmu, tilanne, syvyys - 1);
+            //kutsutaan rekursiivisesti
+            rakennaPuu(uusiSolmu, tilanne, syvyys - 1);
         }
-        
-        tilanne.simuloiSiirto(s.getSiirto());
-
-        tilanne.laskeSiirrot(valkoinenko);
-        
-        
-        // kutsu metodia rekursiivisesti
-        return s.getSiirto();
     }
 }

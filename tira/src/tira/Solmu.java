@@ -23,6 +23,7 @@ public class Solmu {
         } else {
             this.omaArvo = Integer.MAX_VALUE;
         }
+        /////////////////////////////////////////////////////// DEBUG onko turha^^
         
         if (vanhempi != null) {
             omaArvo =+ vanhempi.getOmaArvo();
