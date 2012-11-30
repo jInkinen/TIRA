@@ -9,11 +9,11 @@ package tira;
 public class Tekoaly {
     
     private Puu puu;
-    private boolean valkoinen;
+    private boolean valkoinenko;
     
     public Tekoaly(boolean omaPuoli) {
         this.puu = new Puu();
-        this.valkoinen = omaPuoli;
+        this.valkoinenko = omaPuoli;
     }
     
     /**
@@ -27,56 +27,52 @@ public class Tekoaly {
      * @return 
      */
     public Siirto valitseSiirto(int syvyys, Lauta oikeaTilanne, int siirto) {
-        oikeaTilanne.laskeSiirrot(valkoinen);
-        
-        Lista l = oikeaTilanne.siirrot();
-        
-//        Solmu apuri2;
-//        
-//        if (valkoinen) {
-//            apuri2 = new Solmu(apuSolmu, l.getMax());
-//        } else {
-//            apuri2 = new Solmu(apuSolmu, l.getMin());
-//        }
-        
-        Solmu apuSolmu = new Solmu(null, l.get(0));
+        oikeaTilanne.laskeSiirrot(valkoinenko);
+
+        //Lisätään puulle juureksi jokin siirto
+        Solmu apuSolmu = new Solmu(null, oikeaTilanne.siirrot().get(0));
         puu.setJuuri(apuSolmu);
         
-        for (int i = 0; i < l.length(); i++) {
-            Solmu uusiS = new Solmu(apuSolmu, l.get(i));
-            puu.getJuuri().lisaaLapsi(uusiS);
-           
-        }
-
+        //Räkennetaan puu alphabetaa varten
+        rakennaPuu(puu.getJuuri(), oikeaTilanne, syvyys);
         
-        for (int i2 = 0; i2 < puu.getJuuri().lastenMaara(); i2++) {
-            siirronLapset(puu.getJuuri().getLapset()[i2], oikeaTilanne, syvyys);
-        }
-        
-        Siirto min = new Siirto(-1, -1, -1, -1, Integer.MIN_VALUE);
-        Siirto max = new Siirto(-1, -1, -1, -1, Integer.MAX_VALUE);
+        //Luodaan vertailua varten apuarvot, jotka rikkovat pelin jos ne tulevat valituksi
+        Siirto min = new Siirto(-2, -2, -2, -2, Integer.MIN_VALUE);
+        Siirto max = new Siirto(-3, -3, -3, -3, Integer.MAX_VALUE);
         Solmu sMin = new Solmu(null, min);
         Solmu sMax = new Solmu(null, max);
         
-        return puu.alphabeta(valkoinen, syvyys - 1, puu.getJuuri(), sMin, sMax).getSiirto();
+        //Palautetaan alphabetan avulla paras siirto
+        return puu.alphabeta(valkoinenko, syvyys - 1, puu.getJuuri(), sMin, sMax).getSiirto();
     }
 
-    private Siirto siirronLapset(Solmu s, Lauta tilanne, int syvyys) {
-//        System.out.println(syvyys + " " + s.getSiirto());
+    /**
+     * Rakentaa puun alphabetassa käytettäväksi
+     * @param s Puun juurisolmu
+     * @param tilanne
+     * @param syvyys
+     * @return 
+     */
+    private Siirto rakennaPuu(Solmu s, Lauta tilanne, int syvyys) {
+        // Ei edetä annettua syvyyttä pidemmälle
         if (syvyys <= 0) {
             return s.getSiirto();
         }
 
-        tilanne.simuloiSiirto(s.getSiirto());
-
-        tilanne.laskeSiirrot(valkoinen);
-        
-        // lisää uudet lapset puuhun       
+        System.out.println(puu.tulostus());
+        //ensimmäisellä kutstukerralla luo     
         for (int i = 0; i < tilanne.siirrot().length(); i++) {
+            System.out.println(tilanne.siirrot().get(i));
             Solmu uusiSolmu = new Solmu(s, tilanne.siirrot().get(i));
             s.lisaaLapsi(uusiSolmu);
-            return siirronLapset(uusiSolmu, tilanne, syvyys - 1);
+            return rakennaPuu(uusiSolmu, tilanne, syvyys - 1);
         }
+        
+        tilanne.simuloiSiirto(s.getSiirto());
+
+        tilanne.laskeSiirrot(valkoinenko);
+        
+        
         // kutsu metodia rekursiivisesti
         return s.getSiirto();
     }

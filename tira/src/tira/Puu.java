@@ -38,13 +38,14 @@ public class Puu {
         if (juuri == null) {
             return "Puu on tyhjä. (Juuri on null).";
         }
-        String ret = "" + juuri.getOmaArvo() + "\n";
+        String ret = juuri.lastenMaara() + " " + juuri.getOmaArvo() + "\n";
         
         ret = ret + lastenString(juuri, 1);
         
         return ret;
     }
     
+    //Apuväline tulostusasun luomiseen
     private String lastenString(Solmu s, int syvyys) {
         String ret = "#" + syvyys + "|v|";
         for (int i = 0; i <= s.lastenMaara(); i++) {
