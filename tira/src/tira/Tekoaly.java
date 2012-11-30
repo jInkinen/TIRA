@@ -43,7 +43,7 @@ public class Tekoaly {
         Solmu sMax = new Solmu(null, max);
 
         //Palautetaan alphabetan avulla paras siirto
-        return puu.alphabeta(valkoinenko, syvyys - 1, puu.getJuuri(), sMin, sMax).getSiirto();
+        return puu.alphabeta(valkoinenko, syvyys, puu.getJuuri(), sMin, sMax).getSiirto();
     }
 
     /**

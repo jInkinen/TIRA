@@ -157,5 +157,29 @@ public class Solmu {
             return true;
         }
         return false;
-    }   
+    }
+    
+    /**
+     * 
+     * @return solmun suurin lapsi
+     */
+    public Solmu getMaxLapsi() {
+        return lapset[this.maxIndeksi];
+    }
+    
+    /**
+     * 
+     * @return solmun pienin lapsi
+     */
+    public Solmu getMinLapsi() {
+        return lapset[this.minIndeksi];
+    }
+
+    /**
+     * 
+     * @return solmun vanhempi
+     */
+    public Solmu vanhempi() {
+        return this.vanh;
+    }
 }
