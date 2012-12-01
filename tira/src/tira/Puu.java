@@ -83,6 +83,7 @@ public class Puu {
 
     private Solmu maxArvo(Solmu solmu, Solmu a, Solmu b, int syvyys) {
         if (lopetus(syvyys, solmu)) {
+            System.out.print("A");
             return solmu;
         }
         
@@ -93,11 +94,14 @@ public class Puu {
 //            System.out.println(i + "---");
             v = max(v, minArvo(solmu.getLapset()[i], a, b, syvyys - 1));
             if (v.getOmaArvo() >= b.getOmaArvo()) {
+                System.out.print("B");
                 return v;
             }
             a = max(a, v);
         }
+        System.out.print("C");
         return v;
+        
     }
 
     private Solmu minArvo(Solmu solmu, Solmu a, Solmu b, int syvyys) {
