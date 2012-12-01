@@ -225,7 +225,7 @@ public class SiirtoLaskuri {
      */
     private Lista lisaaLaillinenSiirto(int x, int y, int uusix, int uusiy, Lista lista, boolean saaSiirtyaTyhjaan, boolean saakoSyoda, boolean saakoOllaVaarassa, int vari) {
         Siirto uusiSiirto = new Siirto(x, y, uusix, uusiy, 0);
-        // uusi paikka on laudan ulkopuolella
+        // uusi paikka on laudan ulkopuolella > ei lisätä
         if (lauta.onkoLaudanUlkopuolella(uusix, uusiy)) {
             return lista;
         }
@@ -233,19 +233,17 @@ public class SiirtoLaskuri {
             throw new UnsupportedOperationException("Siirrettävä nappula ei voi olla laudan ulkopuolella");
         }
 
-        // TODO tarkastus, ettei simuloiSiirto aseta kuningasta vaaraan.
-        // Pohdintaa: onko järkevämpää hoitaa erittäin suurella min-max arvolla?
-
+        // TODO tarkastus, ettei kuningas tule syödyksi
         if (!saakoOllaVaarassa) {
             // TODO tarkastus siirrolle, jottei kuningas aseta itseään shakkiin.
-            // Pohdintaa: varmistaako minmax tämän?
         }
 
         // onko uusi paikka tyhjä?
         if (lauta.onkoTyhja(uusix, uusiy)) {
             // Siirrytään tyhjään ruutuun
             if (saaSiirtyaTyhjaan) {
-                uusiSiirto.setArvo(vari * (int)Math.round(Math.random() * 5));
+//                uusiSiirto.setArvo(vari * (int)Math.round(Math.random() * 5));
+
                 lista.add(uusiSiirto);
             }
             return lista;

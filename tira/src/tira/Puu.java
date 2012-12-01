@@ -83,7 +83,7 @@ public class Puu {
 
     private Solmu maxArvo(Solmu solmu, Solmu a, Solmu b, int syvyys) {
         if (lopetus(syvyys, solmu)) {
-            return solmu.vanhempi().getMaxLapsi();
+            return solmu;
         }
         
         Siirto max = new Siirto(-4, -4, -4, -4, Integer.MIN_VALUE);
@@ -102,7 +102,7 @@ public class Puu {
 
     private Solmu minArvo(Solmu solmu, Solmu a, Solmu b, int syvyys) {
         if (lopetus(syvyys, solmu)) {
-            return solmu.vanhempi().getMinLapsi();
+            return solmu;
         }
         
         Siirto min = new Siirto(-5, -5, -5, -5, Integer.MAX_VALUE);

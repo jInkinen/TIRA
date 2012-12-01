@@ -24,13 +24,11 @@ public class Shakki {
 
         while (true) {
             //VALKOINEN
-            tilanne = new Lauta();
-            tilanne.toteutaSiirrot(siirrot, siirto);
-            
-            siirrot[siirto] = aly1.valitseSiirto(5, tilanne, siirto);
             siirto++;
+            siirrot[siirto - 1] = aly1.valitseSiirto(5, siirto - 1, siirrot);
             
-            System.out.println(siirto + " Tekoälyn 1 valitsema siirto: " + siirrot[siirto - 1]);
+            
+            System.out.println("Siirto " + siirto + " Tekoälyn 1 valitsema siirto: " + siirrot[siirto - 1]);
 //            for (int i = 0; i < siirto; i++) {
 //                System.out.println(i + " " + siirrot[i]);
 //            }
@@ -40,13 +38,11 @@ public class Shakki {
             Thread.sleep(100);
 
             //MUSTA
-            tilanne = new Lauta();
-            tilanne.toteutaSiirrot(siirrot, siirto);
-            
-            siirrot[siirto] = aly2.valitseSiirto(5, tilanne, siirto);
             siirto++;
+            siirrot[siirto - 1] = aly2.valitseSiirto(5, siirto - 1, siirrot);
             
-            System.out.println(siirto + " Tekoälyn 2 valitsema siirto: " + siirrot[siirto - 1]);
+            
+            System.out.println("Siirto " + siirto + " Tekoälyn 2 valitsema siirto: " + siirrot[siirto - 1]);
             peliLauta.toteutaSiirto(siirrot[siirto - 1]);
 
             System.out.println(peliLauta.laudanTulostus());
