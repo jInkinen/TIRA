@@ -59,23 +59,6 @@ public class Lauta{
         this.lauta = ruudut;
     }
 
-    
-
-    /**
-     * Simuloi siirron suorittamisen
-     * @param s Siirto, joka simuloidaan
-     * @return Palautetaan pelilauta, jossa simuloiSiirto on toteutettu
-     */
-    public Lauta simuloiSiirto(Siirto s) {
-        // luodaan kopio laudasta
-        Lauta ret = new Lauta(this.kokox, this.kokoy, this.ruudut());
-        //Toteutetaan simuloiSiirto
-        ret.toteutaSiirto(s);
-        
-        
-        return ret;
-    }
-
     /**
      * aika: O(1), tila: O(1)
      *
@@ -218,6 +201,7 @@ public class Lauta{
         if (s == null) {
             throw new UnsupportedOperationException("siirto on null");
         }
+       
         int origX = s.alkuperainenPaikka()[0];
         int origY = s.alkuperainenPaikka()[1];
         int uusiX = s.uusiPaikka()[0];

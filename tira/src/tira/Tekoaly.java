@@ -53,20 +53,27 @@ public class Tekoaly {
      * @param syvyys syvyys, jota hyödynnetään rekursion katkaisussa
      */
     private void rakennaPuu(Solmu s, Lauta tilanne, int syvyys) {
+        //varmistetaan että annetulle tilanteelle on laskettu siirrot
         tilanne.laskeSiirrot(valkoinenko);
-
+        
         // Ei edetä annettua syvyyttä pidemmälle
         if (syvyys <= 0) {
             return;
         }
     
+        //käydään läpi kaikki tilanteesta seuraavat siirrot ja lisätään
+        //ne puuhun nykyisen tilanteen lapseksi
         for (int i = 0; i < tilanne.siirrot().length(); i++) {
-            System.out.println(tilanne.siirrot().get(i));
-            
             //Luodaan uusi solmu
             Solmu uusiSolmu = new Solmu(s, tilanne.siirrot().get(i));
             //lisätään uusi solmu lapseksi
             s.lisaaLapsi(uusiSolmu);
+        }
+        
+        for (int i = 0; i < s.lastenMaara(); i++) {
+            tilanne.toteutaSiirto(s.getLapset()[i].getSiirto());
+            rakennaPuu(s.getLapset()[i], tilanne, syvyys - 1);
+
         }
     }
 }

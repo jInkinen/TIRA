@@ -73,45 +73,84 @@ public class Puu {
      * @return solmu, joka on paras
      */
     public Solmu alphabeta(boolean valkoinen, int syvyys, Solmu solmu, Solmu a, Solmu b) {
-        // Katkaistaan rekursio, jos päädytään liian syvälle tai jos törmätään lehtisolmuun
-        if (syvyys == 0 || solmu.eiLapsia()) {
-            return solmu;
-        }
-
         if (valkoinen) {
-            for (int i = 0; i < solmu.lastenMaara(); i++) {
-                a = max(a, alphabeta(!valkoinen, syvyys - 1, solmu.getLapset()[i], a, b));
-                if (b.getOmaArvo() <= a.getOmaArvo()) {
-                    break;
-                }
+            return maxArvo(solmu, a, b, syvyys);
+        } else {
+            return minArvo(solmu, a, b, syvyys);
+        }
+    }
+
+
+    private Solmu maxArvo(Solmu solmu, Solmu a, Solmu b, int syvyys) {
+        if (lopetus(syvyys, solmu)) {
+            return solmu.vanhempi().getMaxLapsi();
+        }
+        
+        Siirto max = new Siirto(-4, -4, -4, -4, Integer.MIN_VALUE);
+        Solmu v = new Solmu(null, max);
+        
+        for (int i = 0; i < solmu.lastenMaara(); i++) {
+//            System.out.println(i + "---");
+            v = max(v, minArvo(solmu.getLapset()[i], a, b, syvyys - 1));
+            if (v.getOmaArvo() >= b.getOmaArvo()) {
+                return v;
             }
-            System.out.println(a.getOmaArvo());
+            a = max(a, v);
+        }
+        return v;
+    }
+
+    private Solmu minArvo(Solmu solmu, Solmu a, Solmu b, int syvyys) {
+        if (lopetus(syvyys, solmu)) {
+            return solmu.vanhempi().getMinLapsi();
+        }
+        
+        Siirto min = new Siirto(-5, -5, -5, -5, Integer.MAX_VALUE);
+        Solmu v = new Solmu(null, min);
+        
+        for (int i = 0; i < solmu.lastenMaara(); i++) {
+            v = min(v, maxArvo(solmu.getLapset()[i], a, b, syvyys - 1));
+            if (v.getOmaArvo() <= a.getOmaArvo()) {
+                return v;
+            }
+            b = min(b, v);
+        }
+        return v;
+    }
+    
+    /**
+     * @param syvyys hetkellinen syvyys, jonka suuruus tarkistetaan
+     * @param s solmu, jota tarkastellaan
+     * @return true, jos ei voida jatkaa, muutoin false.
+     */
+    private boolean lopetus(int syvyys, Solmu s) {
+        if (syvyys == 0 || s.eiLapsia()) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * vertailee kahta solmua
+     * @return suurempi solmu
+     */
+    private Solmu max(Solmu a, Solmu b) {
+        if (a.getOmaArvo() >= b.getOmaArvo()) {
             return a;
         } else {
-            for (int i = 0; i < solmu.lastenMaara(); i++) {
-                b = min(b, alphabeta(!valkoinen, syvyys - 1, solmu.getLapset()[i], a, b));
-                if (b.getOmaArvo() <= a.getOmaArvo()) {
-                    break;
-                }
-            }
-            System.out.println("min" + b.getOmaArvo());
             return b;
         }
     }
 
-    private Solmu max(Solmu a, Solmu ab) {
-        if (a.getOmaArvo() > ab.getOmaArvo()) {
+    /**
+     * vertailee kahta solmua
+     * @return pienempi solmu
+     */
+    private Solmu min(Solmu a, Solmu b) {
+        if (a.getOmaArvo() <= b.getOmaArvo()) {
             return a;
         } else {
-            return ab;
-        }
-    }
-
-    private Solmu min(Solmu b, Solmu ab) {
-        if (b.getOmaArvo() < ab.getOmaArvo()) {
             return b;
-        } else {
-            return ab;
         }
     }
 }
