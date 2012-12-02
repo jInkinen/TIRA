@@ -44,7 +44,9 @@ public class Tekoaly {
         Solmu sMax = new Solmu(null, max);
 
         //Palautetaan alphabetan avulla paras siirto
-        return puu.alphabeta(valkoinenko, syvyys, puu.getJuuri(), sMin, sMax).getSiirto();
+        Solmu tulos = puu.alphabeta(valkoinenko, syvyys, puu.getJuuri(), sMin, sMax);
+        tulos = tulos.vanhempi().vanhempi().vanhempi().vanhempi();
+        return tulos.getSiirto();
     }
 
     /**
