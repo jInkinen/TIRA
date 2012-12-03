@@ -16,6 +16,7 @@ public class Lauta{
     private int kokox, kokoy;
     private Ruudut lauta;
     private SiirtoLaskuri siirtoLaskin;
+    private boolean vKuningasVaarassa, mKuningasVaarassa;
 
     /**
      * Oletuskonstruktori, joka luo 6x6 laudan. Toistaiseksi suositeltu versio.
@@ -230,5 +231,29 @@ public class Lauta{
         for (int i = 0; i < pituus; i++) {
             this.toteutaSiirto(siirrot[i]);
         }
+    }
+
+    /**
+     * valkoisen kuninkaan status
+     * @return 
+     */
+    public boolean onkovKuningasVaarassa() {
+        return vKuningasVaarassa;
+    }
+
+    public void setvKuningasVaarassa(boolean vKuningasVaarassa) {
+        this.vKuningasVaarassa = vKuningasVaarassa;
+    }
+
+    /**
+     * mustan kuninkaan status
+     * @return 
+     */
+    public boolean onkomKuningasVaarassa() {
+        return mKuningasVaarassa;
+    }
+
+    public void setmKuningasVaarassa(boolean mKuningasVaarassa) {
+        this.mKuningasVaarassa = mKuningasVaarassa;
     }
 }

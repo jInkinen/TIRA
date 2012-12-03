@@ -1,9 +1,8 @@
-
 package tira;
 
 /**
- * Siirtolaskuri on ludan käyttämä apuväline laillisten siirtojen selvittämiseen
- * kullekin nappulalle.
+ * Siirtolaskuri on laudan käyttämä apuväline laillisten siirtojen
+ * selvittämiseen kullekin nappulalle.
  */
 public class SiirtoLaskuri {
 
@@ -221,11 +220,12 @@ public class SiirtoLaskuri {
      * Normaalisti true, mutta sotilaan eteenpäin siirtyminen false.
      * @param saakoOllaVaarassa Normaalisti true, mutta kuninkaalla false.
      * Varmistetaan, ettei kuninkaan liikkuminen altista sitä shakille.
-     * @return lista, jossa on laskettu simuloiSiirto ja aikaisemmat lasketut siirrot.
+     * @return lista, jossa on laskettu simuloiSiirto ja aikaisemmat lasketut
+     * siirrot.
      */
     private Lista lisaaLaillinenSiirto(int x, int y, int uusix, int uusiy, Lista lista, boolean saaSiirtyaTyhjaan, boolean saakoSyoda, boolean saakoOllaVaarassa, int vari) {
         Siirto uusiSiirto = new Siirto(x, y, uusix, uusiy, 0);
-        // uusi paikka on laudan ulkopuolella > ei lisätä
+        // uusi paikka on laudan ulkopuolella -> ei lisätä
         if (lauta.onkoLaudanUlkopuolella(uusix, uusiy)) {
             return lista;
         }
@@ -233,16 +233,22 @@ public class SiirtoLaskuri {
             throw new UnsupportedOperationException("Siirrettävä nappula ei voi olla laudan ulkopuolella");
         }
 
-        // TODO tarkastus, ettei kuningas tule syödyksi
         if (!saakoOllaVaarassa) {
             // TODO tarkastus siirrolle, jottei kuningas aseta itseään shakkiin.
         }
+        
+        // TODO tarkastus kuninkaan uhattuna olemiselle
+        // lauta.onkoKuningasVaarassa....
 
+        return siirronArvo(uusiSiirto, uusix, uusiy, saaSiirtyaTyhjaan, vari, lista, x, y, saakoSyoda);
+    }
+
+    private Lista siirronArvo(Siirto uusiSiirto, int uusix, int uusiy, boolean saaSiirtyaTyhjaan, int vari, Lista lista, int x, int y, boolean saakoSyoda) {
         // onko uusi paikka tyhjä?
         if (lauta.onkoTyhja(uusix, uusiy)) {
             // Siirrytään tyhjään ruutuun
             if (saaSiirtyaTyhjaan) {
-                uusiSiirto.setArvo(vari * (int)Math.round(Math.random() * 5));
+                uusiSiirto.setArvo(vari * (int) Math.round(Math.random() * 5));
 
                 lista.add(uusiSiirto);
             }
@@ -257,6 +263,12 @@ public class SiirtoLaskuri {
                 if (saakoSyoda) {
                     // Lisätään syöntisiirto vain jos syöminen on sallittua nappulalle tällä siirrolla
                     uusiSiirto.setArvo(vari * lauta.nappulanArvo(uusix, uusiy));
+                    if (uusiSiirto.arvo() > 1000) {
+                        lauta.setmKuningasVaarassa(true);
+                    }
+                    if (uusiSiirto.arvo() < -1000) {
+                        lauta.setvKuningasVaarassa(true);
+                    }
                     lista.add(uusiSiirto);
                 }
                 return lista;
