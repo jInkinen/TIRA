@@ -58,10 +58,7 @@ public class Puu {
     }
 
     /**
-     * RIKKI
-     *
-     *
-     * Alphabeta-algoritmi, joka laskee optimaalisen siirron parametrien mukaan.
+     * Alphabeta-algoritmi, jonka tehtävä on laskea optimaalinen siirto parametrien mukaan.
      *
      * @param valkoinen true, jos max-pelaaja. false, jos min-pelaaja
      * @param syvyys kuinka monta tasoa alaspäin mennään puussa. Käytetään
@@ -83,23 +80,19 @@ public class Puu {
 
     private Solmu maxArvo(Solmu solmu, Solmu a, Solmu b, int syvyys) {
         if (lopetus(syvyys, solmu)) {
-//            System.out.print("A");
             return solmu;
         }
         
-        Siirto max = new Siirto(-4, -4, -4, -4, Integer.MIN_VALUE);
-        Solmu v = new Solmu(null, max);
+        Siirto min = new Siirto(-4, -4, -4, -4, Integer.MIN_VALUE);
+        Solmu v = new Solmu(null, min);
         
         for (int i = 0; i < solmu.lastenMaara(); i++) {
-//            System.out.println(i + "---");
             v = max(v, minArvo(solmu.getLapset()[i], a, b, syvyys - 1));
             if (v.getOmaArvo() >= b.getOmaArvo()) {
-//                System.out.print("B");
                 return v;
             }
             a = max(a, v);
         }
-//        System.out.print("C");
         return v;
         
     }

@@ -29,7 +29,7 @@ public class Shakki {
             siirto++;
             siirrot[siirto - 1] = aly1.valitseSiirto(5, siirto - 1, siirrot);
             
-            System.out.println("Siirto " + siirto + " Tekoälyn 1 valitsema siirto: " + siirrot[siirto - 1]);
+            System.out.println("Siirto " + siirto + ": Tekoälyn 1 valitsema siirto: " + siirrot[siirto - 1]);
 //            for (int i = 0; i < siirto; i++) {
 //                System.out.println(i + " " + siirrot[i]);
 //            }
@@ -46,7 +46,7 @@ public class Shakki {
             siirrot[siirto - 1] = aly2.valitseSiirto(5, siirto - 1, siirrot);
             
             
-            System.out.println("Siirto " + siirto + " Tekoälyn 2 valitsema siirto: " + siirrot[siirto - 1]);
+            System.out.println("Siirto " + siirto + ": Tekoälyn 2 valitsema siirto: " + siirrot[siirto - 1]);
             tilanne.toteutaSiirto(siirrot[siirto - 1]);
 
             System.out.println(tilanne.laudanTulostus());

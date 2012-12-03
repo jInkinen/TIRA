@@ -242,7 +242,7 @@ public class SiirtoLaskuri {
         if (lauta.onkoTyhja(uusix, uusiy)) {
             // Siirrytään tyhjään ruutuun
             if (saaSiirtyaTyhjaan) {
-//                uusiSiirto.setArvo(vari * (int)Math.round(Math.random() * 5));
+                uusiSiirto.setArvo(vari * (int)Math.round(Math.random() * 5));
 
                 lista.add(uusiSiirto);
             }

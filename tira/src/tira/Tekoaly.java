@@ -35,7 +35,7 @@ public class Tekoaly {
         
         //Rakennetaan puu alphabetaa varten
         rakennaPuu(puu.getJuuri(), syvyys, siirrot, siirto);
-        System.out.println(this.debugLisayksia);
+        System.out.println("Puuhun lisätty siirtoja yhteensä " + this.debugLisayksia);
 //        System.out.println(puu.tulostus());
         //Luodaan vertailua varten apuarvot (jotka rikkovat pelin jos ne jostain syystä tulevat valituksi)
         Siirto min = new Siirto(-2, -2, -2, -2, Integer.MIN_VALUE);

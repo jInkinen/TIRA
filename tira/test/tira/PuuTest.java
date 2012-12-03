@@ -48,6 +48,7 @@ public class PuuTest {
         
         Solmu ret = puu.alphabeta(false, 20, s, sMin, sMax);
         System.out.println(ret.getSiirto());
-        assertEquals(ret, s);
+        
+        assertEquals(ret.vanhempi().vanhempi(), s);
     }
 }
