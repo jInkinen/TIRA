@@ -40,7 +40,7 @@ public class Puu {
         if (juuri == null) {
             return "Puu on tyhjä. (Juuri on null).";
         }
-        String ret = juuri.lastenMaara() + " " + juuri.getOmaArvo() + "\n";
+        String ret = juuri.lastenMaara() + " " + juuri.getSiirto().arvo() + "\n";
 
         ret = ret + lastenString(juuri, 1);
 
@@ -51,7 +51,7 @@ public class Puu {
     private String lastenString(Solmu s, int syvyys) {
         String ret = "#" + syvyys + "|v|";
         for (int i = 0; i <= s.lastenMaara(); i++) {
-            ret = ret + s.getLapset()[i].getOmaArvo() + "<A ";
+            ret = ret + s.getLapset()[i].getSiirto().arvo() + "<A ";
             ret = ret + lastenString(s.getLapset()[i], syvyys + 1);
         }
         return ret + "|^|\n";
@@ -88,7 +88,7 @@ public class Puu {
         
         for (int i = 0; i < solmu.lastenMaara(); i++) {
             v = max(v, minArvo(solmu.getLapset()[i], a, b, syvyys - 1));
-            if (v.getOmaArvo() >= b.getOmaArvo()) {
+            if (v.getSiirto().arvo() >= b.getSiirto().arvo()) {
                 return v;
             }
             a = max(a, v);
@@ -107,7 +107,7 @@ public class Puu {
         
         for (int i = 0; i < solmu.lastenMaara(); i++) {
             v = min(v, maxArvo(solmu.getLapset()[i], a, b, syvyys - 1));
-            if (v.getOmaArvo() <= a.getOmaArvo()) {
+            if (v.getSiirto().arvo() <= a.getSiirto().arvo()) {
                 return v;
             }
             b = min(b, v);
@@ -121,6 +121,9 @@ public class Puu {
      * @return true, jos ei voida jatkaa, muutoin false.
      */
     private boolean lopetus(int syvyys, Solmu s) {
+        if (s == null) {
+            return true;
+        }
         if (syvyys == 0 || s.eiLapsia()) {
             return true;
         }
@@ -132,7 +135,10 @@ public class Puu {
      * @return suurempi solmu
      */
     private Solmu max(Solmu a, Solmu b) {
-        if (a.getOmaArvo() >= b.getOmaArvo()) {
+        if (b == null) {
+            return a;
+        }
+        if (a.getSiirto().arvo() > b.getSiirto().arvo()) {
             return a;
         } else {
             return b;
@@ -144,7 +150,10 @@ public class Puu {
      * @return pienempi solmu
      */
     private Solmu min(Solmu a, Solmu b) {
-        if (a.getOmaArvo() <= b.getOmaArvo()) {
+        if (b == null) {
+            return a;
+        }
+        if (a.getSiirto().arvo() < b.getSiirto().arvo()) {
             return a;
         } else {
             return b;

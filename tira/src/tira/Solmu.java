@@ -18,19 +18,21 @@ public class Solmu {
         this.vanh = vanhempi;
         this.siirto = siirto;
         
-        if (this.siirto != null) {
-            this.omaArvo = this.siirto.arvo();
-        } else {
-            this.omaArvo = Integer.MAX_VALUE;
-        }
-        /////////////////////////////////////////////////////// DEBUG onko turha^^
-        
-        if (vanhempi != null) {
-            omaArvo =+ vanhempi.getOmaArvo();
-        }
-        
+//        asetaOmaArvo();
         asetaOletusArvot();
     }
+    
+//    private void asetaOmaArvo() {
+//        if (this.siirto != null) {
+//            this.omaArvo = this.siirto.arvo();
+//        } else {
+//            this.omaArvo = Integer.MAX_VALUE;
+//        }
+//        
+//        if (this.vanh != null) {
+//            omaArvo =+ this.vanh.getOmaArvo();
+//        }
+//    }
     
     //Asettaa oliolle tietyt enneltamääritetyt oletusarvot
     private void asetaOletusArvot() {
@@ -63,17 +65,24 @@ public class Solmu {
     
     //tallennetaan suurimman/pienimmän lapsen sijainti
     private void aariLastenSijainti(Solmu s) {
+        // ensimmäisellä lisäyskerralla asetetaan ensimmäinen alkio min/max arvoiksi
         if (maxIndeksi < 0 || minIndeksi < 0) {
             maxIndeksi = pointer;
             minIndeksi = pointer;
+        // muilla kerroilla vertaillaan  ja päivitetään arvot tarvittaessa
         } else {
-            if (s.getOmaArvo() > lapset[maxIndeksi].getOmaArvo()) {
-                maxIndeksi = pointer;
-                lastenMax = s.getOmaArvo();
+            if (this.lapset[maxIndeksi] == null || lapset[minIndeksi] == null) {
+                maxIndeksi = -1;
+                minIndeksi = -1;
+                return;
             }
-            if (s.getOmaArvo() < lapset[minIndeksi].getOmaArvo()) {
+            if (s.getSiirto().arvo() > this.lapset[maxIndeksi].getSiirto().arvo()) {
+                maxIndeksi = pointer;
+                lastenMax = s.getSiirto().arvo();
+            }
+            if (s.getSiirto().arvo() < lapset[minIndeksi].getSiirto().arvo()) {
                 minIndeksi = pointer;
-                lastenMin = s.getOmaArvo();
+                lastenMin = s.getSiirto().arvo();
             }
         }
     }
@@ -107,9 +116,10 @@ public class Solmu {
     /**
      * @return Solmun oma arvo
      */
-    public int getOmaArvo() {
-        return omaArvo;
-    }
+//    public int getOmaArvo() {
+////        asetaOmaArvo();
+//        return omaArvo;
+//    }
 
 //    public void setOmaArvo(int omaArvo) {
 //        this.omaArvo = omaArvo;
