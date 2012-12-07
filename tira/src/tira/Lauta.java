@@ -1,22 +1,19 @@
-
 package tira;
 
 /**
  * Lauta toimii logiikan perusluokkana, joka säätelee mm. siirtojen laskemista,
  * tilanteen tallentamista ja heurestiikkaa.
  */
-public class Lauta{
+public class Lauta {
 
     public final int vakioMus = -1;
     public final int vakioVal = 1;
     public final int vakioTyh = 0;
-    
     private final String merkit[] = {" ", "K", "Q", "T", "L", "S", "H"};
     private final int heurestiikka[] = {0, 20000, 90, 50, 30, 10, 30};
     private int kokox, kokoy;
     private Ruudut lauta;
     private SiirtoLaskuri siirtoLaskin;
-    private boolean vKuningasVaarassa, mKuningasVaarassa;
 
     /**
      * Oletuskonstruktori, joka luo 6x6 laudan. Toistaiseksi suositeltu versio.
@@ -38,13 +35,14 @@ public class Lauta{
         this.kokoy = kokoy;
 
         siirtoLaskin = new SiirtoLaskuri(this);
-        
+
         lauta = new Ruudut(kokox, kokoy, vakioVal, vakioMus);
         lauta.alustaLauta();
     }
-    
+
     /**
      * Konstruktori, joka sallii manuaalisesti asetetun tilanteen luomisen.
+     *
      * @param kokox laudan leveys
      * @param kokoy laudan korkeus
      * @param ruudut Ruutu[][], jossa on kaikkien ruutujen tiedot
@@ -56,13 +54,11 @@ public class Lauta{
         this.kokoy = kokoy;
 
         siirtoLaskin = new SiirtoLaskuri(this);
-        
+
         this.lauta = ruudut;
     }
 
     /**
-     * aika: O(1), tila: O(1)
-     *
      * @param x laudan sarake
      * @param y laudan rivi
      * @return merkki, joka kuvaa laudan sijainnissa olevaa nappulaa
@@ -92,8 +88,7 @@ public class Lauta{
     }
 
     /**
-     * aika: O(nm), tila: O(1), n=laudan leveys, m=laudan korkeus Tulostaa
-     * laudan sisällön rivi riviltä.
+     * Tulostaa laudan sisällön rivi riviltä.
      */
     public String laudanTulostus() {
         String ret = "";
@@ -107,8 +102,6 @@ public class Lauta{
     }
 
     /**
-     * aika: O(1), tila: O(1)
-     *
      * @param x siirrettävän palikan alkuperäinen sijainti (sarake)
      * @param y siirrettävän palikan alkuperäinen sijainti (rivi)
      * @param uusix siirrettävän palikan uusi sijainti (sarake)
@@ -128,16 +121,16 @@ public class Lauta{
 
     /**
      * Kertoo onko laudan ruutu tyhjä
+     *
      * @param x
      * @param y
      * @return onko tyhjä?
      */
     public boolean onkoTyhja(int x, int y) {
-//        System.out.println("----- ONKO TYHJÄ??? " + x + "," + y + " "+ lauta[x][y] + " > " + lauta[x][y].onkoTyhja());
         return lauta.get(x, y).onkoTyhja();
     }
-    
-        /**
+
+    /**
      * Tarkistaa onko ruutu laudalla.
      *
      * @param nykyinenX Ruudun rivi
@@ -156,25 +149,26 @@ public class Lauta{
 
     /**
      * Laskee heurestiikan mukaisen arvon siirrolle
+     *
      * @param x1 nappula ykkösen x
      * @param y1 nappula ykkösen y
      * @param x2 nappula kakkosen x
      * @param y2 nappula kakkosen y
-     * @return 
+     * @return
      */
     public int nappulanArvo(int x, int y) {
         int nappula = this.lauta.get(x, y).getNappula();
-        
+
         return this.heurestiikka[nappula];
     }
 
     /**
-     * 
+     *
      * @return Kertoo pelilaudan kaikki mahdolliset siirrot
      */
     public Lista siirrot() {
         Lista siirrot = new Lista();
-        
+
         for (int x = 0; x < this.kokox; x++) {
             for (int y = 0; y < this.kokoy; y++) {
                 Lista apuri = this.lauta.get(x, y).getSiirrot();
@@ -185,9 +179,9 @@ public class Lauta{
         }
         return siirrot;
     }
-    
+
     /**
-     * 
+     *
      * @return kertoo käyttäjälle nykyisen pelilaudan ruudut
      */
     public Ruudut ruudut() {
@@ -196,64 +190,42 @@ public class Lauta{
 
     /**
      * Muuttaa laudan tilannetta suorittamalla annetun siirron.
+     *
      * @param s toteutettavaksi annettava siirto
      */
     public void toteutaSiirto(Siirto s) {
         if (s == null) {
             throw new UnsupportedOperationException("siirto on null");
         }
-       
+
         int origX = s.alkuperainenPaikka()[0];
         int origY = s.alkuperainenPaikka()[1];
         int uusiX = s.uusiPaikka()[0];
         int uusiY = s.uusiPaikka()[1];
-        
+
         Ruutu orig = this.lauta.get(origX, origY);
         Ruutu uusi = this.lauta.get(uusiX, uusiY);
-        
+
         //Annetaan uudelle ruudulle vanhan tiedot
         uusi.setVari(orig.getVari());
         uusi.setNappula(orig.getNappula());
         //Tyhjennetään alkuperäisen ruudun tiedot
         orig.tyhjaksi();
-    }    
+    }
 
     /**
      * Toteuttaa kaikki siirrot, jotka sille annetaan taulukon järjestyksessä.
-     * Mahdollistaa pelitilanteeseen kiinnipääsemisen ilman tilanteen säilömistä.
-     * Aikavaativuus O(n), mutta tilaa menee vähemmän, kuin jokaisen pelitilanteen
-     * säilömiseen.
-     * 
-     * @param siirrot Taulukko, jossa on kaikki toteutettavat siirrot järjestyksessä
+     * Mahdollistaa pelitilanteeseen kiinnipääsemisen ilman tilanteen
+     * säilömistä. Aikavaativuus O(n), mutta tilaa menee vähemmän, kuin jokaisen
+     * pelitilanteen säilömiseen.
+     *
+     * @param siirrot Taulukko, jossa on kaikki toteutettavat siirrot
+     * järjestyksessä
      * @param pituus kuinka monta siirtoa taulukosta toteutetaan
      */
     public void toteutaSiirrot(Siirto[] siirrot, int pituus) {
         for (int i = 0; i < pituus; i++) {
             this.toteutaSiirto(siirrot[i]);
         }
-    }
-
-    /**
-     * valkoisen kuninkaan status
-     * @return 
-     */
-    public boolean onkovKuningasVaarassa() {
-        return vKuningasVaarassa;
-    }
-
-    public void setvKuningasVaarassa(boolean vKuningasVaarassa) {
-        this.vKuningasVaarassa = vKuningasVaarassa;
-    }
-
-    /**
-     * mustan kuninkaan status
-     * @return 
-     */
-    public boolean onkomKuningasVaarassa() {
-        return mKuningasVaarassa;
-    }
-
-    public void setmKuningasVaarassa(boolean mKuningasVaarassa) {
-        this.mKuningasVaarassa = mKuningasVaarassa;
     }
 }

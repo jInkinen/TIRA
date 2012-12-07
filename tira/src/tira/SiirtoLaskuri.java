@@ -263,12 +263,6 @@ public class SiirtoLaskuri {
                 if (saakoSyoda) {
                     // Lisätään syöntisiirto vain jos syöminen on sallittua nappulalle tällä siirrolla
                     uusiSiirto.setArvo(vari * lauta.nappulanArvo(uusix, uusiy));
-                    if (uusiSiirto.arvo() > 1000) {
-                        lauta.setmKuningasVaarassa(true);
-                    }
-                    if (uusiSiirto.arvo() < -1000) {
-                        lauta.setvKuningasVaarassa(true);
-                    }
                     lista.add(uusiSiirto);
                 }
                 return lista;

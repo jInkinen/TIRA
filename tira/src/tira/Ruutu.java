@@ -82,13 +82,6 @@ public class Ruutu {
     }
 
     /**
-     * Tyhjentää ruudun muistissa olevat siirrot, jos ruutuun on vaikutettu.
-     */
-    public void ruutuunVaikutettu() {
-        this.omatSiirrot.clear();
-    }
-
-    /**
      * Tallentaa ruudulle uudet siirrot
      *
      * @param siirrot lista, jossa on ruudun mahdolliset siirrot

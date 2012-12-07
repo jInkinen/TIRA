@@ -29,7 +29,7 @@ public class Lista {
      * @param uusi Siirto-olio, joka kuvaa tallennettavaa siirtoa
      */
     public void add(Siirto uusi) {
-        if (pointer == koko - 1) {
+        if (pointer >= koko - 1) {
             kasvata();
         }
         taulukko[pointer] = uusi;
@@ -42,8 +42,6 @@ public class Lista {
             this.maxArvo = uusi.arvo();
             this.maxIndex = pointer;
         }
-//        System.out.println("Lista.add(): " + uusi.arvo() + ", max: " + this.maxArvo + "@" + this.maxIndex);
-//        System.out.println("Lista.add(): " + uusi.arvo() + ", min: " + this.minArvo + "@" + this.minIndex);
         pointer++;
     }
     
@@ -52,17 +50,12 @@ public class Lista {
      */
     private void kasvata() {
         Siirto[] uusiTaulu = new Siirto[this.koko*2];
+        koko = koko * 2;
+        
         for (int i = 0; i < pointer; i++) {
             uusiTaulu[i] = this.taulukko[i];
         }
         this.taulukko = uusiTaulu;
-    }
-    
-    /**
-     * Tyhjentää listan
-     */
-    public void clear() {
-        this.taulukko = new Siirto[this.koko];
     }
     
     /**
