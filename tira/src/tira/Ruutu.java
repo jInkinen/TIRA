@@ -88,10 +88,6 @@ public class Ruutu {
      */
     public void tallennaSiirrot(Lista siirrot) {
         this.omatSiirrot = siirrot;
-        //this.siirrotLaskettu = true;
-        
-        // TODO kehitä systeemi, jolla varmistetaan että siirrot lasketaan
-        // vaikka booleania käytetään
     }
 
     /**

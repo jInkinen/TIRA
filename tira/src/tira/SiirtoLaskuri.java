@@ -238,7 +238,6 @@ public class SiirtoLaskuri {
         }
         
         // TODO tarkastus kuninkaan uhattuna olemiselle
-        // lauta.onkoKuningasVaarassa....
 
         return siirronArvo(uusiSiirto, uusix, uusiy, saaSiirtyaTyhjaan, vari, lista, x, y, saakoSyoda);
     }

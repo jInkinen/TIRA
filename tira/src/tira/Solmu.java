@@ -7,7 +7,7 @@ package tira;
 public class Solmu {
     private Solmu vanh;
     private Solmu[] lapset;
-    private int pointer, koko, omaArvo, lastenMax, lastenMin, maxIndeksi, minIndeksi;
+    private int pointer, koko, lastenMax, lastenMin, maxIndeksi, minIndeksi;
     private Siirto siirto;
 
     /**
@@ -17,22 +17,9 @@ public class Solmu {
     public Solmu(Solmu vanhempi, Siirto siirto) {
         this.vanh = vanhempi;
         this.siirto = siirto;
-        
-//        asetaOmaArvo();
+
         asetaOletusArvot();
     }
-    
-//    private void asetaOmaArvo() {
-//        if (this.siirto != null) {
-//            this.omaArvo = this.siirto.arvo();
-//        } else {
-//            this.omaArvo = Integer.MAX_VALUE;
-//        }
-//        
-//        if (this.vanh != null) {
-//            omaArvo =+ this.vanh.getOmaArvo();
-//        }
-//    }
     
     //Asettaa oliolle tietyt enneltamääritetyt oletusarvot
     private void asetaOletusArvot() {
@@ -45,9 +32,7 @@ public class Solmu {
         maxIndeksi = -1;
         minIndeksi = -1;
     }
-    
-    
-    
+ 
     /**
      * Lisää solmulle toisen solmun lapseksi
      * @param s lisättävä solmu
@@ -86,8 +71,7 @@ public class Solmu {
             }
         }
     }
-    
-    
+
     /**
      * Kasvattaa taulukon kokoa tarvittaessa tuplaamalla sen
      */
@@ -112,18 +96,6 @@ public class Solmu {
     public int getLastenMin() {
         return lastenMin;
     }
-
-    /**
-     * @return Solmun oma arvo
-     */
-//    public int getOmaArvo() {
-////        asetaOmaArvo();
-//        return omaArvo;
-//    }
-
-//    public void setOmaArvo(int omaArvo) {
-//        this.omaArvo = omaArvo;
-//    }
 
     /**
      * 

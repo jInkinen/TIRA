@@ -21,7 +21,7 @@ public class LautaTest {
     public void testSimppeliSiirtojenLaskemisenAikaVaativuus() {
         long start = System.nanoTime();
         int kerrat = 1;
-        //System.out.println("Lasketaan siirrot " + kerrat + " kertaa");
+//        System.out.println("Lasketaan siirrot " + kerrat + " kertaa");
         Lauta instance = new Lauta();
 
         for (int i = 0; i < kerrat; i++) {
@@ -31,13 +31,14 @@ public class LautaTest {
 
         long end = System.nanoTime();
         double muunnos = (end - start) / 1000000000.0;
-        //System.out.println("Kesto: " + muunnos + "s");
+//        System.out.println("Kesto: " + muunnos + "s");
 
 
-        // 1 000   : 0,1s
-        // 10 000  : 1s
-        // 100 000 : 12s
-        // 500 000 : 45s
+        // 1 000    : 0,07s
+        // 10 000   : 0,12s
+        // 100 000  : 0,72s
+        // 500 000  : 2,69s
+        // 1 000 000: 5.14s
     }
 
     /**
