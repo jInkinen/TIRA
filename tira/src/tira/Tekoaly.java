@@ -36,7 +36,7 @@ public class Tekoaly {
         
         //Rakennetaan puu alphabetaa varten
         rakennaPuu(puu.getJuuri(), syvyys, siirrot, siirto);
-//        System.out.println("Puuhun lisätty siirtoja yhteensä " + this.debugLisayksia);
+        System.out.println("Puuhun lisätty siirtoja yhteensä " + this.debugLisayksia);
         //Luodaan vertailua varten apuarvot (jotka rikkovat pelin jos ne jostain syystä tulevat valituksi)
         Siirto min = new Siirto(-2, -2, -2, -2, Integer.MIN_VALUE);
         Siirto max = new Siirto(-3, -3, -3, -3, Integer.MAX_VALUE);
@@ -45,7 +45,10 @@ public class Tekoaly {
 
         //Palautetaan alphabetan avulla paras siirto
         Solmu tulos = puu.alphabeta(valkoinenko, syvyys, puu.getJuuri(), sMin, sMax);
-        tulos = tulos.vanhempi().vanhempi().vanhempi().vanhempi();
+
+        for (int i = 0; i < syvyys - 1; i++) {
+            tulos = tulos.vanhempi();
+        }
         return tulos.getSiirto();
     }
 
